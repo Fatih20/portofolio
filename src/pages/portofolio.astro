@@ -1,5 +1,22 @@
 ---
 import { projectsCardContentFetcher } from "@/api";
+import ProjectCard from "@/components/ProjectCard.astro";
+import Spacer from "@/components/Spacer.astro";
+import Layout from "@/layouts/Layout.astro";
 
-const projectsCardContent = await projectsCardContentFetcher();
+const {allProjects} = await projectsCardContentFetcher();
 ---
+<Layout title="Portofolio">
+    <main class="flex flex-col justify-start items-center">
+        <header>
+            <h1 class="text-silver-100 text-left text-2xl font-bold">The many projects that I've worked on
+            </h1>
+        </header>
+        <section class="flex flex-col justify-start items-center">
+            {allProjects.map(({projectLink, projectName, projectStartDate, repositoryLink, shortDescription, projectEndDate, gradientStartColor, gradientEndColor}) => <ProjectCard projectName={projectName} projectEndDate={projectEndDate} projectStartDate={projectStartDate} projectLink={projectLink} repositoryLink={repositoryLink} shortDescription={shortDescription} gradientStartColor={gradientStartColor} gradientEndColor={gradientEndColor}  />
+            )}
+        </section>
+    
+    </main>
+    <Spacer />
+</Layout>

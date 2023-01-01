@@ -1,0 +1,6 @@
+---
+import type { ProjectCardContent } from "@/types";
+
+    type ProjectCardProp = ProjectCardContent
+    const {projectName, projectEndDate, projectStartDate, projectLink, repositoryLink, shortDescription, gradientStartColor, gradientEndColor} = Astro.props as ProjectCardProp
+---

@@ -39,18 +39,17 @@ export async function homeContentFetcher () : Promise<HomeContent> {
 }
 
 export async function projectsCardContentFetcher () : Promise<AllProjectCardContent> {
-    const query = `query {
-        allProjects {
-          projectName,
-          repositoryLink,
-          projectLink,
-          projectStartDate,
-          projectEndDate,
-          summary,
-          gradientStartColor,
-          gradientEndColor
-        }
-      }`
+    const query = `  allProjects {
+        projectName,
+        repositoryLink,
+        projectLink,
+        projectStartDate,
+        projectEndDate,
+        shortDescription
+        gradientStartColor,
+        gradientEndColor
+      }
+    }`
     const {error, result} =  await (fetcher<AllProjectCardContent>(query))
     if (error === null && result?.data) {
         return result.data as AllProjectCardContent

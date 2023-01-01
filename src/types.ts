@@ -10,8 +10,10 @@ export interface ProjectCardContent {
     repositoryLink: string,
     projectLink: string,
     projectStartDate: string,
-    projectEndDate: string,
-    summary: string
+    projectEndDate?: string,
+    shortDescription: string,
+    gradientStartColor: string,
+    gradientEndColor: string
 }
 
 export interface AllProjectCardContent {
