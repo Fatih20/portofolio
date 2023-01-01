@@ -1,0 +1,7 @@
+@tailwind base; /* Preflight will be injected here */
+@tailwind components;
+@tailwind utilities;
+
+.test {
+  @apply text-5xl text-silver-300;
+}
