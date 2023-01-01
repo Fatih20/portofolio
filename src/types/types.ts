@@ -4,6 +4,6 @@ export interface Date {
     year : number,
 }
 
-const headerOptions = ["home", "portofolio"] as const;
+const headerOptions = ["", "home", "portofolio"] as const;
 
 export type HeaderOption = typeof headerOptions[number];
