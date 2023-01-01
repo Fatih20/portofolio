@@ -1,13 +1,16 @@
 ---
+import { homeContentFetcher } from '@/api';
 import Layout from '../layouts/Layout.astro';
+
+const {home : {name, description}} = await homeContentFetcher()
 ---
 
 <Layout title="Welcome to Astro.">
 	<main class="flex-grow flex flex-col justify-center items-center w-full px-4">
 		<header class="flex flex-col justify-center items-center h-full gap-4">
-			<h1 class="text-center font-bold text-5xl text-silver-100">Fatih Nararya R. I.</h1>
+			<h1 class="text-center font-bold text-5xl text-silver-100">{name}</h1>
 			<p class="text-silver-300">
-				Undergraduate Informatics Student From ITB
+				{description}
 			</p>
 		</header>
 	</main>
