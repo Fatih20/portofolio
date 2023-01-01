@@ -24,10 +24,10 @@ import { months } from "@/utils";
     <p class="text-base text-silver-100 flex-grow">{shortDescription}</p>
     <div class="flex justify-center items-center gap-4 text-silver-100 mt-2">
         {projectLink &&
-        <a href={projectLink} target="_blank" onclick="(e) => e.stopPropagation()" class="transition-colors"><i class="fa-brands fa-github text-3xl"></i></a>
+        <a href={projectLink} target="_blank" onclick="(e) => e.stopPropagation()" class="transition-colors hover:scale-105"><i class="fa-brands fa-github text-3xl"></i></a>
         }
         {repositoryLink &&
-        <a href={repositoryLink} target="_blank" onclick="(e) => e.stopPropagation()" class="transition-colors"><i class="fa-solid fa-up-right-from-square text-2xl"></i></a>
+        <a href={repositoryLink} target="_blank" onclick="(e) => e.stopPropagation()" class="transition-colors hover:scale-105"><i class="fa-solid fa-up-right-from-square text-2xl"></i></a>
         }
     </div>
 
