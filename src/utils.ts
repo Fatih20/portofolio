@@ -1,3 +1,4 @@
+import type { ProjectCardContent } from "./types/cms";
 import type { Date } from "./types/types";
 
 export function dateConverter (dateString : string){
@@ -12,3 +13,32 @@ export function dateConverter (dateString : string){
 
 export const months  = [ "January", "February", "March", "April", "May", "June", 
 "July", "August", "September", "October", "November", "December" ];
+
+export function projectCompareFunction (a : ProjectCardContent, b : ProjectCardContent) {
+    {
+        const {date : aDate, month : aMonth, year : aYear} = dateConverter(a.projectStartDate)
+        const {date : bDate, month : bMonth, year : bYear} = dateConverter(b.projectStartDate)
+    
+        if (aYear > bYear) {
+            return -1
+        } else if (aYear < bYear) {
+            return 1
+        }
+    
+        if (aMonth > bMonth) {
+            return -1
+        } else if (aMonth < bMonth) {
+            return 1
+        }
+    
+        if (aDate > bDate) {
+            return -1
+        } else if (aDate < bDate) {
+            return 1
+        }
+    
+        return 0
+    
+    
+    }
+}

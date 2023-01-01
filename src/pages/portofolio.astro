@@ -3,8 +3,9 @@ import { projectsCardContentFetcher } from "@/api";
 import ProjectCard from "@/components/ProjectCard.astro";
 import Spacer from "@/components/Spacer.astro";
 import Layout from "@/layouts/Layout.astro";
+import { projectCompareFunction } from "@/utils";
 
-const {allProjects} = await projectsCardContentFetcher();
+const projects = (await projectsCardContentFetcher()).allProjects.sort(projectCompareFunction);
 ---
 <Layout title="Fatih's Portofolio" activeNavigationOption={"portofolio"} pageDescription="The projects that Fatih Nararya has worked on in the past">
     <main class="flex flex-col justify-start items-center max-w-7xl w-full gap-6 px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop pb-6">
@@ -13,7 +14,7 @@ const {allProjects} = await projectsCardContentFetcher();
             </h1>
         </header>
         <section class="flex flex-col justify-start items-center w-full gap-8 md:grid md:grid-cols-2 md:items-start xl:grid-cols-3 lg:gap-6">
-            {allProjects.map(({projectLink, projectName, projectStartDate, repositoryLink, shortDescription, projectEndDate, gradientStartColor, gradientEndColor}) => <ProjectCard projectName={projectName} projectEndDate={projectEndDate} projectStartDate={projectStartDate} projectLink={projectLink} repositoryLink={repositoryLink} shortDescription={shortDescription} gradientStartColor={gradientStartColor} gradientEndColor={gradientEndColor}  />
+            {projects.map(({projectLink, projectName, projectStartDate, repositoryLink, shortDescription, projectEndDate, gradientStartColor, gradientEndColor}) => <ProjectCard projectName={projectName} projectEndDate={projectEndDate} projectStartDate={projectStartDate} projectLink={projectLink} repositoryLink={repositoryLink} shortDescription={shortDescription} gradientStartColor={gradientStartColor} gradientEndColor={gradientEndColor}  />
             )}
         </section>
     
