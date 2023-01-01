@@ -1,4 +1,4 @@
-import type { Date } from "./types";
+import type { Date } from "./types/types";
 
 export function dateConverter (dateString : string){
     const numbers = dateString.split("-");
