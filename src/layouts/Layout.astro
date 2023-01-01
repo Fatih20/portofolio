@@ -1,12 +1,14 @@
 ---
 import Footer from '@/components/Footer.astro';
 import Header from '@/components/Header.astro';
+import type { HeaderOption } from '@/types';
 
 export interface Props {
 	title: string;
+	activeNavigationOption : HeaderOption
 }
 
-const { title } = Astro.props;
+const { title, activeNavigationOption } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -19,10 +21,9 @@ const { title } = Astro.props;
 		<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
 		<script src="https://kit.fontawesome.com/112dcdcf9d.js" crossorigin="anonymous"></script>
 		<title>{title}</title>
-
 	</head>
 	<body class="flex flex-col justify-start items-center pt-headerHeight bg-black-700 min-h-screen">
-		<Header />
+		<Header  activeNavigationOption={activeNavigationOption}/>
 		<slot />
 		<Footer />
 	</body>
