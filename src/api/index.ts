@@ -39,7 +39,8 @@ export async function homeContentFetcher () : Promise<HomeContent> {
 }
 
 export async function projectsCardContentFetcher () : Promise<AllProjectCardContent> {
-    const query = `  allProjects {
+    const query = `query {
+        allProjects {
         projectName,
         repositoryLink,
         projectLink,
@@ -48,7 +49,7 @@ export async function projectsCardContentFetcher () : Promise<AllProjectCardCont
         shortDescription
         gradientStartColor,
         gradientEndColor
-      }
+    }
     }`
     const {error, result} =  await (fetcher<AllProjectCardContent>(query))
     if (error === null && result?.data) {

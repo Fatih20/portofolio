@@ -4,3 +4,12 @@ import type { ProjectCardContent } from "@/types";
     type ProjectCardProp = ProjectCardContent
     const {projectName, projectEndDate, projectStartDate, projectLink, repositoryLink, shortDescription, gradientStartColor, gradientEndColor} = Astro.props as ProjectCardProp
 ---
+
+<article class={`w-full h-32 rounded-xl bg-gradient-to-b from-silver-100 to-black-500 flex flex-col justify-start items-center`} style={`
+    --tw-gradient-from: ${gradientStartColor};
+    --tw-gradient-to: ${gradientEndColor};
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+
+`}>
+    <h2>{projectName}</h2>
+</article>
