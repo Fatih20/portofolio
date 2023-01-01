@@ -6,6 +6,9 @@ module.exports = {
       fontFamily: {
         inter: ["Inter", "sans-serif"],
       },
+      spacing: {
+        headerHeight: "4rem",
+      },
     },
     colors: {
       "silver-100": "#fafafa",

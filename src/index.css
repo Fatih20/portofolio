@@ -5,3 +5,7 @@
 body * {
   @apply font-inter;
 }
+
+body {
+  @apply bg-black-700 min-h-screen;
+}
