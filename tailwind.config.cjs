@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        inter: ["Inter", "sans-serif"],
+      },
+    },
     colors: {
       "silver-100": "#fafafa",
       "silver-300": "#d4d4d4",

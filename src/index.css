@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.test {
-  @apply text-5xl text-silver-300;
+body * {
+  @apply font-inter;
 }
