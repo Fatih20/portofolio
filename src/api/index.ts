@@ -1,4 +1,4 @@
-import type { AllProjectCardContent, HomeContent } from "@/types";
+import type { AllProjectCardContent, HomeContent } from "@/types/cms";
 
 async function fetcher<T>(query : string) : Promise<{error : any, result : null | {data : T}}>{
     try {
