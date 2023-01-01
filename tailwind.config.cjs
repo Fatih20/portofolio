@@ -9,6 +9,12 @@ module.exports = {
       spacing: {
         headerHeight: "4rem",
       },
+      boxShadow: {
+        hoveredCard: "0 0 60px -15px rgba(0, 0, 0, 0.3)",
+      },
+      scale: {
+        101: "1.01",
+      },
     },
     colors: {
       "silver-100": "#fafafa",

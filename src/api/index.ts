@@ -1,4 +1,4 @@
-import type { HomeContent } from "@/types";
+import type { AllProjectCardContent, HomeContent } from "@/types";
 
 async function fetcher<T>(query : string) : Promise<{error : any, result : null | {data : T}}>{
     try {
@@ -35,6 +35,27 @@ export async function homeContentFetcher () : Promise<HomeContent> {
         return result.data as HomeContent
     } else {
         return {home : {name : "Fatih Nararya R. I.", "description" : "Placeholder"}} as HomeContent
+    }
+}
+
+export async function projectsCardContentFetcher () : Promise<AllProjectCardContent> {
+    const query = `query {
+        allProjects {
+        projectName,
+        repositoryLink,
+        projectLink,
+        projectStartDate,
+        projectEndDate,
+        shortDescription
+        gradientStartColor,
+        gradientEndColor
+    }
+    }`
+    const {error, result} =  await (fetcher<AllProjectCardContent>(query))
+    if (error === null && result?.data) {
+        return result.data as AllProjectCardContent
+    } else {
+        return {allProjects : []} as AllProjectCardContent
     }
 }
 
