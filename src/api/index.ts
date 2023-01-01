@@ -1,4 +1,4 @@
-import type { AllProjectCardContent, HomeContent } from "@/types";
+import type { AllProjectCardContent, HomeContent } from "@/types/cms";
 
 async function fetcher<T>(query : string) : Promise<{error : any, result : null | {data : T}}>{
     try {
@@ -27,9 +27,15 @@ export async function homeContentFetcher () : Promise<HomeContent> {
     const query = `query {
         home {
           name,
-          description
+          description,
+          photoOfUs {
+            alt, 
+            url, 
+            title
+          }
         }
-      }`
+      }
+      `
     const {error, result} =  await (fetcher<HomeContent>(query))
     if (error === null && result?.data) {
         return result.data as HomeContent

@@ -1,8 +1,15 @@
 export interface HomeContent {
     home : {
         name : string,
-        description : string
+        description : string,
+        photoOfUs : Image
     }
+}
+
+export interface Image {
+    alt : string,
+    url : string,
+    title : string,
 }
 
 export interface ProjectCardContent {
@@ -18,10 +25,4 @@ export interface ProjectCardContent {
 
 export interface AllProjectCardContent {
     allProjects : ProjectCardContent[]
-}
-
-export interface Date {
-    date : number,
-    month : number,
-    year : number,
 }

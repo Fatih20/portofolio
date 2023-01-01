@@ -8,6 +8,12 @@ module.exports = {
       },
       spacing: {
         headerHeight: "4rem",
+        horizontalPaddingDesktop: "1rem",
+        horizontalPaddingMobile: "1.5rem",
+      },
+      minHeight: {
+        cardDesktop: "12rem",
+        cardMobile: "16rem",
       },
       boxShadow: {
         hoveredCard: "0 0 60px -15px rgba(0, 0, 0, 0.3)",
