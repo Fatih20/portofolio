@@ -7,12 +7,12 @@ import Layout from "@/layouts/Layout.astro";
 const {allProjects} = await projectsCardContentFetcher();
 ---
 <Layout title="Fatih's Portofolio" activeNavigationOption={"portofolio"}>
-    <main class="flex flex-col justify-start items-center max-w-md w-full gap-6 px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop">
+    <main class="flex flex-col justify-start items-center max-w-7xl w-full gap-6 px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop pb-6">
         <header>
-            <h1 class="text-silver-100 text-left text-3xl font-bold">The many projects that I've worked on
+            <h1 class="text-silver-100 text-center lg:text-left text-4xl lg:text-3xl font-bold">The many projects that I've worked on
             </h1>
         </header>
-        <section class="flex flex-col justify-start items-center w-full">
+        <section class="flex flex-col justify-start items-center w-full gap-8 md:grid md:grid-cols-2 md:items-start xl:grid-cols-3 lg:gap-6">
             {allProjects.map(({projectLink, projectName, projectStartDate, repositoryLink, shortDescription, projectEndDate, gradientStartColor, gradientEndColor}) => <ProjectCard projectName={projectName} projectEndDate={projectEndDate} projectStartDate={projectStartDate} projectLink={projectLink} repositoryLink={repositoryLink} shortDescription={shortDescription} gradientStartColor={gradientStartColor} gradientEndColor={gradientEndColor}  />
             )}
         </section>
