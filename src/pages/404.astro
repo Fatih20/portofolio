@@ -1,0 +1,15 @@
+---
+import Layout from "@/layouts/Layout.astro";
+
+---
+
+<Layout title="Address Not Found" activeNavigationOption={""}>
+	<main class="flex-grow flex flex-col justify-center items-center w-full px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop">
+        <header class="flex flex-col justify-center items-center gap-4">
+            <i class="fa-solid fa-question text-silver-100 text-7xl"></i>            <h1 class="text-silver-100 text-center font-bold text-5xl lg:text-4xl">
+                Uh oh, it seems that you're lost!
+            </h1>
+            <a href="/" class="text-slate-500 underline-offset-4 decoration-slate-500 underline text-center font-bold text-xl lg:text-base">Go back to home</a>
+        </header>
+	</main>
+</Layout>
