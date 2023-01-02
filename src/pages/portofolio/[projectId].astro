@@ -59,7 +59,11 @@ const { month: endMonth, year: endYear } = projectEndDate
   : { month: 0, year: 0 };
 ---
 
-<Layout title="" pageDescription="" activeNavigationOption={""}>
+<Layout
+  title={`${projectName}`}
+  pageDescription={`${shortDescription} - Made by Fatih NRI`}
+  activeNavigationOption={""}
+>
   <div
     class="flex flex-col items-center justify-start w-full px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop flex-grow mb-4"
   >
@@ -96,10 +100,10 @@ const { month: endMonth, year: endYear } = projectEndDate
           href={`/portofolio/${allProjects[prevProjectIndex].id}`}
           class="flex items-center justify-start w-full lg:w-1/2 gap-2 rounded-lg px-4 py-2 bg-gradient-to-b hover:shadow-hoveredCard hover:scale-101 transition-all"
           style={`
-            --tw-gradient-from: ${nextProjectGradientStartColor};
-            --tw-gradient-to: ${nextProjectGradientEndColor};
+            --tw-gradient-from: ${prevProjectGradientStartColor};
+            --tw-gradient-to: ${prevProjectGradientEndColor};
             --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-            --tw-shadow-color: ${nextProjectGradientStartColor};
+            --tw-shadow-color: ${prevProjectGradientStartColor};
             --tw-shadow: var(--tw-shadow-colored);
         `}
         >
