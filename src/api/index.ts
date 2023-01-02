@@ -62,7 +62,7 @@ export async function projectsCardContentFetcher(): Promise<AllProjectCardConten
         projectLink,
         projectStartDate,
         projectEndDate,
-        shortDescription
+        shortDescription,
         gradientStartColor,
         gradientEndColor
     }
@@ -118,6 +118,9 @@ export async function projectPageContentFetcher(
       projectStartDate,
       projectEndDate,
       summary,
+      gradientStartColor,
+      gradientEndColor,
+      shortDescription,
 
     }
   }

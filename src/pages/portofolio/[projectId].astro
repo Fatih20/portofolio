@@ -1,6 +1,8 @@
 ---
 import { projectPageContentFetcher, projectsIDFetcher } from "@/api";
+import Spacer from "@/components/Spacer.astro";
 import Layout from "@/layouts/Layout.astro";
+import { dateConverter, months } from "@/utils";
 
 export async function getStaticPaths() {
   return (await projectsIDFetcher()).allProjects.map(({ id }) => {
@@ -11,15 +13,42 @@ export async function getStaticPaths() {
 }
 
 const { projectId } = Astro.params;
-const { projectName } = await projectPageContentFetcher(projectId ?? "");
+const {
+  projectName,
+  gradientStartColor,
+  gradientEndColor,
+  projectStartDate,
+  projectEndDate,
+  shortDescription,
+} = await projectPageContentFetcher(projectId ?? "");
+
+const { month: startMonth, year: startYear } = dateConverter(projectStartDate);
+const { month: endMonth, year: endYear } = projectEndDate
+  ? dateConverter(projectEndDate)
+  : { month: 0, year: 0 };
 ---
 
 <Layout title="" pageDescription="" activeNavigationOption={""}>
   <main
-    class="flex flex-col items-center justify-start px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop"
+    class="flex flex-col items-center justify-start mx-horizontalPaddingMobile lg:mx-horizontalPaddingDesktop w-full max-w-5xl"
   >
-    <header>
-      <h1>{projectName}</h1>
+    <header
+      class="flex flex-col items-start justify-start text-silver-100 gap-2 w-full"
+    >
+      <div class="flex flex-col items-start justify-start w-full gap-2">
+        <h1 class="text-3xl lg:text-4xl text-left font-black">
+          {projectName}
+        </h1>
+        <p class="text-xl text-left text-black-100">
+          {shortDescription}
+        </p>
+      </div>
+      <p class="text-base font-medium text-left">
+        {months[startMonth - 1]}
+        {startYear}
+        {projectEndDate ? `${months[endMonth - 1]} ${endYear}` : null}
+      </p>
     </header>
   </main>
+  <Spacer />
 </Layout>

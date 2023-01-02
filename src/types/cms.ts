@@ -32,6 +32,9 @@ export interface ProjectPageContent {
   projectStartDate: string;
   projectEndDate?: string;
   summary: string;
+  gradientStartColor: string;
+  gradientEndColor: string;
+  shortDescription: string;
 }
 
 export interface AllProjectCardContent {
