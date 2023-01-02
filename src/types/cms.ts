@@ -25,6 +25,15 @@ export interface ProjectCardContent {
   gradientEndColor: string;
 }
 
+export interface ProjectPageContent {
+  projectName: string;
+  repositoryLink: string;
+  projectLink: string;
+  projectStartDate: string;
+  projectEndDate?: string;
+  summary: string;
+}
+
 export interface AllProjectCardContent {
   allProjects: ProjectCardContent[];
 }
