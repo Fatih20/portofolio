@@ -65,10 +65,13 @@ const { month: endMonth, year: endYear } = projectEndDate
   activeNavigationOption={""}
 >
   <div
-    class="flex flex-col items-center justify-start w-full px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop flex-grow mb-4"
+    class="flex flex-col items-center justify-start w-full px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop flex-grow"
   >
     <main
-      class="flex flex-col items-center justify-start w-full max-w-5xl mx-auto flex-grow"
+      class="flex flex-col items-center justify-start w-full max-w-5xl mx-auto flex-grow border-b-2 pb-4"
+      style={`
+      border-color: ${gradientEndColor};
+  `}
     >
       <header
         class="flex flex-col items-start justify-start text-silver-100 gap-2 w-full border-4 rounded-lg p-4 shadow-lg"
