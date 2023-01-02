@@ -23,7 +23,7 @@ const { month: endMonth, year: endYear } = projectEndDate
 ---
 
 <article
-  class={`w-full min-h-cardMobile lg:min-h-cardDesktop rounded-xl bg-gradient-to-b from-silver-100 to-black-500 flex flex-col justify-start items-start box-border p-4 gap-1 hover:shadow-hoveredCard hover:scale-101 transition-all cursor-pointer md:h-full relative`}
+  class={`w-full min-h-cardDesktop rounded-xl bg-gradient-to-b from-silver-100 to-black-500 flex flex-col justify-start items-start box-border p-4 gap-1 hover:shadow-hoveredCard hover:scale-101 transition-all cursor-pointer md:h-full relative`}
   style={`
     --tw-gradient-from: ${gradientStartColor};
     --tw-gradient-to: ${gradientEndColor};
@@ -37,15 +37,15 @@ const { month: endMonth, year: endYear } = projectEndDate
     target="_blank"
     aria-label={`Link to the page for ${projectName}`}
     class="absolute inset-0"></a>
-  <h2 class="text-3xl lg:text-2xl text-silver-100 text-left font-bold">
+  <h2 class="text-2xl text-silver-100 text-left font-bold">
     {projectName}
   </h2>
-  <p class="text-lg lg:text-base text-silver-100 font-medium">
+  <p class="text-base text-silver-100 font-medium">
     {months[startMonth - 1]}
     {startYear}
     {projectEndDate ? `- ${months[endMonth - 1]} ${endYear}` : ""}
   </p>
-  <p class="text-lg lg:text-base text-silver-100 flex-grow">
+  <p class="text-base text-silver-100 flex-grow">
     {shortDescription}
   </p>
   <div class="flex justify-center items-center gap-4 text-silver-100 mt-2">
