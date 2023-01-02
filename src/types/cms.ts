@@ -26,6 +26,7 @@ export interface ProjectCardContent {
 }
 
 export interface ProjectPageContent {
+  id: string;
   projectName: string;
   repositoryLink: string;
   projectLink: string;

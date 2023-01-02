@@ -112,6 +112,7 @@ export async function projectPageContentFetcher(
 ): Promise<ProjectPageContent> {
   const query = `query {
     allProjects(filter: { id: { eq: ${projectID} } }){
+      id,
       projectName,
       repositoryLink,
       projectLink,
@@ -139,5 +140,43 @@ export async function projectPageContentFetcher(
       repositoryLink: "",
       summary: "",
     } as ProjectPageContent;
+  }
+}
+
+export async function projectsPageContentFetcher(): Promise<
+  ProjectPageContent[]
+> {
+  const query = `query {
+    allProjects {
+      id,
+      projectName,
+      repositoryLink,
+      projectLink,
+      projectStartDate,
+      projectEndDate,
+      summary,
+      gradientStartColor,
+      gradientEndColor,
+      shortDescription,
+
+    }
+  }
+  `;
+  const { error, result } = await fetcher<{
+    allProjects: ProjectPageContent[];
+  }>(query);
+  if (error === null && result?.data) {
+    return result.data.allProjects as ProjectPageContent[];
+  } else {
+    return [
+      {
+        projectName: "",
+        projectLink: "",
+        projectStartDate: "",
+        projectEndDate: "",
+        repositoryLink: "",
+        summary: "",
+      },
+    ] as ProjectPageContent[];
   }
 }
