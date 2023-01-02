@@ -1,63 +1,85 @@
 ---
-import { homeContentFetcher } from '@/api';
-import Layout from '../layouts/Layout.astro';
+import { homeContentFetcher } from "@/api";
+import PhotoOfUs from "@/components/PhotoOfUs.svelte";
+import Layout from "../layouts/Layout.astro";
 
-const {home : {name, description, photoOfUs : {alt, title, url}}} = await homeContentFetcher()
+const {
+  home: { name, description, photoOfUs, photoCycleTime },
+} = await homeContentFetcher();
 ---
 
-<Layout title="Fatih NRI" activeNavigationOption={"home"} pageDescription={description}>
-	<main class="flex-grow flex flex-col justify-center items-center w-full px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop">
-		<header class="flex flex-col justify-center items-center h-full gap-4">
-			<img class="w-40 h-40 object-cover rounded-full" alt={alt} title={title} src={url} />
-			<h1 class="text-center font-bold text-5xl text-silver-100">{name}</h1>
-			<p class="text-silver-300 text-xl lg:text-base">
-				{description}
-			</p>
-		</header>
-	</main>
+<Layout
+  title="Fatih NRI"
+  activeNavigationOption={"home"}
+  pageDescription={description}
+>
+  <main
+    class="flex-grow flex flex-col justify-center items-center w-full px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop"
+  >
+    <header class="flex flex-col justify-center items-center h-full gap-4">
+      <PhotoOfUs
+        cycleInterval={photoCycleTime}
+        photoSet={photoOfUs}
+        client:visible
+      />
+      <h1 class="text-center font-bold text-5xl text-silver-100">{name}</h1>
+      <p class="text-silver-300 text-xl lg:text-base">
+        {description}
+      </p>
+    </header>
+  </main>
 </Layout>
 
+<script defer>
+  const photoContainer = document.getElementById("photo-container");
+  setInterval(() => {
+    if (photoContainer) {
+      photoContainer.src;
+    }
+  }, 3000);
+</script>
+
 <style>
-	main {
-		margin: auto;
-		padding: 1.5rem;
-		max-width: 60ch;
-	}
-	h1 {
-		font-size: 3rem;
-		font-weight: 800;
-		margin: 0;
-	}
-	.text-gradient {
-		background-image: var(--accent-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
-	}
-	.instructions {
-		line-height: 1.6;
-		margin: 1rem 0;
-		border: 1px solid rgba(var(--accent), 25%);
-		background-color: white;
-		padding: 1rem;
-		border-radius: 0.4rem;
-	}
-	.instructions code {
-		font-size: 0.875em;
-		font-weight: bold;
-		background: rgba(var(--accent), 12%);
-		color: rgb(var(--accent));
-		border-radius: 4px;
-		padding: 0.3em 0.45em;
-	}
-	.instructions strong {
-		color: rgb(var(--accent));
-	}
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 1rem;
-		padding: 0;
-	}
+  main {
+    margin: auto;
+    padding: 1.5rem;
+    max-width: 60ch;
+  }
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0;
+  }
+  .text-gradient {
+    background-image: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+  .instructions {
+    line-height: 1.6;
+    margin: 1rem 0;
+    border: 1px solid rgba(var(--accent), 25%);
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.4rem;
+  }
+  .instructions code {
+    font-size: 0.875em;
+    font-weight: bold;
+    background: rgba(var(--accent), 12%);
+    color: rgb(var(--accent));
+    border-radius: 4px;
+    padding: 0.3em 0.45em;
+  }
+  .instructions strong {
+    color: rgb(var(--accent));
+  }
+  .link-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+    gap: 1rem;
+    padding: 0;
+  }
 </style>

@@ -2,7 +2,8 @@ export interface HomeContent {
     home : {
         name : string,
         description : string,
-        photoOfUs : Image
+        photoOfUs : Image[],
+        photoCycleTime : number
     }
 }
 

@@ -32,7 +32,8 @@ export async function homeContentFetcher () : Promise<HomeContent> {
             alt, 
             url, 
             title
-          }
+          },
+          photoCycleTime
         }
       }
       `
