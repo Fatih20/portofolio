@@ -26,3 +26,9 @@ export interface ProjectCardContent {
 export interface AllProjectCardContent {
     allProjects : ProjectCardContent[]
 }
+
+export interface PortofolioContent {
+    portofolio : {
+        title : string
+    }
+}

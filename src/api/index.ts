@@ -1,4 +1,4 @@
-import type { AllProjectCardContent, HomeContent } from "@/types/cms";
+import type { AllProjectCardContent, HomeContent, PortofolioContent } from "@/types/cms";
 
 async function fetcher<T>(query : string) : Promise<{error : any, result : null | {data : T}}>{
     try {
@@ -65,5 +65,19 @@ export async function projectsCardContentFetcher () : Promise<AllProjectCardCont
     }
 }
 
+export async function portofolioContentFetcher () : Promise<PortofolioContent> {
+  const query = `query {
+    portofolio {
+      title
+    }
+  }
+  `
+  const {error, result} =  await (fetcher<PortofolioContent>(query))
+  if (error === null && result?.data) {
+      return result.data as PortofolioContent
+  } else {
+      return {portofolio : {title : "The many projects that I've worked on"}} as PortofolioContent
+  }
+}
 
 
