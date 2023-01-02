@@ -1,0 +1,24 @@
+---
+import { projectsIDFetcher } from "@/api";
+import Layout from "@/layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  return (await projectsIDFetcher()).allProjects.map(({ id }) => {
+    return {
+      params: { projectId: id },
+    };
+  });
+}
+
+const { projectId } = Astro.params;
+---
+
+<Layout title="" pageDescription="" activeNavigationOption={""}>
+  <main
+    class="flex flex-col items-center justify-start px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop"
+  >
+    <header>
+      <h1>Project number {projectId}</h1>
+    </header>
+  </main>
+</Layout>

@@ -5,6 +5,7 @@ import { months } from "@/utils";
 
 type ProjectCardProp = ProjectCardContent;
 const {
+  id,
   projectName,
   projectEndDate,
   projectStartDate,
@@ -32,8 +33,7 @@ const { month: endMonth, year: endYear } = projectEndDate
 `}
 >
   <a
-    href="https://www.google.com"
-    target="_blank"
+    href={`portofolio/${id}`}
     aria-label={`Link to the page for ${projectName}`}
     class="absolute inset-0"></a>
   <h2 class="text-2xl text-silver-100 text-left font-bold">
