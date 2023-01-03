@@ -120,39 +120,80 @@ const { month: endMonth, year: endYear } = projectEndDate
         <h2 class="text-2xl lg:text-3xl text-left font-bold">Summary</h2>
         <Fragment set:html={render(summary)} />
       </section>
-      <section class="flex items-stretch justify-center w-full gap-4">
+      <section class="w-full relative">
+        <h2 class="absolute -left-[-9999px]">Tech Stack</h2>
         <div
-          class="summary-container flex flex-col items-center justify-center gap-2 w-full bg-none border-l-4 border-y-4 rounded-l-lg p-4"
-          style={`
-        border-color: ${gradientStartColor};`}
+          class="items-stretch justify-center w-full gap-4 invisible md:visible hidden md:flex"
         >
-          <p class="text-2xl font-bold">Tech</p>
+          <div
+            class="summary-container flex flex-col items-center justify-center gap-2 flex-grow bg-none border-4 rounded-lg p-4"
+            style={`
+      border-color: ${gradientStartColor};`}
+          >
+            <p class="text-2xl lg:text-3xl font-bold">Tech</p>
+          </div>
+          <div
+            class="summary-container flex flex-col items-center justify-center gap-2 flex-grow bg-none border-x-4 border-b-4 rounded-b-lg px-2 pb-2 box-border"
+            style={`
+    border-color: ${gradientStartColor};`}
+          >
+            <p class="border-4 w-full text-center p-1 invisible">
+              {null}
+            </p>
+            {
+              processedTechStack.map((name) => {
+                return (
+                  <p
+                    class="rounded-lg border-silver-100 border-4 w-full text-center p-1"
+                    style={`
+      border-color: ${gradientEndColor};`}
+                  >
+                    {name}
+                  </p>
+                );
+              })
+            }
+          </div>
+          <div
+            class="summary-container flex flex-col items-center justify-center gap-2 flex-grow bg-none border-4 rounded-lg p-4"
+            style={`
+    border-color: ${gradientStartColor};`}
+          >
+            <p class="text-2xl lg:text-3xl font-bold">Stack</p>
+          </div>
         </div>
         <div
-          class="summary-container flex flex-col items-center justify-center gap-2 w-full bg-none border-x-4 border-b-4 rounded-b-lg px-2 pb-2 pt-4 box-border"
-          style={`
-      border-color: ${gradientStartColor};`}
+          class="items-stretch justify-center w-full gap-4 relative flex flex-col md:hidden visible md:invisible"
         >
-          {
-            processedTechStack.map((name) => {
-              return (
-                <p
-                  class="rounded-lg border-silver-100 border-4 w-full text-center"
-                  style={`
-        border-color: ${gradientStartColor};`}
-                >
-                  {name}
-                </p>
-              );
-            })
-          }
-        </div>
-        <div
-          class="summary-container flex flex-col items-center justify-center gap-2 w-full bg-none border-r-4 border-y-4 rounded-r-lg p-4"
-          style={`
+          <div
+            class="summary-container flex flex-col items-center justify-center gap-2 flex-grow bg-none border-x-4 border-b-4 rounded-b-lg px-2 pb-2 box-border"
+            style={`
       border-color: ${gradientStartColor};`}
-        >
-          <p class="text-2xl font-bold">Stack</p>
+          >
+            <p class="border-4 w-full text-center p-1 invisible">
+              {null}
+            </p>
+            {
+              processedTechStack.map((name) => {
+                return (
+                  <p
+                    class="rounded-lg border-silver-100 border-4 w-full text-center p-1"
+                    style={`
+        border-color: ${gradientEndColor};`}
+                  >
+                    {name}
+                  </p>
+                );
+              })
+            }
+            <div
+              class="flex flex-col items-center justify-center gap-2 bg-none border-4 p-4 box-border rounded-lg w-full"
+              style={`
+      border-color: ${gradientStartColor};`}
+            >
+              <p class="text-2xl lg:text-3xl font-bold">Tech Stack</p>
+            </div>
+          </div>
         </div>
       </section>
       <Spacer />
