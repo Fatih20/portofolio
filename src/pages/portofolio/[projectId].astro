@@ -111,15 +111,6 @@ const { month: endMonth, year: endYear } = projectEndDate
           {projectEndDate ? `${months[endMonth - 1]} ${endYear}` : null}
         </p>
       </header>
-      <section
-        class="summary-container flex flex-col items-start justify-start gap-2 w-full border-4 rounded-lg p-4"
-        style={`
-        border-color: ${gradientStartColor};
-    `}
-      >
-        <h2 class="text-2xl lg:text-3xl text-left font-bold">Summary</h2>
-        <Fragment set:html={render(summary)} />
-      </section>
       <section class="w-full relative">
         <h2 class="absolute -left-[-9999px]">Tech Stack</h2>
         <div
@@ -196,6 +187,16 @@ const { month: endMonth, year: endYear } = projectEndDate
           </div>
         </div>
       </section>
+      <section
+        class="summary-container flex flex-col items-start justify-start gap-2 w-full border-4 rounded-lg p-4"
+        style={`
+        border-color: ${gradientStartColor};
+    `}
+      >
+        <h2 class="text-2xl lg:text-3xl text-left font-bold">Summary</h2>
+        <Fragment set:html={render(summary)} />
+      </section>
+
       <Spacer />
       <div
         class="flex flex-col lg:flex-row w-full text-silver-100 h-fit justify-items-stretch gap-2 lg:gap-4 text-xl"
