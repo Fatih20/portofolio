@@ -146,6 +146,7 @@ export async function projectsPageContentFetcher(): Promise<
       projectName,
     repositoryLink,
     projectLink,
+    shortDescription,
     projectStartDate,
     projectEndDate,
     summary {

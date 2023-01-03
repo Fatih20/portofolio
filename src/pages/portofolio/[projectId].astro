@@ -61,6 +61,20 @@ const { month: endMonth, year: endYear } = projectEndDate
   : { month: 0, year: 0 };
 ---
 
+<style>
+  .summary-container :global(h3) {
+    @apply text-xl font-bold;
+  }
+
+  .summary-container :global(h4) {
+    @apply text-lg font-bold;
+  }
+
+  .summary-container :global(h5) {
+    @apply text-lg font-medium;
+  }
+</style>
+
 <Layout
   title={`${projectName}`}
   pageDescription={`${shortDescription} - Made by Fatih NRI`}
@@ -70,13 +84,13 @@ const { month: endMonth, year: endYear } = projectEndDate
     class="flex flex-col items-center justify-start w-full px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop flex-grow"
   >
     <main
-      class="flex flex-col items-center justify-start w-full max-w-5xl mx-auto flex-grow border-b-2 pb-4"
+      class="flex flex-col items-center justify-start w-full max-w-5xl mx-auto flex-grow border-b-2 pb-4 gap-8"
       style={`
       border-color: ${gradientEndColor};
   `}
     >
       <header
-        class="flex flex-col items-start justify-start text-silver-100 gap-2 w-full border-4 rounded-lg p-4 shadow-lg"
+        class="flex flex-col items-start justify-start gap-2 w-full border-4 rounded-lg p-4 shadow-lg"
         style={`
           border-color: ${gradientStartColor};
           --tw-shadow-color: ${gradientEndColor}7F;
@@ -97,8 +111,15 @@ const { month: endMonth, year: endYear } = projectEndDate
           {projectEndDate ? `${months[endMonth - 1]} ${endYear}` : null}
         </p>
       </header>
-      <section>
-        <h2>Summary</h2>
+      <section
+        class="summary-container flex flex-col items-start justify-start gap-2 w-full border-4 rounded-lg p-4 shadow-lg"
+        style={`
+        border-color: ${gradientStartColor};
+        --tw-shadow-color: ${gradientEndColor}7F;
+        --tw-shadow: var(--tw-shadow-colored);
+    `}
+      >
+        <h2 class="text-2xl lg:text-3xl text-left font-bold">Summary</h2>
         <Fragment set:html={render(summary)} />
       </section>
       <Spacer />
