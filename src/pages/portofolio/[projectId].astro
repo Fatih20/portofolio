@@ -1,12 +1,9 @@
 ---
-import {
-  projectPageContentFetcher,
-  projectsIDFetcher,
-  projectsPageContentFetcher,
-} from "@/api";
+import { projectsIDFetcher, projectsPageContentFetcher } from "@/api";
 import Spacer from "@/components/Spacer.astro";
 import Layout from "@/layouts/Layout.astro";
 import { dateConverter, months, projectPCompareFunction } from "@/utils";
+import { render } from "datocms-structured-text-to-html-string";
 
 export async function getStaticPaths() {
   return (await projectsIDFetcher()).allProjects.map(({ id }) => {
@@ -33,7 +30,12 @@ const {
   projectStartDate,
   projectEndDate,
   shortDescription,
+  summary,
+  techStack,
+  diaryAndReflections,
 } = allProjects[projectIndexFromFetchedData];
+
+const processedTechStack = techStack.map(({ name }) => name);
 
 const nextProjectIndex = (projectIndexFromFetchedData + 1) % allProjects.length;
 const prevProjectIndex =
@@ -95,6 +97,10 @@ const { month: endMonth, year: endYear } = projectEndDate
           {projectEndDate ? `${months[endMonth - 1]} ${endYear}` : null}
         </p>
       </header>
+      <section>
+        <h2>Summary</h2>
+        <Fragment set:html={render(summary)} />
+      </section>
       <Spacer />
       <div
         class="flex flex-col lg:flex-row w-full text-silver-100 h-fit justify-items-stretch gap-2 lg:gap-4 text-xl"

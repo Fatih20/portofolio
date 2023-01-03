@@ -1,3 +1,5 @@
+import type { StructuredText } from "datocms-structured-text-utils";
+
 export interface HomeContent {
   home: {
     name: string;
@@ -28,14 +30,16 @@ export interface ProjectCardContent {
 export interface ProjectPageContent {
   id: string;
   projectName: string;
+  shortDescription: string;
   repositoryLink: string;
   projectLink: string;
   projectStartDate: string;
   projectEndDate?: string;
-  summary: string;
+  summary: StructuredText;
+  diaryAndReflections: StructuredText;
+  techStack: { name: string }[];
   gradientStartColor: string;
   gradientEndColor: string;
-  shortDescription: string;
 }
 
 export interface AllProjectCardContent {

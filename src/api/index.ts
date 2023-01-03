@@ -107,41 +107,34 @@ export async function projectsIDFetcher(): Promise<ProjectsID> {
   }
 }
 
-export async function projectPageContentFetcher(
-  projectID: string
-): Promise<ProjectPageContent> {
-  const query = `query {
-    allProjects(filter: { id: { eq: ${projectID} } }){
-      id,
-      projectName,
-      repositoryLink,
-      projectLink,
-      projectStartDate,
-      projectEndDate,
-      summary,
-      gradientStartColor,
-      gradientEndColor,
-      shortDescription,
+// export async function projectPageContentFetcher(
+//   projectID: string
+// ): Promise<ProjectPageContent> {
+//   const query = `query {
+//     allProjects(filter: { id: { eq: ${projectID} } }){
+//       id,
+//       projectName,
+//       repositoryLink,
+//       projectLink,
+//       projectStartDate,
+//       projectEndDate,
+//       summary,
+//       gradientStartColor,
+//       gradientEndColor,
+//       shortDescription,
 
-    }
-  }
-  `;
-  const { error, result } = await fetcher<{
-    allProjects: ProjectPageContent[];
-  }>(query);
-  if (error === null && result?.data) {
-    return result.data.allProjects[0] as ProjectPageContent;
-  } else {
-    return {
-      projectName: "",
-      projectLink: "",
-      projectStartDate: "",
-      projectEndDate: "",
-      repositoryLink: "",
-      summary: "",
-    } as ProjectPageContent;
-  }
-}
+//     }
+//   }
+//   `;
+//   const { error, result } = await fetcher<{
+//     allProjects: ProjectPageContent[];
+//   }>(query);
+//   if (error === null && result?.data) {
+//     return result.data.allProjects[0] as ProjectPageContent;
+//   } else {
+//     return undefined as ProjectPageContent;
+//   }
+// }
 
 export async function projectsPageContentFetcher(): Promise<
   ProjectPageContent[]
@@ -150,15 +143,26 @@ export async function projectsPageContentFetcher(): Promise<
     allProjects {
       id,
       projectName,
-      repositoryLink,
-      projectLink,
-      projectStartDate,
-      projectEndDate,
-      summary,
-      gradientStartColor,
-      gradientEndColor,
-      shortDescription,
-
+      projectName,
+    repositoryLink,
+    projectLink,
+    projectStartDate,
+    projectEndDate,
+    summary {
+      blocks,
+      value,
+      links
+    },
+    techStack {
+      name
+    },
+      diaryAndReflections {
+        blocks,
+        links,
+        value
+      },
+    gradientStartColor,
+    gradientEndColor
     }
   }
   `;
@@ -168,15 +172,6 @@ export async function projectsPageContentFetcher(): Promise<
   if (error === null && result?.data) {
     return result.data.allProjects as ProjectPageContent[];
   } else {
-    return [
-      {
-        projectName: "",
-        projectLink: "",
-        projectStartDate: "",
-        projectEndDate: "",
-        repositoryLink: "",
-        summary: "",
-      },
-    ] as ProjectPageContent[];
+    return [] as ProjectPageContent[];
   }
 }
