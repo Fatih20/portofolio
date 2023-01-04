@@ -33,6 +33,7 @@ const {
       {
         projects.map(
           ({
+            id,
             projectLink,
             projectName,
             projectStartDate,
@@ -43,6 +44,7 @@ const {
             gradientEndColor,
           }) => (
             <ProjectCard
+              id={id}
               projectName={projectName}
               projectEndDate={projectEndDate}
               projectStartDate={projectStartDate}
