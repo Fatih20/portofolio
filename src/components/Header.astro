@@ -15,13 +15,17 @@ const { activeNavigationOption } = Astro.props as HeaderProp;
     <a
       href="/"
       class={`${
-        activeNavigationOption === "home" ? "text-silver-100" : ""
+        activeNavigationOption === "home"
+          ? "text-silver-100"
+          : "text-silver-500"
       } hover:text-silver-100 transition-colors`}>Home</a
     >
     <a
       href="/portofolio"
       class={`${
-        activeNavigationOption === "portofolio" ? "text-silver-100" : ""
+        activeNavigationOption === "portofolio"
+          ? "text-silver-100"
+          : "text-silver-500"
       } hover:text-silver-100 transition-colors`}>Portofolio</a
     >
   </div>
