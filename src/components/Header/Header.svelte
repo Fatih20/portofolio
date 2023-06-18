@@ -8,25 +8,34 @@
 </script>
 
 <div
-  class={`fixed inset-0 w-screen h-screen ${
+  class={`fixed inset-0 z-20 w-screen h-screen ${
     hovered ? "bg-slate-900/75" : ""
   } flex items-center box-border py-8`}
 >
   <nav
     class={`bg-black rounded-r-md ${
       hovered ? "translate-x-0" : "-translate-x-full"
-    } h-full p-8 relative transition-transform items-center justify-center flex flex-col`}
+    } h-full p-8 relative transition-transform items-start justify-center flex flex-col gap-4`}
     on:mouseover={() => (hovered = true)}
     on:mouseleave={() => (hovered = false)}
     on:focus={() => {}}
   >
-    <div class="absolute z-10 top-0 bottom-0 left-full h-full w-4" />
+    <div class="absolute z-20 top-0 bottom-0 left-full h-full w-4" />
     <Option
-      colorOnHover={"#ffffff"}
+      colorOnHover={"#8cd5ff"}
       destination={"/"}
-      iconName={"briefcase"}
+      iconName={"home"}
       navigationOption={"home"}
+      {activeNavigationOption}
       text={"Home"}
+    />
+    <Option
+      colorOnHover={"#e4c6fa"}
+      destination={"/portofolio"}
+      iconName={"briefcase"}
+      navigationOption={"portofolio"}
+      {activeNavigationOption}
+      text={"Portofolio"}
     />
   </nav>
 </div>
