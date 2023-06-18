@@ -13,9 +13,9 @@
   } flex items-center box-border py-8`}
 >
   <nav
-    class={`bg-black rounded-r-md ${
+    class={`bg-black rounded-r-md lg:rounded-r-xl ${
       hovered ? "translate-x-0" : "-translate-x-full"
-    } h-full p-8 relative transition-transform items-start justify-center flex flex-col gap-4 duration-200`}
+    } h-full py-8 pl-4 pr-6 relative transition-transform items-start justify-center flex flex-col gap-4 duration-200`}
     on:mouseover={() => (hovered = true)}
     on:mouseleave={() => (hovered = false)}
     on:focus={() => {}}
@@ -23,11 +23,11 @@
     <div
       class="absolute flex justify-center items-center flex-col z-20 top-0 bottom-0 left-full h-full"
     >
-      <div class="bg-silver-700 rounded-r-md pl-2 py-3 pr-3">
+      <div class=" rounded-r-md pl-2 py-3 pr-3">
         <i
           class={`fa-solid fa-chevron-right text-xl text-silver-100 ${
-            hovered ? "rotate-180" : "rotate-0"
-          } transition-transform duration-200`}
+            hovered ? "rotate-180 opacity-0" : "rotate-0"
+          } transition-all duration-200`}
         />
       </div>
     </div>
@@ -41,11 +41,27 @@
     />
     <Option
       colorOnHover={"#e4c6fa"}
-      destination={"/portofolio"}
-      iconName={"briefcase"}
-      navigationOption={"portofolio"}
+      destination={"/hobby-project"}
+      iconName={"pencil"}
+      navigationOption={"hobbyProject"}
       {activeNavigationOption}
-      text={"Portofolio"}
+      text={"Hobby Projects"}
+    />
+    <Option
+      colorOnHover={"#e4c6fa"}
+      destination={"/works"}
+      iconName={"briefcase"}
+      navigationOption={"works"}
+      {activeNavigationOption}
+      text={"Works/Contributions"}
+    />
+    <Option
+      colorOnHover={"#e4c6fa"}
+      destination={"/mun"}
+      iconName={"globe"}
+      navigationOption={"mun"}
+      {activeNavigationOption}
+      text={"Hobby Projects"}
     />
   </nav>
 </div>

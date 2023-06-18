@@ -1,9 +1,9 @@
 export interface Date {
-    date : number,
-    month : number,
-    year : number,
+  date: number;
+  month: number;
+  year: number;
 }
 
-const headerOptions = ["", "home", "portofolio"] as const;
+const headerOptions = ["", "home", "hobbyProject", "works", "mun"] as const;
 
 export type HeaderOption = typeof headerOptions[number];

@@ -23,11 +23,11 @@
 <style>
   .selected {
     color: var(--color-on-hover);
+    font-weight: bold;
   }
 
   .unselected:hover {
     color: var(--color-on-hover);
-    opacity: 0.75;
   }
 
   .unselected {
