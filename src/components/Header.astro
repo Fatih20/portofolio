@@ -2,13 +2,34 @@
 import type { HeaderOption } from "@/types/types";
 
 type HeaderProp = {
-    activeNavigationOption : HeaderOption
-}
+  activeNavigationOption: HeaderOption;
+};
 
-const {activeNavigationOption} = Astro.props as HeaderProp
+const { activeNavigationOption } = Astro.props as HeaderProp;
 ---
 
-<nav class="h-headerHeight bg-none px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop py-2 box-border fixed top-0 w-full text-xl lg:text-lg font-bold text-silver-500 flex items-center justify-start gap-4 bg-black-700/80 backdrop-blur-lg">
-    <a href="/" class={`${activeNavigationOption === "home" ? 'text-silver-100' : ''} hover:text-silver-100 transition-colors`}>Home</a>
-    <a href="/portofolio" class={`${activeNavigationOption === "portofolio" ? 'text-silver-100' : ''} hover:text-silver-100 transition-colors`}>Portofolio</a>
-</nav>
+<div class="fixed inset-0 w-screen h-screen bg-silver flex items-center">
+  <nav class="bg-black h-full p-8 relative">
+    <div
+      class="absolute top-0 bottom-0 left-full h-full w-4 hover:bg-silver-900"
+    >
+    </div>
+  </nav>
+</div>
+
+<!-- <nav
+  class="absolute h-headerHeight bg-none px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop py-2 box-border top-0 w-full text-xl lg:text-lg font-bold text-silver-500 flex items-center justify-start gap-4 bg-black-700/80 backdrop-blur-lg"
+>
+  <a
+    href="/"
+    class={`${
+      activeNavigationOption === "home" ? "text-silver-100" : ""
+    } hover:text-silver-100 transition-colors`}>Home</a
+  >
+  <a
+    href="/portofolio"
+    class={`${
+      activeNavigationOption === "portofolio" ? "text-silver-100" : ""
+    } hover:text-silver-100 transition-colors`}>Portofolio</a
+  >
+</nav> -->

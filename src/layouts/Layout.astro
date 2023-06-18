@@ -1,12 +1,12 @@
 ---
-import Footer from '@/components/Footer.astro';
-import Header from '@/components/Header.astro';
-import type { HeaderOption } from '@/types/types';
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.svelte";
+import type { HeaderOption } from "@/types/types";
 
 export interface Props {
-	title: string;
-	activeNavigationOption : HeaderOption
-	pageDescription : string;
+  title: string;
+  activeNavigationOption: HeaderOption;
+  pageDescription: string;
 }
 
 const { title, activeNavigationOption, pageDescription } = Astro.props;
@@ -14,80 +14,77 @@ const { title, activeNavigationOption, pageDescription } = Astro.props;
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta name="generator" content={Astro.generator} />
-		
-		<!-- Metadata -->
-		<link rel="icon" type="image/svg+xml" href="/favicon/favicon.ico" />
-		<title>{title}</title>
-		<meta name='description' content={pageDescription} />
-		<meta name='author' content='Fatih Nararya Rashadyfa Ilhamsyah' />
-		<meta name='copyright' content='Fatih Nararya Rashadyfa Ilhamsyah' />
-		<meta name='application-name' content='Fatih NRI homepage' />
-		<meta charset='UTF-8' />
+  <head>
+    <meta name="generator" content={Astro.generator} />
 
-		<!-- App-specific metadata -->
-		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
-		<meta property='og:title' content={title} />
-		<meta property='og:type' content='article' />
-		<meta
-		property='og:image'
-		content='/favicon.ico'
-		/>
-		<meta property='og:description' content={pageDescription} />
-		<meta name='twitter:card' content='summary' />
-		<meta name='twitter:title' content={title} />
-		<meta name='twitter:description' content={pageDescription} />
-		<meta
-		name='twitter:image'
-		content='/favicon.ico'
-		/>
+    <!-- Metadata -->
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.ico" />
+    <title>{title}</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="author" content="Fatih Nararya Rashadyfa Ilhamsyah" />
+    <meta name="copyright" content="Fatih Nararya Rashadyfa Ilhamsyah" />
+    <meta name="application-name" content="Fatih NRI homepage" />
+    <meta charset="UTF-8" />
 
-		<!-- Third party script -->
-		<script src="https://kit.fontawesome.com/112dcdcf9d.js" crossorigin="anonymous"></script>
+    <!-- App-specific metadata -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:title" content={title} />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="/favicon.ico" />
+    <meta property="og:description" content={pageDescription} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content="/favicon.ico" />
 
-	</head>
-	<body class="flex flex-col justify-start items-center pt-headerHeight bg-black-700 min-h-screen">
-		<Header  activeNavigationOption={activeNavigationOption}/>
-		<slot />
-		<Footer />
-	</body>
+    <!-- Third party script -->
+    <script
+      src="https://kit.fontawesome.com/112dcdcf9d.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body
+    class="flex flex-col justify-start items-center pt-headerHeight bg-black-700 min-h-screen relative"
+  >
+    <Header activeNavigationOption={activeNavigationOption} client:visible />
+    <slot />
+    <Footer />
+  </body>
 </html>
 <style is:global>
+  body * {
+    @apply font-inter;
+  }
 
-	body *{
-		@apply font-inter;
-	}
+  @font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter/Inter-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
 
-	@font-face {
-		font-family : 'Inter';
-		src:url('/fonts/Inter/Inter-Regular.ttf') format('truetype');
-		font-weight : normal;
-		font-style : normal;
-		font-display: swap;
-	}
+  @font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter/Inter-Black.ttf") format("truetype");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+  }
 
-	@font-face {
-		font-family : 'Inter';
-		src:url('/fonts/Inter/Inter-Black.ttf') format('truetype');
-		font-weight : 900;
-		font-style : normal;
-		font-display: swap;
-	}
+  @font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter/Inter-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
 
-	@font-face {
-		font-family : 'Inter';
-		src:url('/fonts/Inter/Inter-Medium.ttf') format('truetype');
-		font-weight : 500;
-		font-style : normal;
-		font-display: swap;
-	}
-
-	@font-face {
-		font-family : 'Inter';
-		src:url('/fonts/Inter/Inter-Bold.ttf') format('truetype');
-		font-weight : 700;
-		font-style : normal;
-		font-display: swap;
-	}
+  @font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter/Inter-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
 </style>
