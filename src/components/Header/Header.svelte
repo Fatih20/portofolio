@@ -8,7 +8,9 @@
 </script>
 
 <div
-  class="fixed inset-0 w-screen h-screen bg-silver flex items-center box-border py-4"
+  class={`fixed inset-0 w-screen h-screen ${
+    hovered ? "bg-slate-900/75" : ""
+  } flex items-center box-border py-8`}
 >
   <nav
     class={`bg-black rounded-r-md ${
