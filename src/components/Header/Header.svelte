@@ -1,10 +1,6 @@
 <script lang="ts">
   import type { HeaderOption } from "@/types/types";
 
-  //   type HeaderProp = {
-  //     activeNavigationOption: HeaderOption;
-  //   };
-
   export let activeNavigationOption: HeaderOption;
 
   let hovered = false;
