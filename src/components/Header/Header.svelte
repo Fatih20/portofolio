@@ -15,12 +15,22 @@
   <nav
     class={`bg-black rounded-r-md ${
       hovered ? "translate-x-0" : "-translate-x-full"
-    } h-full p-8 relative transition-transform items-start justify-center flex flex-col gap-4`}
+    } h-full p-8 relative transition-transform items-start justify-center flex flex-col gap-4 duration-200`}
     on:mouseover={() => (hovered = true)}
     on:mouseleave={() => (hovered = false)}
     on:focus={() => {}}
   >
-    <div class="absolute z-20 top-0 bottom-0 left-full h-full w-4" />
+    <div
+      class="absolute flex justify-center items-center flex-col z-20 top-0 bottom-0 left-full h-full"
+    >
+      <div class="bg-silver-700 rounded-r-md pl-2 py-3 pr-3">
+        <i
+          class={`fa-solid fa-chevron-right text-xl text-silver-100 ${
+            hovered ? "rotate-180" : "rotate-0"
+          } transition-transform duration-200`}
+        />
+      </div>
+    </div>
     <Option
       colorOnHover={"#8cd5ff"}
       destination={"/"}
