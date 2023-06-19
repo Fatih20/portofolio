@@ -96,6 +96,7 @@ export async function portofolioContentFetcher(): Promise<PortofolioContent> {
   const query = `query {
     portofolio {
       title
+      pageDescription
       description {
         blocks
         value

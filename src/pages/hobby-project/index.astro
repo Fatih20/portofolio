@@ -11,14 +11,14 @@ const projects = (await projectsCardContentFetcher()).allProjects.sort(
 );
 
 const {
-  portofolio: { title, description },
+  portofolio: { title, description, pageDescription },
 } = await portofolioContentFetcher();
 ---
 
 <Layout
   title="Fatih's Portofolio"
   activeNavigationOption={"hobbyProject"}
-  pageDescription="The projects that Fatih Nararya has worked on in the past"
+  pageDescription={pageDescription}
 >
   <main
     class="flex flex-col justify-start items-center max-w-7xl w-full gap-6 px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop pb-6 text-silver-100"
