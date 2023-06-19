@@ -35,49 +35,57 @@ const { month: endMonth, year: endYear } = workEndDate
     target="_blank"
     aria-label={`Link to the page for ${role} in ${companyName}`}
     class="absolute inset-0"></a>
-  <div class="flex flex-col items-start justify-start">
-    <h2 class="text-xl lg:text-2xl text-silver-100 text-left font-bold">
-      {role}
-    </h2>
-    <p class="text-sm lg:text-base text-silver-100 flex-grow font-bold">
-      {companyName}
-    </p>
-    <p class="text-sm lg:text-base text-silver-100 font-medium">
-      {months[startMonth - 1]}
-      {startYear}
-      {ongoing ? "- Now" : ""}
-      {workEndDate ? `- ${months[endMonth - 1]} ${endYear}` : ""}
-    </p>
-  </div>
-  <p>{shortRemark}</p>
-  <Spacer />
-  <div class="flex justify-center items-center gap-4 text-silver-100 mt-2">
-    {
-      repositoryLink && (
-        <a
-          href={repositoryLink}
-          target="_blank"
-          onclick="(e) => e.stopPropagation()"
-          class="transition-colors hover:scale-105 relative z-10"
-          aria-label={`Link to the repository of ${role} in ${companyName}`}
-        >
-          <i class="fa-brands fa-github text-3xl" />
-        </a>
-      )
-    }
-    {
-      projectLink && (
-        <a
-          href={projectLink}
-          target="_blank"
-          onclick="(e) => e.stopPropagation()"
-          class="transition-colors hover:scale-105 relative z-10"
-          aria-label={`Link to the page for ${role} in ${companyName}`}
-        >
-          <i class="fa-solid fa-link  text-2xl" />
-        </a>
-      )
-    }
+  <div class="flex justify-start items-start w-full h-full gap-2">
+    <div class="flex flex-col items-start justify-start">
+      <div class="flex flex-col items-start justify-start mb-2">
+        <h2 class="text-xl lg:text-2xl text-silver-100 text-left font-bold">
+          {role}
+        </h2>
+        <p class="text-sm lg:text-base text-silver-100 flex-grow font-bold">
+          {companyName}
+        </p>
+        <p class="text-sm lg:text-base text-silver-100 font-medium">
+          {months[startMonth - 1]}
+          {startYear}
+          {ongoing ? "- Now" : ""}
+          {workEndDate ? `- ${months[endMonth - 1]} ${endYear}` : ""}
+        </p>
+      </div>
+      <p>{shortRemark}</p>
+    </div>
+    <Spacer />
+    <div
+      class={`border-l-2 border-silver-100 h-full pl-4 flex flex-col items-center justify-center`}
+    >
+      {
+        repositoryLink && (
+          <a
+            href={repositoryLink}
+            target="_blank"
+            onclick="(e) => e.stopPropagation()"
+            class="transition-colors hover:scale-105 relative z-10 group-hover:animate-none animate-variableColorChange"
+            aria-label={`Link to the repository of ${role} in ${companyName}`}
+            style={`--startColor:${gradientStartColor}; --endColor:${gradientEndColor};`}
+          >
+            <i class="fa-brands fa-github text-3xl" />
+          </a>
+        )
+      }
+      {
+        projectLink && (
+          <a
+            href={projectLink}
+            target="_blank"
+            onclick="(e) => e.stopPropagation()"
+            class="transition-colors hover:scale-105 relative z-10 group-hover:animate-none animate-variableColorChange"
+            aria-label={`Link to the page for ${role} in ${companyName}`}
+            style={`--startColor:${gradientEndColor}; --endColor:${gradientStartColor};`}
+          >
+            <i class="fa-solid fa-link  text-2xl" />
+          </a>
+        )
+      }
+    </div>
   </div>
 </Card>
 

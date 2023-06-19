@@ -34,7 +34,7 @@ module.exports = {
       animation: {
         lostColorChange: "lostColorChange 5s ease-in-out infinite",
         lightColorChange: "lightColorChange 20s ease-in-out infinite",
-        variableColorChange: "variableColorChange 5s ease-in-out infinite",
+        variableColorChange: "variableColorChange 10s ease-in-out infinite",
         "glow-pulse": "glow-pulse 5s ease-in-out infinite",
       },
       fontFamily: {

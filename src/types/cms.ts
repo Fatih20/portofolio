@@ -47,6 +47,7 @@ export type WorkCardContent = {
 export type MUNCardContent = {
   id: string;
   eventName: string;
+  council: string;
   shortRemark: string;
   startDate: string;
   roleOrAward: string;

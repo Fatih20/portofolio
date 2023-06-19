@@ -66,7 +66,6 @@ export async function projectsCardContentFetcher(): Promise<AllProjectCardConten
         id,
         ongoing,
         projectName,
-        shortRemark,
         repositoryLink,
         projectLink,
         projectStartDate,
@@ -114,6 +113,7 @@ export async function munCardContentFetcher(): Promise<AllMUNCardContent> {
       id
       eventName
     	startDate
+      council
     	roleOrAward
       shortRemark
         gradientStartColor
