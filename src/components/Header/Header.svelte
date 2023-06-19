@@ -61,7 +61,7 @@
       iconName={"globe"}
       navigationOption={"mun"}
       {activeNavigationOption}
-      text={"Hobby Projects"}
+      text={"MUNs"}
     />
   </nav>
 </div>

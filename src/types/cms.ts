@@ -1,3 +1,5 @@
+import type { StructuredText } from "datocms-structured-text-utils";
+
 export interface HomeContent {
   home: {
     name: string;

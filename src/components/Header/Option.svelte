@@ -11,7 +11,7 @@
 
 <a
   href={destination}
-  class={`flex gap-4 items-center ${
+  class={`flex gap-4 items-center transition-all select-none font-bold ${
     activeNavigationOption === navigationOption ? "selected" : "unselected"
   }`}
   style:--color-on-hover={colorOnHover}
@@ -23,14 +23,14 @@
 <style>
   .selected {
     color: var(--color-on-hover);
-    font-weight: bold;
+    pointer-events: none;
   }
 
   .unselected:hover {
-    color: var(--color-on-hover);
+    @apply translate-x-2;
   }
 
   .unselected {
-    color: #ffffff;
+    @apply text-silver-100;
   }
 </style>
