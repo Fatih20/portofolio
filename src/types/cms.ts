@@ -19,6 +19,7 @@ export interface Image {
 export interface ProjectCardContent {
   id: string;
   projectName: string;
+  ongoing: boolean;
   repositoryLink: string;
   projectLink: string;
   projectStartDate: string;
@@ -48,9 +49,26 @@ export interface PortofolioContent {
   };
 }
 
+export interface MUNContent {
+  munPage: {
+    title: string;
+    description: StructuredText;
+    pageDescription: string;
+  };
+}
+
+export interface WorkContent {
+  workPage: {
+    title: string;
+    description: StructuredText;
+    pageDescription: string;
+  };
+}
+
 export interface ProjectPageContent {
   id: string;
   projectName: string;
+  ongoing: boolean;
   shortDescription: string;
   repositoryLink: string;
   projectLink: string;

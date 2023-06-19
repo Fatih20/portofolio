@@ -1,5 +1,5 @@
 ---
-import { portofolioContentFetcher, projectsCardContentFetcher } from "@/api";
+import { munContentFetcher, projectsCardContentFetcher } from "@/api";
 import ProjectCard from "@/components/ProjectCard.astro";
 import Spacer from "@/components/Spacer.astro";
 import Layout from "@/layouts/Layout.astro";
@@ -11,8 +11,8 @@ const projects = (await projectsCardContentFetcher()).allProjects.sort(
 );
 
 const {
-  portofolio: { title, description, pageDescription },
-} = await portofolioContentFetcher();
+  munPage: { title, description, pageDescription },
+} = await munContentFetcher();
 ---
 
 <Layout
@@ -48,11 +48,9 @@ const {
             projectEndDate,
             gradientStartColor,
             gradientEndColor,
-            ongoing,
           }) => (
             <ProjectCard
               id={id}
-              ongoing={ongoing}
               projectName={projectName}
               projectEndDate={projectEndDate}
               projectStartDate={projectStartDate}

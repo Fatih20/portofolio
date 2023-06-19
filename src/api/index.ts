@@ -2,8 +2,10 @@ import type {
   AllProjectCardContent,
   AllProjectID,
   HomeContent,
+  MUNContent,
   PortofolioContent,
   ProjectPageContent,
+  WorkContent,
 } from "@/types/cms";
 
 async function fetcher<T>(
@@ -60,6 +62,7 @@ export async function projectsCardContentFetcher(): Promise<AllProjectCardConten
   const query = `query {
         allProjects {
         id,
+        ongoing,
         projectName,
         repositoryLink,
         projectLink,
@@ -108,11 +111,51 @@ export async function portofolioContentFetcher(): Promise<PortofolioContent> {
   const { error, result } = await fetcher<PortofolioContent>(query);
   if (error === null && result?.data) {
     return result.data as PortofolioContent;
-  } else {
-    return {
-      portofolio: { title: "The many projects that I've worked on" },
-    } as PortofolioContent;
   }
+
+  throw new Error("Failed to fetch portofolio page content!");
+}
+
+export async function munContentFetcher(): Promise<MUNContent> {
+  const query = `query {
+    munPage {
+      title
+      pageDescription
+      description {
+        blocks
+        value
+        links
+      }
+    }
+  }
+  `;
+  const { error, result } = await fetcher<MUNContent>(query);
+  if (error === null && result?.data) {
+    return result.data as MUNContent;
+  }
+
+  throw new Error("Failed to fetch MUN page content!");
+}
+
+export async function workContentFetcher(): Promise<WorkContent> {
+  const query = `query {
+    workPage {
+      title
+      pageDescription
+      description {
+        blocks
+        value
+        links
+      }
+    }
+  }
+  `;
+  const { error, result } = await fetcher<WorkContent>(query);
+  if (error === null && result?.data) {
+    return result.data as WorkContent;
+  }
+
+  throw new Error("Failed to fetch work page content!");
 }
 
 export async function projectsPageContentFetcher(): Promise<
@@ -123,6 +166,7 @@ export async function projectsPageContentFetcher(): Promise<
       id,
       projectName,
       projectName,
+      ongoing,
     repositoryLink,
     projectLink,
     shortDescription,

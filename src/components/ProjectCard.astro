@@ -14,6 +14,7 @@ const {
   shortDescription,
   gradientStartColor,
   gradientEndColor,
+  ongoing,
 } = Astro.props as ProjectCardProp;
 
 const { month: startMonth, year: startYear } = dateConverter(projectStartDate);
@@ -43,6 +44,7 @@ const { month: endMonth, year: endYear } = projectEndDate
   <p class="text-sm lg:text-base text-silver-100 font-medium">
     {months[startMonth - 1]}
     {startYear}
+    {ongoing ? "- Now" : ""}
     {projectEndDate ? `- ${months[endMonth - 1]} ${endYear}` : ""}
   </p>
   <p class="text-sm lg:text-base text-silver-100 flex-grow">
