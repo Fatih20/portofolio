@@ -24,10 +24,16 @@ import Layout from "@/layouts/Layout.astro";
           href="/"
           class="underline underline-offset-2 decoration-silver-100 decoration-1 hover:font-bold hover:decoration-2"
           >home</a
-        > or open the sidebar to return to the <span
-          class="animate-lightColorChange">light</span
+        > or open the sidebar to return to the <span class="glow-text"
+          >light</span
         >
       </p>
     </header>
   </main>
 </Layout>
+
+<style>
+  .glow-text {
+    text-shadow: 0 0 7px #fff;
+  }
+</style>
