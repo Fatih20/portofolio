@@ -7,8 +7,6 @@ import { render } from "datocms-structured-text-to-html-string";
 
 const muns = (await munCardContentFetcher()).allMuns;
 
-console.log(muns);
-
 const {
   munPage: { title, description, pageDescription },
 } = await munContentFetcher();
@@ -44,12 +42,14 @@ const {
             startDate,
             gradientStartColor,
             gradientEndColor,
+            shortRemark,
           }) => (
             <MUNCard
               id={id}
               eventName={eventName}
               roleOrAward={roleOrAward}
               startDate={startDate}
+              shortRemark={shortRemark}
               gradientStartColor={gradientStartColor}
               gradientEndColor={gradientEndColor}
             />

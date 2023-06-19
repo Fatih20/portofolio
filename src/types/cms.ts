@@ -35,6 +35,7 @@ export type ProjectCardContent = {
 export type WorkCardContent = {
   id: string;
   companyName: string;
+  shortRemark: string;
   role: string;
   ongoing: boolean;
   repositoryLink: string;
@@ -46,6 +47,7 @@ export type WorkCardContent = {
 export type MUNCardContent = {
   id: string;
   eventName: string;
+  shortRemark: string;
   startDate: string;
   roleOrAward: string;
 } & Gradiented;

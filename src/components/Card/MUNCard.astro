@@ -13,6 +13,7 @@ const {
   startDate,
   gradientStartColor,
   gradientEndColor,
+  shortRemark,
 } = Astro.props as MUNCardProp;
 
 const { year: startYear } = dateConverter(startDate);
@@ -27,17 +28,21 @@ const { year: startYear } = dateConverter(startDate);
     target="_blank"
     aria-label={`Link to the page for ${eventName} ${startYear}`}
     class="absolute inset-0"></a>
-  <div class="flex flex-col items-start justify-start">
+  <div class="flex flex-col items-start justify-start w-full">
     <h2 class="text-xl lg:text-2xl text-silver-100 text-left font-bold">
       {eventName}
     </h2>
     <p class="text-sm lg:text-base text-silver-100 font-medium">
       {startYear}
     </p>
-    <p class="text-sm lg:text-base text-silver-100 flex-grow font-bold">
-      {roleOrAward}
-    </p>
+    <p>{shortRemark}</p>
   </div>
+  <Spacer />
+  <p
+    class="text-left self-start text-base lg:text-lg text-silver-100 font-bold"
+  >
+    {roleOrAward}
+  </p>
 </Card>
 
 <style></style>

@@ -17,6 +17,7 @@ const {
   gradientStartColor,
   gradientEndColor,
   ongoing,
+  shortRemark,
 } = Astro.props as WorkCardProp;
 
 const { month: startMonth, year: startYear } = dateConverter(workStartDate);
@@ -48,6 +49,7 @@ const { month: endMonth, year: endYear } = workEndDate
       {workEndDate ? `- ${months[endMonth - 1]} ${endYear}` : ""}
     </p>
   </div>
+  <p>{shortRemark}</p>
   <Spacer />
   <div class="flex justify-center items-center gap-4 text-silver-100 mt-2">
     {

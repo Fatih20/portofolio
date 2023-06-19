@@ -66,6 +66,7 @@ export async function projectsCardContentFetcher(): Promise<AllProjectCardConten
         id,
         ongoing,
         projectName,
+        shortRemark,
         repositoryLink,
         projectLink,
         projectStartDate,
@@ -89,6 +90,7 @@ export async function workCardContentFetcher(): Promise<AllWorkCardContent> {
       id
       ongoing,
       companyName,
+      shortRemark,
         repositoryLink,
         projectLink,
       workStartDate,
@@ -113,6 +115,7 @@ export async function munCardContentFetcher(): Promise<AllMUNCardContent> {
       eventName
     	startDate
     	roleOrAward
+      shortRemark
         gradientStartColor
         gradientEndColor
     }
@@ -121,7 +124,7 @@ export async function munCardContentFetcher(): Promise<AllMUNCardContent> {
   if (error === null && result?.data) {
     return result.data as AllMUNCardContent;
   } else {
-    return { allMUNs: [] } as AllMUNCardContent;
+    return { allMuns: [] } as AllMUNCardContent;
   }
 }
 
@@ -308,7 +311,6 @@ export async function projectsContentFetcher(
   const { error, result } = await fetcher<{
     project: ProjectPageContent;
   }>(query);
-  console.log(result);
   if (error === null && result?.data) {
     return result.data.project as ProjectPageContent;
   } else {
