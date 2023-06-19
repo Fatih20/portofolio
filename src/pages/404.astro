@@ -1,15 +1,33 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-
 ---
 
-<Layout title="Address Not Found" activeNavigationOption={""} pageDescription="You're lost in Fatih NRI's page">
-	<main class="flex-grow flex flex-col justify-center items-center w-full px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop">
-        <header class="flex flex-col justify-center items-center gap-4">
-            <i class="fa-solid fa-question text-silver-100 text-7xl"></i>            <h1 class="text-silver-100 text-center font-bold text-5xl lg:text-4xl">
-                Uh oh, it seems that you're lost!
-            </h1>
-            <a href="/" class="text-slate-500 underline-offset-4 decoration-slate-500 underline text-center font-bold text-xl lg:text-base">Go back to home</a>
-        </header>
-	</main>
+<Layout
+  title="Address Not Found"
+  activeNavigationOption={""}
+  pageDescription="You're lost in Fatih NRI's page"
+>
+  <main
+    class="flex-grow flex flex-col justify-center items-center w-full px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop"
+  >
+    <header
+      class="flex flex-col justify-center items-center gap-4 text-silver-100"
+    >
+      <i class="fa-solid fa-question text-7xl animate-bounce"></i>
+      <h1 class="text-center font-bold text-5xl lg:text-4xl">
+        Uh oh, it seems that you're <span class="animate-lostColorChange"
+          >lost!</span
+        >
+      </h1>
+      <p class="text-center font-medium text-xl lg:text-base">
+        Go <a
+          href="/"
+          class="underline underline-offset-2 decoration-silver-100 decoration-1 hover:font-bold hover:decoration-2"
+          >home</a
+        > or open the sidebar to return to the <span
+          class="animate-lightColorChange">light</span
+        >
+      </p>
+    </header>
+  </main>
 </Layout>

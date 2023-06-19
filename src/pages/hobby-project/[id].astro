@@ -1,5 +1,9 @@
 ---
-import { projectsIdFetcher, projectsPageContentFetcher } from "@/api";
+import {
+  projectsIdFetcher,
+  projectsPageContentFetcher,
+  projectsContentFetcher,
+} from "@/api";
 import Spacer from "@/components/Spacer.astro";
 import Layout from "@/layouts/Layout.astro";
 import { dateConverter, months, projectPCompareFunction } from "@/utils";
@@ -15,45 +19,46 @@ export async function getStaticPaths() {
 
 const { id } = Astro.params;
 
-const allProjects = (await projectsPageContentFetcher()).sort(
-  projectPCompareFunction
-);
-
-const projectIndexFromFetchedData = allProjects.findIndex(
-  ({ id: projectId }) => projectId === id
-);
-
 const {
-  projectName,
-  gradientStartColor,
+  description,
+  galleryPhotos,
+  galleryTitle,
   gradientEndColor,
+  gradientStartColor,
+  projectLink,
+  projectName,
   projectStartDate,
-  projectEndDate,
+  repositoryLink,
   shortDescription,
-  summary,
   techStack,
-  diaryAndReflections,
-} = allProjects[projectIndexFromFetchedData];
+  projectEndDate,
+} = await projectsContentFetcher(id ?? "");
+
+// const projectIndexFromFetchedData = allProjects.findIndex(
+//   ({ id: projectId }) => projectId === id
+// );
+
+// const b = allProjects[projectIndexFromFetchedData];
 
 const processedTechStack = techStack.map(({ name }) => name);
 
-const nextProjectIndex = (projectIndexFromFetchedData + 1) % allProjects.length;
-const prevProjectIndex =
-  projectIndexFromFetchedData - 1 < 0
-    ? allProjects.length - 1
-    : projectIndexFromFetchedData - 1;
+// const nextProjectIndex = (projectIndexFromFetchedData + 1) % allProjects.length;
+// const prevProjectIndex =
+//   projectIndexFromFetchedData - 1 < 0
+//     ? allProjects.length - 1
+//     : projectIndexFromFetchedData - 1;
 
-const {
-  projectName: nextProjectName,
-  gradientEndColor: nextProjectGradientEndColor,
-  gradientStartColor: nextProjectGradientStartColor,
-} = allProjects[nextProjectIndex];
+// const {
+//   projectName: nextProjectName,
+//   gradientEndColor: nextProjectGradientEndColor,
+//   gradientStartColor: nextProjectGradientStartColor,
+// } = allProjects[nextProjectIndex];
 
-const {
-  projectName: prevProjectName,
-  gradientEndColor: prevProjectGradientEndColor,
-  gradientStartColor: prevProjectGradientStartColor,
-} = allProjects[prevProjectIndex];
+// const {
+//   projectName: prevProjectName,
+//   gradientEndColor: prevProjectGradientEndColor,
+//   gradientStartColor: prevProjectGradientStartColor,
+// } = allProjects[prevProjectIndex];
 
 const { month: startMonth, year: startYear } = dateConverter(projectStartDate);
 const { month: endMonth, year: endYear } = projectEndDate
@@ -81,7 +86,7 @@ const { month: endMonth, year: endYear } = projectEndDate
   activeNavigationOption={""}
 >
   <div
-    class="flex flex-col items-center justify-start w-full px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop flex-grow"
+    class="flex flex-col items-center justify-start w-full px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop flex-grow text-silver-100"
   >
     <main
       class="flex flex-col items-center justify-start w-full max-w-5xl mx-auto flex-grow border-b-2 pb-4 gap-8"
@@ -105,14 +110,17 @@ const { month: endMonth, year: endYear } = projectEndDate
             {shortDescription}
           </p>
         </div>
-        <p class="text-base font-medium text-left">
-          {months[startMonth - 1]}
-          {startYear}
-          {projectEndDate ? `${months[endMonth - 1]} ${endYear}` : null}
-        </p>
+        <div class="flex justify-start items-center gap-2">
+          <i class="fa-regular fa-calendar-days"></i>
+          <p class="text-base font-medium text-left">
+            {months[startMonth - 1]}
+            {startYear}
+            {projectEndDate ? `${months[endMonth - 1]} ${endYear}` : null}
+          </p>
+        </div>
       </header>
       <section class="w-full relative">
-        <h2 class="absolute -left-[-9999px]">Tech Stack</h2>
+        <!-- <h2 class="absolute -left-[-9999px]">Tech Stack</h2> -->
         <div
           class="items-stretch justify-center w-full gap-4 invisible md:visible hidden md:flex"
         >
@@ -193,11 +201,10 @@ const { month: endMonth, year: endYear } = projectEndDate
         border-color: ${gradientStartColor};
     `}
       >
-        <h2 class="text-2xl lg:text-3xl text-left font-bold">Summary</h2>
-        <!-- <Fragment set:html={render(summary)} /> -->
+        <Fragment set:html={render(description)} />
       </section>
 
-      <Spacer />
+      <!-- <Spacer />
       <div
         class="flex flex-col lg:flex-row w-full text-silver-100 h-fit justify-items-stretch gap-2 lg:gap-4 text-xl"
       >
@@ -234,7 +241,7 @@ const { month: endMonth, year: endYear } = projectEndDate
           </p>
           <i class="fa-solid fa-arrow-right text-xl"></i>
         </a>
-      </div>
+      </div> -->
     </main>
   </div>
 </Layout>

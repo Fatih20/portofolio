@@ -54,9 +54,10 @@ export interface ProjectPageContent {
   projectLink: string;
   projectStartDate: string;
   projectEndDate?: string;
-  summary: StructuredText;
-  diaryAndReflections: StructuredText;
+  description: StructuredText;
   techStack: { name: string }[];
   gradientStartColor: string;
   gradientEndColor: string;
+  galleryTitle: string;
+  galleryPhotos: Image[];
 }

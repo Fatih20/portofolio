@@ -3,6 +3,7 @@ import type {
   AllProjectID,
   HomeContent,
   PortofolioContent,
+  ProjectPageContent,
 } from "@/types/cms";
 
 async function fetcher<T>(
@@ -123,21 +124,18 @@ export async function projectsPageContentFetcher(): Promise<
     shortDescription,
     projectStartDate,
     projectEndDate,
-    summary {
-      blocks,
-      value,
+    description {
+      blocks
+      value
       links
     },
     techStack {
       name
     },
-      diaryAndReflections {
-        blocks,
-        links,
-        value
-      },
     gradientStartColor,
-    gradientEndColor
+    gradientEndColor,
+    galleryTitle,
+    galleryPhotos
     }
   }
   `;
@@ -148,5 +146,48 @@ export async function projectsPageContentFetcher(): Promise<
     return result.data.allProjects as ProjectPageContent[];
   } else {
     return [] as ProjectPageContent[];
+  }
+}
+
+export async function projectsContentFetcher(
+  id: string
+): Promise<ProjectPageContent> {
+  const query = `query {
+    project (filter : {id : {eq : ${id}}}) {
+      id,
+      projectName,
+      projectName,
+    repositoryLink,
+    projectLink,
+    shortDescription,
+    projectStartDate,
+    projectEndDate,
+    description {
+      blocks
+      value
+      links
+    },
+    techStack {
+      name
+    },
+    gradientStartColor,
+    gradientEndColor,
+    galleryTitle,
+    galleryPhotos {
+      alt
+      title
+      url
+    }
+    }
+  }
+  `;
+  const { error, result } = await fetcher<{
+    project: ProjectPageContent;
+  }>(query);
+  console.log(result);
+  if (error === null && result?.data) {
+    return result.data.project as ProjectPageContent;
+  } else {
+    throw new Error("Error getting project's data");
   }
 }

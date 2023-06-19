@@ -3,7 +3,8 @@
 
   export let activeNavigationOption: HeaderOption;
   export let navigationOption: HeaderOption;
-  export let colorOnHover: string;
+  export let startColor: string;
+  export let endColor: string;
   export let iconName: string;
   export let text: string;
   export let destination: string;
@@ -13,8 +14,10 @@
   href={destination}
   class={`flex gap-4 items-center transition-all select-none font-bold ${
     activeNavigationOption === navigationOption ? "selected" : "unselected"
-  }`}
-  style:--color-on-hover={colorOnHover}
+  }
+  `}
+  style:--startColor={startColor}
+  style:--endColor={endColor}
 >
   <i class={`fa-solid fa-${iconName} `} />
   <p>{text}</p>
@@ -22,8 +25,7 @@
 
 <style>
   .selected {
-    color: var(--color-on-hover);
-    pointer-events: none;
+    @apply animate-variableColorChange pointer-events-none;
   }
 
   .unselected:hover {

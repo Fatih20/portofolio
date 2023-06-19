@@ -3,6 +3,34 @@ module.exports = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
+      keyframes: {
+        variableColorChange: {
+          "0%": { color: "var(--startColor)" },
+          "50%": { color: "var(--endColor)" },
+          "100%": { color: "var(--startColor)" },
+        },
+        lostColorChange: {
+          "0%": { color: "#fafafa" },
+          "33%": { color: "#273445" },
+          "66%": { color: "#1a1a1a" },
+          "100%": { color: "#fafafa" },
+        },
+        lightColorChange: {
+          "0%": { color: "#c6262e" },
+          "14%": { color: "#f37329" },
+          "28%": { color: "#f9c440" },
+          "42%": { color: "#68b723" },
+          "56%": { color: "#28bca3" },
+          "70%": { color: "#3689e6" },
+          "84%": { color: "#a56de2" },
+          "100%": { color: "#c6262e" },
+        },
+      },
+      animation: {
+        lostColorChange: "lostColorChange 5s ease-in-out infinite",
+        lightColorChange: "lightColorChange 20s ease-in-out infinite",
+        variableColorChange: "variableColorChange 5s ease-in-out infinite",
+      },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
       },

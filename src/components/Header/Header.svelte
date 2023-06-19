@@ -41,7 +41,8 @@
     </div>
     <div class="lg:hidden flex-grow" />
     <Option
-      colorOnHover={"#8cd5ff"}
+      startColor={"#8cd5ff"}
+      endColor={"#64baff"}
       destination={"/"}
       iconName={"home"}
       navigationOption={"home"}
@@ -49,7 +50,8 @@
       text={"Home"}
     />
     <Option
-      colorOnHover={"#e4c6fa"}
+      startColor={"#e4c6fa"}
+      endColor={"#a56de2"}
       destination={"/hobby-project"}
       iconName={"pencil"}
       navigationOption={"hobbyProject"}
@@ -57,7 +59,8 @@
       text={"Hobby Projects"}
     />
     <Option
-      colorOnHover={"#e4c6fa"}
+      startColor={"#89ffdd"}
+      endColor={"#28bca3"}
       destination={"/works"}
       iconName={"briefcase"}
       navigationOption={"works"}
@@ -65,7 +68,8 @@
       text={"Works/Contributions"}
     />
     <Option
-      colorOnHover={"#e4c6fa"}
+      startColor={"#d1ff82"}
+      endColor={"#68b723"}
       destination={"/mun"}
       iconName={"globe"}
       navigationOption={"mun"}
