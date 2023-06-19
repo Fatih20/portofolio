@@ -8,12 +8,12 @@
 </script>
 
 <div
-  class={`fixed inset-0 z-20 w-screen h-screen ${
+  class={`fixed inset-0 z-20 w-screen h-screen pointer-events-none ${
     hovered ? "bg-slate-900/75" : ""
   } flex items-center box-border py-8`}
 >
   <nav
-    class={`bg-black rounded-r-md lg:rounded-r-xl ${
+    class={`pointer-events-auto bg-black rounded-r-md lg:rounded-r-xl ${
       hovered ? "translate-x-0" : "-translate-x-full"
     } h-full py-8 pl-4 pr-6 relative transition-transform items-start justify-center flex flex-col gap-4 duration-200`}
     on:mouseover={() => (hovered = true)}

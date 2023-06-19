@@ -1,0 +1,13 @@
+---
+import { projectsIdFetcher } from "@/api";
+
+export async function getStaticPaths() {
+  return (await projectsIdFetcher()).allProjects.map(({ id }) => {
+    return { params: { id } };
+  });
+}
+
+const { id } = Astro.params;
+---
+
+<h1 class="text-3xl font-bold">{id}</h1>
