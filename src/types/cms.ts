@@ -3,7 +3,8 @@ import type { StructuredText } from "datocms-structured-text-utils";
 export interface HomeContent {
   home: {
     name: string;
-    description: string;
+    description: StructuredText;
+    pageDescription: string;
     photoOfUs: Image[];
     photoCycleTime: number;
   };

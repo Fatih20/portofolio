@@ -2,41 +2,46 @@
 import { homeContentFetcher } from "@/api";
 import PhotoOfUs from "@/components/PhotoOfUs.svelte";
 import Layout from "../layouts/Layout.astro";
+import { render } from "datocms-structured-text-to-html-string";
 
 const {
-  home: { name, description, photoOfUs, photoCycleTime },
+  home: { name, description, pageDescription, photoOfUs, photoCycleTime },
 } = await homeContentFetcher();
 ---
 
 <Layout
   title="Fatih NRI"
   activeNavigationOption={"home"}
-  pageDescription={description}
+  pageDescription={pageDescription}
 >
   <main
     class="flex-grow flex flex-col justify-center items-center w-full px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop"
   >
-    <header class="flex flex-col justify-center items-center h-full gap-1 lg:gap-4">
+    <header
+      class="flex flex-col justify-center items-center h-full gap-1 lg:gap-4"
+    >
       <PhotoOfUs
         cycleInterval={photoCycleTime}
         photoSet={photoOfUs}
         client:visible
       />
-      <h1 class="text-center font-bold text-3xl lg:text-5xl text-silver-100">{name}</h1>
-      <p class="text-silver-300 text-md lg:text-base">
-        {description}
-      </p>
+      <h1 class="text-center font-bold text-3xl lg:text-5xl text-silver-100">
+        {name}
+      </h1>
+      <div class="text-silver-300 text-sm lg:text-base">
+        <Fragment set:html={render(description)} />
+      </div>
     </header>
+
+    <script defer>
+      const photoContainer = document.getElementById("photo-container");
+      setInterval(() => {
+        if (photoContainer) {
+          photoContainer.src;
+        }
+      }, 3000);
+    </script>
+
+    <style></style>
   </main>
 </Layout>
-
-<script defer>
-  const photoContainer = document.getElementById("photo-container");
-  setInterval(() => {
-    if (photoContainer) {
-      photoContainer.src;
-    }
-  }, 3000);
-</script>
-
-<style></style>

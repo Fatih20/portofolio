@@ -33,7 +33,12 @@ export async function homeContentFetcher(): Promise<HomeContent> {
   const query = `query {
         home {
           name,
-          description,
+          pageDescription,
+          description {
+            blocks
+            links
+            value
+          },
           photoOfUs {
             alt, 
             url, 
@@ -46,11 +51,9 @@ export async function homeContentFetcher(): Promise<HomeContent> {
   const { error, result } = await fetcher<HomeContent>(query);
   if (error === null && result?.data) {
     return result.data as HomeContent;
-  } else {
-    return {
-      home: { name: "Fatih Nararya R. I.", description: "Placeholder" },
-    } as HomeContent;
   }
+
+  throw new Error("Failed to fetch home!");
 }
 
 export async function projectsCardContentFetcher(): Promise<AllProjectCardContent> {
