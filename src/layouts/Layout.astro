@@ -44,7 +44,7 @@ const { title, activeNavigationOption, pageDescription } = Astro.props;
     ></script>
   </head>
   <body
-    class="flex flex-col justify-start items-center pt-headerHeight bg-black-700 min-h-screen relative"
+    class="flex flex-col justify-start items-center pt-headerHeight bg-background min-h-screen relative"
   >
     <Header activeNavigationOption={activeNavigationOption} client:visible />
     <slot />

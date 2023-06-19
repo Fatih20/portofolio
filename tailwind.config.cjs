@@ -23,6 +23,7 @@ module.exports = {
       },
     },
     colors: {
+      transparent: "#fafafa00",
       "silver-100": "#fafafa",
       "silver-300": "#d4d4d4",
       "silver-500": "#abacae",
@@ -39,6 +40,7 @@ module.exports = {
       "black-300": "#4d4d4d",
       "black-500": "#333333",
       "black-700": "#1a1a1a",
+      background: "#1a1a1a",
       "black-900": "#000000",
       black: "#333333",
     },
