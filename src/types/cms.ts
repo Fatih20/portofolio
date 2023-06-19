@@ -43,12 +43,23 @@ export type WorkCardContent = {
   workEndDate?: string;
 } & Gradiented;
 
+export type MUNCardContent = {
+  id: string;
+  eventName: string;
+  startDate: string;
+  roleOrAward: string;
+} & Gradiented;
+
 export interface ProjectID {
   id: string;
 }
 
 export interface AllWorkCardContent {
   allWorks: WorkCardContent[];
+}
+
+export interface AllMUNCardContent {
+  allMuns: MUNCardContent[];
 }
 
 export interface AllProjectCardContent {

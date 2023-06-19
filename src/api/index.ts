@@ -1,4 +1,5 @@
 import type {
+  AllMUNCardContent,
   AllProjectCardContent,
   AllProjectID,
   AllWorkCardContent,
@@ -102,6 +103,25 @@ export async function workCardContentFetcher(): Promise<AllWorkCardContent> {
     return result.data as AllWorkCardContent;
   } else {
     return { allWorks: [] } as AllWorkCardContent;
+  }
+}
+
+export async function munCardContentFetcher(): Promise<AllMUNCardContent> {
+  const query = `query {
+    allMuns (orderBy :[startDate_DESC]) {
+      id
+      eventName
+    	startDate
+    	roleOrAward
+        gradientStartColor
+        gradientEndColor
+    }
+  }`;
+  const { error, result } = await fetcher<AllMUNCardContent>(query);
+  if (error === null && result?.data) {
+    return result.data as AllMUNCardContent;
+  } else {
+    return { allMUNs: [] } as AllMUNCardContent;
   }
 }
 
