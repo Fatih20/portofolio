@@ -42,3 +42,18 @@ export interface PortofolioContent {
     title: string;
   };
 }
+
+export interface ProjectPageContent {
+  id: string;
+  projectName: string;
+  shortDescription: string;
+  repositoryLink: string;
+  projectLink: string;
+  projectStartDate: string;
+  projectEndDate?: string;
+  summary: StructuredText;
+  diaryAndReflections: StructuredText;
+  techStack: { name: string }[];
+  gradientStartColor: string;
+  gradientEndColor: string;
+}

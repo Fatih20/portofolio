@@ -1,13 +1,240 @@
 ---
-import { projectsIdFetcher } from "@/api";
+import { projectsIdFetcher, projectsPageContentFetcher } from "@/api";
+import Spacer from "@/components/Spacer.astro";
+import Layout from "@/layouts/Layout.astro";
+import { dateConverter, months, projectPCompareFunction } from "@/utils";
+// import { render } from "datocms-structured-text-to-html-string";
 
 export async function getStaticPaths() {
   return (await projectsIdFetcher()).allProjects.map(({ id }) => {
-    return { params: { id } };
+    return {
+      params: { id },
+    };
   });
 }
 
 const { id } = Astro.params;
+
+const allProjects = (await projectsPageContentFetcher()).sort(
+  projectPCompareFunction
+);
+
+const projectIndexFromFetchedData = allProjects.findIndex(
+  ({ id: projectId }) => projectId === id
+);
+
+const {
+  projectName,
+  gradientStartColor,
+  gradientEndColor,
+  projectStartDate,
+  projectEndDate,
+  shortDescription,
+  summary,
+  techStack,
+  diaryAndReflections,
+} = allProjects[projectIndexFromFetchedData];
+
+const processedTechStack = techStack.map(({ name }) => name);
+
+const nextProjectIndex = (projectIndexFromFetchedData + 1) % allProjects.length;
+const prevProjectIndex =
+  projectIndexFromFetchedData - 1 < 0
+    ? allProjects.length - 1
+    : projectIndexFromFetchedData - 1;
+
+const {
+  projectName: nextProjectName,
+  gradientEndColor: nextProjectGradientEndColor,
+  gradientStartColor: nextProjectGradientStartColor,
+} = allProjects[nextProjectIndex];
+
+const {
+  projectName: prevProjectName,
+  gradientEndColor: prevProjectGradientEndColor,
+  gradientStartColor: prevProjectGradientStartColor,
+} = allProjects[prevProjectIndex];
+
+const { month: startMonth, year: startYear } = dateConverter(projectStartDate);
+const { month: endMonth, year: endYear } = projectEndDate
+  ? dateConverter(projectEndDate)
+  : { month: 0, year: 0 };
 ---
 
-<h1 class="text-3xl font-bold">{id}</h1>
+<style>
+  .summary-container :global(h3) {
+    @apply text-xl font-bold;
+  }
+
+  .summary-container :global(h4) {
+    @apply text-lg font-bold;
+  }
+
+  .summary-container :global(h5) {
+    @apply text-lg font-medium;
+  }
+</style>
+
+<Layout
+  title={`${projectName}`}
+  pageDescription={`${shortDescription} - Made by Fatih NRI`}
+  activeNavigationOption={""}
+>
+  <div
+    class="flex flex-col items-center justify-start w-full px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop flex-grow"
+  >
+    <main
+      class="flex flex-col items-center justify-start w-full max-w-5xl mx-auto flex-grow border-b-2 pb-4 gap-8"
+      style={`
+      border-color: ${gradientEndColor};
+  `}
+    >
+      <header
+        class="flex flex-col items-start justify-start gap-2 w-full border-4 rounded-lg p-4 shadow-lg"
+        style={`
+          border-color: ${gradientStartColor};
+          --tw-shadow-color: ${gradientEndColor}7F;
+          --tw-shadow: var(--tw-shadow-colored);
+      `}
+      >
+        <div class="flex flex-col items-start justify-start w-full gap-1">
+          <h1 class="text-3xl lg:text-4xl text-left font-black">
+            {projectName}
+          </h1>
+          <p class="text-xl text-left text-black-100">
+            {shortDescription}
+          </p>
+        </div>
+        <p class="text-base font-medium text-left">
+          {months[startMonth - 1]}
+          {startYear}
+          {projectEndDate ? `${months[endMonth - 1]} ${endYear}` : null}
+        </p>
+      </header>
+      <section class="w-full relative">
+        <h2 class="absolute -left-[-9999px]">Tech Stack</h2>
+        <div
+          class="items-stretch justify-center w-full gap-4 invisible md:visible hidden md:flex"
+        >
+          <div
+            class="summary-container flex flex-col items-center justify-center gap-2 flex-grow bg-none border-4 rounded-lg p-4"
+            style={`
+      border-color: ${gradientStartColor};`}
+          >
+            <p class="text-2xl lg:text-3xl font-bold">Tech</p>
+          </div>
+          <div
+            class="summary-container flex flex-col items-center justify-center gap-2 flex-grow bg-none border-x-4 border-b-4 rounded-b-lg px-2 pb-2 box-border"
+            style={`
+    border-color: ${gradientStartColor};`}
+          >
+            <p class="border-4 w-full text-center p-1 invisible">
+              {null}
+            </p>
+            {
+              processedTechStack.map((name) => {
+                return (
+                  <p
+                    class="rounded-lg border-silver-100 border-4 w-full text-center p-1"
+                    style={`
+      border-color: ${gradientEndColor};`}
+                  >
+                    {name}
+                  </p>
+                );
+              })
+            }
+          </div>
+          <div
+            class="summary-container flex flex-col items-center justify-center gap-2 flex-grow bg-none border-4 rounded-lg p-4"
+            style={`
+    border-color: ${gradientStartColor};`}
+          >
+            <p class="text-2xl lg:text-3xl font-bold">Stack</p>
+          </div>
+        </div>
+        <div
+          class="items-stretch justify-center w-full gap-4 relative flex flex-col md:hidden visible md:invisible"
+        >
+          <div
+            class="summary-container flex flex-col items-center justify-center gap-2 flex-grow bg-none border-x-4 border-b-4 rounded-b-lg px-2 pb-2 box-border"
+            style={`
+      border-color: ${gradientStartColor};`}
+          >
+            <p class="border-4 w-full text-center p-1 invisible">
+              {null}
+            </p>
+            {
+              processedTechStack.map((name) => {
+                return (
+                  <p
+                    class="rounded-lg border-silver-100 border-4 w-full text-center p-1"
+                    style={`
+        border-color: ${gradientEndColor};`}
+                  >
+                    {name}
+                  </p>
+                );
+              })
+            }
+            <div
+              class="flex flex-col items-center justify-center gap-2 bg-none border-4 p-4 box-border rounded-lg w-full"
+              style={`
+      border-color: ${gradientStartColor};`}
+            >
+              <p class="text-2xl lg:text-3xl font-bold">Tech Stack</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        class="summary-container flex flex-col items-start justify-start gap-2 w-full border-4 rounded-lg p-4"
+        style={`
+        border-color: ${gradientStartColor};
+    `}
+      >
+        <h2 class="text-2xl lg:text-3xl text-left font-bold">Summary</h2>
+        <!-- <Fragment set:html={render(summary)} /> -->
+      </section>
+
+      <Spacer />
+      <div
+        class="flex flex-col lg:flex-row w-full text-silver-100 h-fit justify-items-stretch gap-2 lg:gap-4 text-xl"
+      >
+        <a
+          href={`/portofolio/${allProjects[prevProjectIndex].id}`}
+          class="flex items-center justify-start w-full lg:w-1/2 gap-2 rounded-lg px-4 py-2 bg-gradient-to-b hover:shadow-hoveredCard hover:scale-101 transition-all"
+          style={`
+            --tw-gradient-from: ${prevProjectGradientStartColor};
+            --tw-gradient-to: ${prevProjectGradientEndColor};
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+            --tw-shadow-color: ${prevProjectGradientStartColor};
+            --tw-shadow: var(--tw-shadow-colored);
+        `}
+        >
+          <i class="fa-solid fa-arrow-left text-xl"></i>
+          <p>
+            {prevProjectName}
+          </p>
+        </a>
+        <Spacer />
+        <a
+          href={`/portofolio/${allProjects[nextProjectIndex].id}`}
+          class="flex items-center justify-end w-full lg:w-1/2 gap-2 rounded-lg px-4 py-2 bg-gradient-to-b hover:shadow-hoveredCard hover:scale-101 transition-all"
+          style={`
+            --tw-gradient-from: ${nextProjectGradientStartColor};
+            --tw-gradient-to: ${nextProjectGradientEndColor};
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+            --tw-shadow-color: ${nextProjectGradientStartColor};
+            --tw-shadow: var(--tw-shadow-colored);
+        `}
+        >
+          <p>
+            {nextProjectName}
+          </p>
+          <i class="fa-solid fa-arrow-right text-xl"></i>
+        </a>
+      </div>
+    </main>
+  </div>
+</Layout>

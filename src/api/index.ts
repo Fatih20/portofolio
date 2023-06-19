@@ -104,3 +104,44 @@ export async function portofolioContentFetcher(): Promise<PortofolioContent> {
     } as PortofolioContent;
   }
 }
+
+export async function projectsPageContentFetcher(): Promise<
+  ProjectPageContent[]
+> {
+  const query = `query {
+    allProjects {
+      id,
+      projectName,
+      projectName,
+    repositoryLink,
+    projectLink,
+    shortDescription,
+    projectStartDate,
+    projectEndDate,
+    summary {
+      blocks,
+      value,
+      links
+    },
+    techStack {
+      name
+    },
+      diaryAndReflections {
+        blocks,
+        links,
+        value
+      },
+    gradientStartColor,
+    gradientEndColor
+    }
+  }
+  `;
+  const { error, result } = await fetcher<{
+    allProjects: ProjectPageContent[];
+  }>(query);
+  if (error === null && result?.data) {
+    return result.data.allProjects as ProjectPageContent[];
+  } else {
+    return [] as ProjectPageContent[];
+  }
+}
