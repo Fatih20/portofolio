@@ -15,6 +15,11 @@ module.exports = {
           "66%": { color: "#1a1a1a" },
           "100%": { color: "#fafafa" },
         },
+        "glow-pulse": {
+          "0%": { "text-shadow": "0 0 7px #fff" },
+          "50%": { "text-shadow": "0 0 0px #fff" },
+          "100%": { "text-shadow": "0 0 7px #fff" },
+        },
         lightColorChange: {
           "0%": { color: "#c6262e" },
           "14%": { color: "#f37329" },
@@ -30,6 +35,7 @@ module.exports = {
         lostColorChange: "lostColorChange 5s ease-in-out infinite",
         lightColorChange: "lightColorChange 20s ease-in-out infinite",
         variableColorChange: "variableColorChange 5s ease-in-out infinite",
+        "glow-pulse": "glow-pulse 5s ease-in-out infinite",
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
