@@ -42,6 +42,7 @@ export interface AllProjectID {
 export interface PortofolioContent {
   portofolio: {
     title: string;
+    description: StructuredText;
   };
 }
 

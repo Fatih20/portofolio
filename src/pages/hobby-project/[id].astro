@@ -3,7 +3,7 @@ import { projectsIdFetcher, projectsPageContentFetcher } from "@/api";
 import Spacer from "@/components/Spacer.astro";
 import Layout from "@/layouts/Layout.astro";
 import { dateConverter, months, projectPCompareFunction } from "@/utils";
-// import { render } from "datocms-structured-text-to-html-string";
+import { render } from "datocms-structured-text-to-html-string";
 
 export async function getStaticPaths() {
   return (await projectsIdFetcher()).allProjects.map(({ id }) => {
