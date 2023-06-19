@@ -1,14 +1,11 @@
 ---
-import { projectsCardContentFetcher, workContentFetcher } from "@/api";
-import ProjectCard from "@/components/ProjectCard.astro";
+import { workCardContentFetcher, workContentFetcher } from "@/api";
+import WorkCard from "@/components/Card/WorkCard.astro";
 import Spacer from "@/components/Spacer.astro";
 import Layout from "@/layouts/Layout.astro";
-import { projectCompareFunction } from "@/utils";
 import { render } from "datocms-structured-text-to-html-string";
 
-const projects = (await projectsCardContentFetcher()).allProjects.sort(
-  projectCompareFunction
-);
+const works = (await workCardContentFetcher()).allWorks;
 
 const {
   workPage: { title, description, pageDescription },
@@ -17,7 +14,7 @@ const {
 
 <Layout
   title="Fatih's Portofolio"
-  activeNavigationOption={"hobbyProject"}
+  activeNavigationOption={"works"}
   pageDescription={pageDescription}
 >
   <main
@@ -37,28 +34,28 @@ const {
       class="flex flex-col justify-start items-center w-full gap-8 md:grid md:grid-cols-2 md:items-start xl:grid-cols-3 lg:gap-6"
     >
       {
-        projects.map(
+        works.map(
           ({
             id,
             projectLink,
-            projectName,
-            projectStartDate,
+            companyName,
+            role,
+            workStartDate,
+            workEndDate,
             repositoryLink,
-            shortDescription,
-            projectEndDate,
             gradientStartColor,
             gradientEndColor,
             ongoing,
           }) => (
-            <ProjectCard
+            <WorkCard
               id={id}
               ongoing={ongoing}
-              projectName={projectName}
-              projectEndDate={projectEndDate}
-              projectStartDate={projectStartDate}
               projectLink={projectLink}
+              companyName={companyName}
+              role={role}
+              workStartDate={workStartDate}
+              workEndDate={workEndDate}
               repositoryLink={repositoryLink}
-              shortDescription={shortDescription}
               gradientStartColor={gradientStartColor}
               gradientEndColor={gradientEndColor}
             />

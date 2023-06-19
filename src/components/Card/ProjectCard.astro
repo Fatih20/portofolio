@@ -2,6 +2,7 @@
 import type { ProjectCardContent } from "@/types/cms";
 import { dateConverter } from "@/utils";
 import { months } from "@/utils";
+import Card from "./Card.astro";
 
 type ProjectCardProp = ProjectCardContent;
 const {
@@ -23,15 +24,9 @@ const { month: endMonth, year: endYear } = projectEndDate
   : { month: 0, year: 0 };
 ---
 
-<article
-  class={`bg-black-500 w-full min-h-cardDesktop rounded-xl hover:bg-gradient-to-b flex flex-col justify-start items-start box-border p-4 gap-1 hover:shadow-hoveredCard hover:scale-101 transition-all cursor-pointer md:h-full relative`}
-  style={`
-    --tw-gradient-from: ${gradientStartColor};
-    --tw-gradient-to: ${gradientEndColor};
-    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-    --tw-shadow-color: ${gradientStartColor};
-    --tw-shadow: var(--tw-shadow-colored);
-`}
+<Card
+  gradientEndColor={gradientEndColor}
+  gradientStartColor={gradientStartColor}
 >
   <a
     href={`/hobby-project/${id}`}
@@ -78,6 +73,6 @@ const { month: endMonth, year: endYear } = projectEndDate
       )
     }
   </div>
-</article>
+</Card>
 
 <style></style>

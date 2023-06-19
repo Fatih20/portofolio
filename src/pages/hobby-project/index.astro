@@ -1,14 +1,11 @@
 ---
 import { portofolioContentFetcher, projectsCardContentFetcher } from "@/api";
-import ProjectCard from "@/components/ProjectCard.astro";
+import ProjectCard from "@/components/Card/ProjectCard.astro";
 import Spacer from "@/components/Spacer.astro";
 import Layout from "@/layouts/Layout.astro";
-import { projectCompareFunction } from "@/utils";
 import { render } from "datocms-structured-text-to-html-string";
 
-const projects = (await projectsCardContentFetcher()).allProjects.sort(
-  projectCompareFunction
-);
+const projects = (await projectsCardContentFetcher()).allProjects;
 
 const {
   portofolio: { title, description, pageDescription },

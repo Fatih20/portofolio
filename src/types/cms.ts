@@ -16,7 +16,12 @@ export interface Image {
   title: string;
 }
 
-export interface ProjectCardContent {
+export interface Gradiented {
+  gradientStartColor: string;
+  gradientEndColor: string;
+}
+
+export type ProjectCardContent = {
   id: string;
   projectName: string;
   ongoing: boolean;
@@ -25,12 +30,25 @@ export interface ProjectCardContent {
   projectStartDate: string;
   projectEndDate?: string;
   shortDescription: string;
-  gradientStartColor: string;
-  gradientEndColor: string;
-}
+} & Gradiented;
+
+export type WorkCardContent = {
+  id: string;
+  companyName: string;
+  role: string;
+  ongoing: boolean;
+  repositoryLink: string;
+  projectLink: string;
+  workStartDate: string;
+  workEndDate?: string;
+} & Gradiented;
 
 export interface ProjectID {
   id: string;
+}
+
+export interface AllWorkCardContent {
+  allWorks: WorkCardContent[];
 }
 
 export interface AllProjectCardContent {

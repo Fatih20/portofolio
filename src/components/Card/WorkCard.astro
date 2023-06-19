@@ -1,0 +1,82 @@
+---
+import type { ProjectCardContent, WorkCardContent } from "@/types/cms";
+import { dateConverter } from "@/utils";
+import { months } from "@/utils";
+import Card from "./Card.astro";
+import Spacer from "../Spacer.astro";
+
+type WorkCardProp = WorkCardContent;
+const {
+  id,
+  companyName,
+  role,
+  workStartDate,
+  workEndDate,
+  projectLink,
+  repositoryLink,
+  gradientStartColor,
+  gradientEndColor,
+  ongoing,
+} = Astro.props as WorkCardProp;
+
+const { month: startMonth, year: startYear } = dateConverter(workStartDate);
+const { month: endMonth, year: endYear } = workEndDate
+  ? dateConverter(workEndDate)
+  : { month: 0, year: 0 };
+---
+
+<Card
+  gradientEndColor={gradientEndColor}
+  gradientStartColor={gradientStartColor}
+>
+  <a
+    href={`/hobby-project/${id}`}
+    target="_blank"
+    aria-label={`Link to the page for ${role} in ${companyName}`}
+    class="absolute inset-0"></a>
+  <div class="flex flex-col items-start justify-start">
+    <h2 class="text-xl lg:text-2xl text-silver-100 text-left font-bold">
+      {role}
+    </h2>
+    <p class="text-sm lg:text-base text-silver-100 flex-grow font-bold">
+      {companyName}
+    </p>
+    <p class="text-sm lg:text-base text-silver-100 font-medium">
+      {months[startMonth - 1]}
+      {startYear}
+      {ongoing ? "- Now" : ""}
+      {workEndDate ? `- ${months[endMonth - 1]} ${endYear}` : ""}
+    </p>
+  </div>
+  <Spacer />
+  <div class="flex justify-center items-center gap-4 text-silver-100 mt-2">
+    {
+      repositoryLink && (
+        <a
+          href={repositoryLink}
+          target="_blank"
+          onclick="(e) => e.stopPropagation()"
+          class="transition-colors hover:scale-105 relative z-10"
+          aria-label={`Link to the repository of ${role} in ${companyName}`}
+        >
+          <i class="fa-brands fa-github text-3xl" />
+        </a>
+      )
+    }
+    {
+      projectLink && (
+        <a
+          href={projectLink}
+          target="_blank"
+          onclick="(e) => e.stopPropagation()"
+          class="transition-colors hover:scale-105 relative z-10"
+          aria-label={`Link to the page for ${role} in ${companyName}`}
+        >
+          <i class="fa-solid fa-link  text-2xl" />
+        </a>
+      )
+    }
+  </div>
+</Card>
+
+<style></style>

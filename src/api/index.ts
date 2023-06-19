@@ -1,6 +1,7 @@
 import type {
   AllProjectCardContent,
   AllProjectID,
+  AllWorkCardContent,
   HomeContent,
   MUNContent,
   PortofolioContent,
@@ -60,7 +61,7 @@ export async function homeContentFetcher(): Promise<HomeContent> {
 
 export async function projectsCardContentFetcher(): Promise<AllProjectCardContent> {
   const query = `query {
-        allProjects {
+        allProjects (orderBy :[projectStartDate_DESC]) {
         id,
         ongoing,
         projectName,
@@ -78,6 +79,29 @@ export async function projectsCardContentFetcher(): Promise<AllProjectCardConten
     return result.data as AllProjectCardContent;
   } else {
     return { allProjects: [] } as AllProjectCardContent;
+  }
+}
+
+export async function workCardContentFetcher(): Promise<AllWorkCardContent> {
+  const query = `query {
+    allWorks (orderBy :[workStartDate_DESC]) {
+      id
+      ongoing,
+      companyName,
+        repositoryLink,
+        projectLink,
+      workStartDate,
+      workEndDate,
+      role
+      gradientStartColor,
+      gradientEndColor
+    }
+  }`;
+  const { error, result } = await fetcher<AllWorkCardContent>(query);
+  if (error === null && result?.data) {
+    return result.data as AllWorkCardContent;
+  } else {
+    return { allWorks: [] } as AllWorkCardContent;
   }
 }
 
@@ -147,6 +171,38 @@ export async function workContentFetcher(): Promise<WorkContent> {
         value
         links
       }
+    }
+  }
+  `;
+  const { error, result } = await fetcher<WorkContent>(query);
+  if (error === null && result?.data) {
+    return result.data as WorkContent;
+  }
+
+  throw new Error("Failed to fetch works page content!");
+}
+
+export async function worksPageContentFetcher(): Promise<WorkContent> {
+  const query = `query {
+    allWorks {
+      id
+      ongoing,
+      companyName,
+        repositoryLink,
+        projectLink,
+      workStartDate,
+      workEndDate,
+      description {
+        blocks
+        value
+        links
+      },
+      role
+      techStack {
+        name
+      }
+        gradientStartColor,
+        gradientEndColor
     }
   }
   `;
