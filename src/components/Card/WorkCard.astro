@@ -47,8 +47,13 @@ const { month: endMonth, year: endYear } = workEndDate
         <p class="text-sm lg:text-base text-silver-100 font-medium">
           {months[startMonth - 1]}
           {startYear}
-          {ongoing ? "- Now" : ""}
-          {workEndDate ? `- ${months[endMonth - 1]} ${endYear}` : ""}
+          {
+            ongoing
+              ? "- Now"
+              : workEndDate
+              ? `- ${months[endMonth - 1]} ${endYear}`
+              : ""
+          }
         </p>
       </div>
       <p>{shortRemark}</p>

@@ -114,6 +114,8 @@ export async function munCardContentFetcher(): Promise<AllMUNCardContent> {
       eventName
     	startDate
       council
+      country
+      countryFlag
     	roleOrAward
       shortRemark
         gradientStartColor

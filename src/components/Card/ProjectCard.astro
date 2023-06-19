@@ -43,8 +43,13 @@ const { month: endMonth, year: endYear } = projectEndDate
         <p class="text-sm lg:text-base text-silver-100 font-bold">
           {months[startMonth - 1]}
           {startYear}
-          {ongoing ? "- Now" : ""}
-          {projectEndDate ? `- ${months[endMonth - 1]} ${endYear}` : ""}
+          {
+            ongoing
+              ? "- Now"
+              : projectEndDate
+              ? `- ${months[endMonth - 1]} ${endYear}`
+              : ""
+          }
         </p>
       </div>
       <p class="text-sm lg:text-base text-silver-100 flex-grow">

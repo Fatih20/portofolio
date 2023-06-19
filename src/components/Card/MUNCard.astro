@@ -15,6 +15,8 @@ const {
   gradientStartColor,
   gradientEndColor,
   shortRemark,
+  country,
+  countryFlag,
 } = Astro.props as MUNCardProp;
 
 const roleOrAwardAbbreviation = roleOrAward
@@ -44,7 +46,7 @@ const { year: startYear } = dateConverter(startDate);
           {startYear}
         </p>
         <p class="text-sm lg:text-base text-silver-100 font-medium">
-          {council}
+          {council} - {countryFlag}
         </p>
       </div>
       <p>{shortRemark}</p>

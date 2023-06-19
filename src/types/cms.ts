@@ -48,6 +48,8 @@ export type MUNCardContent = {
   id: string;
   eventName: string;
   council: string;
+  country: string;
+  countryFlag: string;
   shortRemark: string;
   startDate: string;
   roleOrAward: string;
