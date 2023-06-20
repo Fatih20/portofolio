@@ -90,12 +90,7 @@ const { month: endMonth, year: endYear } = projectEndDate
   pageDescription={`${shortDescription} - Made by Fatih NRI`}
   activeNavigationOption={""}
 >
-  <Stack
-    client:visible
-    stackContent={processedTechStack}
-    startColor={gradientStartColor}
-    endColor={gradientEndColor}
-  />
+  <Stack client:visible stackContent={processedTechStack} />
   <div
     class="flex flex-col items-center justify-start w-full px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop flex-grow text-silver-100"
   >

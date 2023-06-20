@@ -1,7 +1,5 @@
 <script lang="ts">
   export let stackContent: string[] = [];
-  export let startColor: string;
-  export let endColor: string;
 
   let shown = false;
 </script>
@@ -14,22 +12,17 @@
   <nav
     class={`pointer-events-auto bg-black rounded-l-md lg:rounded-l-xl ${
       shown ? "translate-x-0" : "translate-x-full"
-    } h-full p-4 relative transition-transform items-center justify-center flex flex-row gap-4 duration-200`}
+    } h-full p-2 relative transition-transform items-center justify-center flex flex-row gap-4 duration-200`}
   >
     <div
-      class="self-end w-full flex flex-col items-center justify-center gap-2 flex-grow bg-none"
+      class="self-end w-full flex flex-col items-center justify-center gap-1 flex-grow bg-none"
     >
       <p class="border-4 w-full text-center p-1 invisible">
         {null}
       </p>
       {#each stackContent as name}
         <p
-          class="rounded-lg text-silver-100 w-full text-center py-1 px-2 bg-gradient-to-b"
-          style={`
-            --tw-gradient-from: ${startColor};
-            --tw-gradient-to: ${endColor};
-            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-        `}
+          class="rounded-lg text-background font-medium shadow-md shadow-black-900/30 w-full text-center py-1 px-2 from-silver-100 to-silver-300 bg-gradient-to-b"
         >
           {name}
         </p>
