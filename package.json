@@ -17,5 +17,8 @@
     "datocms-structured-text-to-html-string": "^2.1.11",
     "svelte": "^3.46.4",
     "tailwindcss": "^3.0.24"
+  },
+  "devDependencies": {
+    "daisyui": "^3.1.1"
   }
 }
