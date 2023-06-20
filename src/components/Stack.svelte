@@ -41,7 +41,7 @@
         />
       </button>
       <button
-        class={`p-2 leading-none font-bold text-center bg-black text-silver-100 hover:pr-4 transition-all  rounded-r-sm rounded-lg flex flex-col normal-case pointer-events-auto ${
+        class={`p-2 leading-none shadow-md shadow-black-900/30 font-bold text-center bg-black text-silver-100 hover:pr-4 transition-all  rounded-r-sm rounded-lg flex flex-col normal-case pointer-events-auto ${
           shown ? "hidden" : ""
         }`}
         on:click={() => (shown = true)}
