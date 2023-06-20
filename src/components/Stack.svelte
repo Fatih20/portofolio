@@ -9,24 +9,25 @@
     shown ? "bg-slate-900/75" : ""
   } flex flex-row-reverse items-center box-border py-8`}
 >
-  <nav
-    class={`pointer-events-auto bg-black rounded-l-md lg:rounded-l-xl ${
+  <div
+    class={`pointer-events-auto ${
       shown ? "translate-x-0" : "translate-x-full"
-    } h-full p-2 relative transition-transform items-center justify-center flex flex-row gap-4 duration-200`}
+    } h-full relative transition-transform items-center justify-center flex flex-col gap-4 duration-200`}
   >
     <div
-      class="self-end w-full flex flex-col items-center justify-center gap-1 flex-grow bg-none"
+      class="bg-black rounded-l-md lg:rounded-l-xl p-2 flex-grow flex flex-col items-center justify-start"
     >
-      <p class="border-4 w-full text-center p-1 invisible">
-        {null}
-      </p>
-      {#each stackContent as name}
-        <p
-          class="rounded-lg text-background font-medium shadow-md shadow-black-900/30 w-full text-center py-1 px-2 from-silver-100 to-silver-300 bg-gradient-to-b"
-        >
-          {name}
-        </p>
-      {/each}
+      <div
+        class="self-end w-full h-full flex flex-col items-center justify-end gap-1 bg-none"
+      >
+        {#each stackContent as name}
+          <p
+            class="rounded-lg text-background font-medium shadow-md shadow-black-900/30 w-full text-center py-1 px-2 from-silver-100 to-silver-300 bg-gradient-to-b"
+          >
+            {name}
+          </p>
+        {/each}
+      </div>
     </div>
 
     <div
@@ -55,5 +56,5 @@
     <button class="lg:hidden" on:click={() => (shown = false)}>
       <i class="fa-solid fa-chevron-left text-xl text-silver-100 font-bold" />
     </button>
-  </nav>
+  </div>
 </div>
