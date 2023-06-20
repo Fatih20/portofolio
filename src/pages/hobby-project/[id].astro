@@ -69,7 +69,7 @@ const { month: endMonth, year: endYear } = projectEndDate
 
 <style>
   .summary-container :global(h2) {
-    @apply text-3xl font-bold;
+    @apply text-3xl font-bold mt-4;
   }
 
   .summary-container :global(h3) {
@@ -109,7 +109,7 @@ const { month: endMonth, year: endYear } = projectEndDate
         class="flex flex-col items-start justify-start gap-2 w-full px-4 pb-2 border-b-[1px]"
         style={`border-color: ${gradientStartColor};`}
       >
-        <div class="flex flex-col items-start justify-start w-full">
+        <div class="flex flex-col items-start justify-start gap-1 w-full">
           <h1 class="text-4xl lg:text-5xl text-left font-black">
             {projectName}
           </h1>
@@ -127,7 +127,7 @@ const { month: endMonth, year: endYear } = projectEndDate
         </div>
       </header>
       <section
-        class="summary-container flex flex-col items-start justify-start gap-2 w-full rounded-lg p-4"
+        class="summary-container flex flex-col items-start justify-start w-full rounded-lg px-4 pb-4"
         style={`
         border-color: ${gradientEndColor};
     `}
