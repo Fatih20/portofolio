@@ -1,10 +1,9 @@
 ---
 import { projectsIdFetcher, projectsContentFetcher } from "@/api";
-import Spacer from "@/components/Spacer.astro";
 import Layout from "@/layouts/Layout.astro";
-import { dateConverter, months, projectPCompareFunction } from "@/utils";
+import { dateConverter, months } from "@/utils";
 import { render } from "datocms-structured-text-to-html-string";
-import Stack from "@/components/Stack.svelte";
+import ActionButton from "@/components/ActionButton.svelte";
 
 export async function getStaticPaths() {
   return (await projectsIdFetcher()).allProjects.map(({ id }) => {
@@ -84,18 +83,17 @@ const { month: endMonth, year: endYear } = projectEndDate
   pageDescription={`${shortDescription} - Made by Fatih NRI`}
   activeNavigationOption={""}
 >
-  <Stack client:visible stackContent={techStack} />
   <div
     class="flex flex-col items-center justify-start w-full px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop flex-grow text-silver-100"
   >
     <main
-      class="flex flex-col items-center justify-start w-full max-w-5xl mx-auto flex-grow border-b-2 pb-4"
+      class="flex flex-col items-center justify-start w-full max-w-5xl mx-auto flex-grow pb-4 border-b-2"
       style={`
-      border-color: ${gradientEndColor};
-  `}
+        border-color: ${gradientEndColor};
+    `}
     >
       <header
-        class="flex flex-col items-start justify-start gap-2 w-full px-4 pb-2 border-b-[1px]"
+        class="flex flex-col items-start justify-start gap-2 w-full px-4 pb-2"
         style={`border-color: ${gradientStartColor};`}
       >
         <div class="flex flex-col items-start justify-start gap-1 w-full">
@@ -115,6 +113,31 @@ const { month: endMonth, year: endYear } = projectEndDate
           </p>
         </div>
       </header>
+      <div
+        class="w-full border-y-[1px] py-2"
+        style={`
+        border-color: ${gradientEndColor};
+    `}
+      >
+        <ActionButton client:visible stackContent={techStack}>
+          <a
+            href={repositoryLink}
+            class="right-sidebar-button flex-grow"
+            slot="side-button"
+            target="_blank"
+          >
+            Visit the Repo
+          </a>
+          <a
+            href={projectLink}
+            class="right-sidebar-button flex-grow"
+            slot="side-button"
+            target="_blank"
+          >
+            Try the Project
+          </a>
+        </ActionButton>
+      </div>
       <section
         class="summary-container flex flex-col items-start justify-start w-full rounded-lg px-4 pb-4"
         style={`

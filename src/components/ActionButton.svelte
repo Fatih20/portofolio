@@ -6,9 +6,18 @@
   let shown = false;
 </script>
 
+<div class="flex items-center w-full gap-2">
+  <slot name="side-button" />
+  <button
+    class={`right-sidebar-button flex items-center flex-grow`}
+    on:click={() => (shown = true)}
+  >
+    See the Stack
+  </button>
+</div>
 <div
-  class={`fixed inset-0 z-20 w-screen h-screen pointer-events-none ${
-    shown ? "bg-slate-900/75" : ""
+  class={`fixed inset-0 z-20 w-screen h-screen ${
+    shown ? "bg-slate-900/75 pointer-events-auto" : "pointer-events-none"
   } flex flex-row-reverse items-center box-border py-8`}
 >
   <div
@@ -16,6 +25,31 @@
       shown ? "translate-x-0" : "translate-x-full"
     } h-full relative transition-transform items-center justify-center flex flex-col gap-4 duration-200`}
   >
+    <div
+      class="absolute flex justify-end lg:justify-center items-center flex-col z-50 top-0 bottom-0 right-full h-full"
+    >
+      <button
+        class={`px-2 py-1 rounded-r-md bg-black-500 lg:bg-transparent ${
+          shown ? "" : "opacity-0"
+        } transition-all`}
+        on:click={(e) => {
+          shown = false;
+          e.stopPropagation();
+        }}
+      >
+        <i
+          class={`fa-solid fa-chevron-right text-xl text-silver-100 ${
+            !shown ? "rotate-180 opacity-0" : "rotate-0"
+          } transition-all duration-200`}
+        />
+      </button>
+    </div>
+    <!-- <button
+      on:click={() => (shown = false)}
+      class={`${shown ? "" : "hidden"} mr-3 w-full absolute`}
+    >
+      <i class="fa-solid fa-chevron-right text-xl text-silver-100 font-bold" />
+    </button> -->
     <div
       class="bg-black rounded-l-md lg:rounded-l-xl p-2 flex-grow flex flex-col items-center justify-start"
     >
@@ -42,32 +76,5 @@
         {/each}
       </div>
     </div>
-
-    <div
-      class="absolute flex justify-end lg:justify-center items-center flex-col z-20 top-0 bottom-0 right-full h-full"
-    >
-      <button
-        on:click={() => (shown = false)}
-        class={`${shown ? "" : "hidden"} mr-3`}
-      >
-        <i
-          class="fa-solid fa-chevron-right text-xl text-silver-100 font-bold"
-        />
-      </button>
-      <button
-        class={`p-2 leading-none shadow-md shadow-black-900/30 font-bold text-center bg-black text-silver-100 hover:pr-4 transition-all  rounded-r-sm rounded-lg flex flex-col normal-case pointer-events-auto ${
-          shown ? "hidden" : ""
-        }`}
-        on:click={() => (shown = true)}
-      >
-        See<br /> the<br /> Stack
-      </button>
-    </div>
-    <div class="lg:hidden flex-grow" />
-
-    <div class="lg:hidden flex-grow" />
-    <button class="lg:hidden" on:click={() => (shown = false)}>
-      <i class="fa-solid fa-chevron-left text-xl text-silver-100 font-bold" />
-    </button>
   </div>
 </div>
