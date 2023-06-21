@@ -66,16 +66,20 @@ const { month: endMonth, year: endYear } = workEndDate
 ---
 
 <style>
+  .summary-container :global(h2) {
+    @apply text-3xl font-bold mt-4;
+  }
+
   .summary-container :global(h3) {
-    @apply text-xl font-bold;
+    @apply text-2xl font-bold;
   }
 
   .summary-container :global(h4) {
-    @apply text-lg font-bold;
+    @apply text-xl font-bold;
   }
 
   .summary-container :global(h5) {
-    @apply text-lg font-medium;
+    @apply text-xl font-medium;
   }
 </style>
 
@@ -88,20 +92,20 @@ const { month: endMonth, year: endYear } = workEndDate
     class="flex flex-col items-center justify-start w-full px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop flex-grow text-silver-100"
   >
     <main
-      class="flex flex-col items-center justify-start w-full max-w-5xl mx-auto flex-grow border-b-2 pb-4 gap-8"
+      class="flex flex-col items-center justify-start w-full max-w-5xl mx-auto flex-grow pb-4 border-b-2"
       style={`
       border-color: ${gradientEndColor};
   `}
     >
       <header
-        class="flex flex-col items-start justify-start gap-2 w-full border-4 rounded-lg p-4 shadow-lg"
+        class="flex flex-col items-start justify-start gap-2 w-full px-4 pb-2"
         style={`
           border-color: ${gradientStartColor};
           --tw-shadow-color: ${gradientEndColor}7F;
           --tw-shadow: var(--tw-shadow-colored);
       `}
       >
-        <div class="flex flex-col items-start justify-start w-full gap-1">
+        <div class="flex flex-col items-start justify-start gap-1 w-full">
           <h1 class="text-3xl lg:text-4xl text-left font-black">
             {role}
           </h1>
@@ -117,7 +121,7 @@ const { month: endMonth, year: endYear } = workEndDate
           <p class="text-base font-medium text-left">
             {months[startMonth - 1]}
             {startYear}
-            {workEndDate ? `${months[endMonth - 1]} ${endYear}` : null}
+            {workEndDate ? `- ${months[endMonth - 1]} ${endYear}` : null}
           </p>
         </div>
       </header>
@@ -147,9 +151,9 @@ const { month: endMonth, year: endYear } = workEndDate
         </ActionButton>
       </div>
       <section
-        class="summary-container flex flex-col items-start justify-start gap-2 w-full border-4 rounded-lg p-4"
+        class="summary-container flex flex-col items-start justify-start w-full rounded-lg px-4 pb-4"
         style={`
-        border-color: ${gradientStartColor};
+        border-color: ${gradientEndColor};
     `}
       >
         <Fragment set:html={render(description)} />
