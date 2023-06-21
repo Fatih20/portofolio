@@ -1,5 +1,7 @@
 <script lang="ts">
-  export let stackContent: string[] = [];
+  import type { TechStack } from "@/types/cms";
+
+  export let stackContent: TechStack[] = [];
 
   let shown = false;
 </script>
@@ -20,11 +22,22 @@
       <div
         class="self-end w-full h-full flex flex-col items-center justify-end gap-1 bg-none"
       >
-        {#each stackContent as name}
+        {#each stackContent as { link, name }}
           <p
-            class="rounded-lg text-background font-medium shadow-md shadow-black-900/30 w-full text-center py-1 px-2 from-silver-100 to-silver-300 bg-gradient-to-b"
+            class="rounded-lg text-background font-medium shadow-md shadow-black-900/30 w-full text-center py-1 px-2 from-silver-100 to-silver-300 bg-gradient-to-b relative"
           >
-            {name}
+            {#if link}
+              <a
+                class="w-full h-full"
+                href={link}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {name}
+              </a>
+            {:else}
+              {name}
+            {/if}
           </p>
         {/each}
       </div>

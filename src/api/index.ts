@@ -225,6 +225,7 @@ export async function worksPageContentFetcher(): Promise<WorkContent> {
       role
       techStack {
         name
+        link
       }
         gradientStartColor,
         gradientEndColor
@@ -237,45 +238,6 @@ export async function worksPageContentFetcher(): Promise<WorkContent> {
   }
 
   throw new Error("Failed to fetch work page content!");
-}
-
-export async function projectsPageContentFetcher(): Promise<
-  ProjectPageContent[]
-> {
-  const query = `query {
-    allProjects {
-      id,
-      projectName,
-      projectName,
-      ongoing,
-    repositoryLink,
-    projectLink,
-    shortDescription,
-    projectStartDate,
-    projectEndDate,
-    description {
-      blocks
-      value
-      links
-    },
-    techStack {
-      name
-    },
-    gradientStartColor,
-    gradientEndColor,
-    galleryTitle,
-    galleryPhotos
-    }
-  }
-  `;
-  const { error, result } = await fetcher<{
-    allProjects: ProjectPageContent[];
-  }>(query);
-  if (error === null && result?.data) {
-    return result.data.allProjects as ProjectPageContent[];
-  } else {
-    return [] as ProjectPageContent[];
-  }
 }
 
 export async function projectsContentFetcher(
@@ -298,6 +260,7 @@ export async function projectsContentFetcher(
     },
     techStack {
       name
+      link
     },
     gradientStartColor,
     gradientEndColor,

@@ -99,6 +99,11 @@ export interface WorkContent {
   };
 }
 
+export interface TechStack {
+  name: string;
+  link: string;
+}
+
 export interface ProjectPageContent {
   id: string;
   projectName: string;
@@ -109,7 +114,7 @@ export interface ProjectPageContent {
   projectStartDate: string;
   projectEndDate?: string;
   description: StructuredText;
-  techStack: { name: string }[];
+  techStack: TechStack[];
   gradientStartColor: string;
   gradientEndColor: string;
   galleryTitle: string;
