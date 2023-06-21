@@ -1,9 +1,9 @@
 ---
 import { projectsIdFetcher, projectsContentFetcher } from "@/api";
-import Spacer from "@/components/Spacer.astro";
 import Layout from "@/layouts/Layout.astro";
-import { dateConverter, months, projectPCompareFunction } from "@/utils";
+import { dateConverter, months } from "@/utils";
 import { render } from "datocms-structured-text-to-html-string";
+import ActionButton from "@/components/ActionButton.svelte";
 
 export async function getStaticPaths() {
   return (await projectsIdFetcher()).allProjects.map(({ id }) => {
@@ -36,8 +36,6 @@ const {
 
 // const b = allProjects[projectIndexFromFetchedData];
 
-const processedTechStack = techStack.map(({ name }) => name);
-
 // const nextProjectIndex = (projectIndexFromFetchedData + 1) % allProjects.length;
 // const prevProjectIndex =
 //   projectIndexFromFetchedData - 1 < 0
@@ -63,16 +61,20 @@ const { month: endMonth, year: endYear } = projectEndDate
 ---
 
 <style>
+  .summary-container :global(h2) {
+    @apply text-3xl font-bold mt-4;
+  }
+
   .summary-container :global(h3) {
-    @apply text-xl font-bold;
+    @apply text-2xl font-bold;
   }
 
   .summary-container :global(h4) {
-    @apply text-lg font-bold;
+    @apply text-xl font-bold;
   }
 
   .summary-container :global(h5) {
-    @apply text-lg font-medium;
+    @apply text-xl font-medium;
   }
 </style>
 
@@ -85,29 +87,25 @@ const { month: endMonth, year: endYear } = projectEndDate
     class="flex flex-col items-center justify-start w-full px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop flex-grow text-silver-100"
   >
     <main
-      class="flex flex-col items-center justify-start w-full max-w-5xl mx-auto flex-grow border-b-2 pb-4 gap-8"
+      class="flex flex-col items-center justify-start w-full max-w-5xl mx-auto flex-grow pb-4 border-b-2"
       style={`
-      border-color: ${gradientEndColor};
-  `}
+        border-color: ${gradientEndColor};
+    `}
     >
       <header
-        class="flex flex-col items-start justify-start gap-2 w-full border-4 rounded-lg p-4 shadow-lg"
-        style={`
-          border-color: ${gradientStartColor};
-          --tw-shadow-color: ${gradientEndColor}7F;
-          --tw-shadow: var(--tw-shadow-colored);
-      `}
+        class="flex flex-col items-start justify-start gap-2 w-full px-4 pb-2"
+        style={`border-color: ${gradientStartColor};`}
       >
-        <div class="flex flex-col items-start justify-start w-full gap-1">
-          <h1 class="text-3xl lg:text-4xl text-left font-black">
+        <div class="flex flex-col items-start justify-start gap-1 w-full">
+          <h1 class="text-4xl lg:text-5xl text-left font-black">
             {projectName}
           </h1>
-          <p class="text-xl text-left text-black-100">
+          <p class="text-xl text-left text-silver-500">
             {shortDescription}
           </p>
         </div>
-        <div class="flex justify-start items-center gap-2">
-          <i class="fa-regular fa-calendar-days"></i>
+        <div class="flex justify-start gap-2 items-center text-silver-500">
+          <i class="fa-regular fa-calendar-days" style={``}></i>
           <p class="text-base font-medium text-left">
             {months[startMonth - 1]}
             {startYear}
@@ -115,86 +113,35 @@ const { month: endMonth, year: endYear } = projectEndDate
           </p>
         </div>
       </header>
-      <section class="w-full relative">
-        <!-- <h2 class="absolute -left-[-9999px]">Tech Stack</h2> -->
-        <div
-          class="items-stretch justify-center w-full gap-4 invisible md:visible hidden md:flex"
-        >
-          <div
-            class="summary-container flex flex-col items-center justify-center gap-2 flex-grow bg-none border-4 rounded-lg p-4"
-            style={`
-      border-color: ${gradientStartColor};`}
-          >
-            <p class="text-2xl lg:text-3xl font-bold">Tech</p>
-          </div>
-          <div
-            class="summary-container flex flex-col items-center justify-center gap-2 flex-grow bg-none border-x-4 border-b-4 rounded-b-lg px-2 pb-2 box-border"
-            style={`
-    border-color: ${gradientStartColor};`}
-          >
-            <p class="border-4 w-full text-center p-1 invisible">
-              {null}
-            </p>
-            {
-              processedTechStack.map((name) => {
-                return (
-                  <p
-                    class="rounded-lg border-silver-100 border-4 w-full text-center p-1"
-                    style={`
-      border-color: ${gradientEndColor};`}
-                  >
-                    {name}
-                  </p>
-                );
-              })
-            }
-          </div>
-          <div
-            class="summary-container flex flex-col items-center justify-center gap-2 flex-grow bg-none border-4 rounded-lg p-4"
-            style={`
-    border-color: ${gradientStartColor};`}
-          >
-            <p class="text-2xl lg:text-3xl font-bold">Stack</p>
-          </div>
-        </div>
-        <div
-          class="items-stretch justify-center w-full gap-4 relative flex flex-col md:hidden visible md:invisible"
-        >
-          <div
-            class="summary-container flex flex-col items-center justify-center gap-2 flex-grow bg-none border-x-4 border-b-4 rounded-b-lg px-2 pb-2 box-border"
-            style={`
-      border-color: ${gradientStartColor};`}
-          >
-            <p class="border-4 w-full text-center p-1 invisible">
-              {null}
-            </p>
-            {
-              processedTechStack.map((name) => {
-                return (
-                  <p
-                    class="rounded-lg border-silver-100 border-4 w-full text-center p-1"
-                    style={`
-        border-color: ${gradientEndColor};`}
-                  >
-                    {name}
-                  </p>
-                );
-              })
-            }
-            <div
-              class="flex flex-col items-center justify-center gap-2 bg-none border-4 p-4 box-border rounded-lg w-full"
-              style={`
-      border-color: ${gradientStartColor};`}
-            >
-              <p class="text-2xl lg:text-3xl font-bold">Tech Stack</p>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section
-        class="summary-container flex flex-col items-start justify-start gap-2 w-full border-4 rounded-lg p-4"
+      <div
+        class="w-full border-y-[1px] py-2"
         style={`
-        border-color: ${gradientStartColor};
+        border-color: ${gradientEndColor};
+    `}
+      >
+        <ActionButton client:visible stackContent={techStack}>
+          <a
+            href={repositoryLink}
+            class="right-sidebar-button flex-grow"
+            slot="side-button"
+            target="_blank"
+          >
+            Visit the Repo
+          </a>
+          <a
+            href={projectLink}
+            class="right-sidebar-button flex-grow"
+            slot="side-button"
+            target="_blank"
+          >
+            Try the Project
+          </a>
+        </ActionButton>
+      </div>
+      <section
+        class="summary-container flex flex-col items-start justify-start w-full rounded-lg px-4 pb-4"
+        style={`
+        border-color: ${gradientEndColor};
     `}
       >
         <Fragment set:html={render(description)} />

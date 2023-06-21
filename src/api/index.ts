@@ -3,11 +3,13 @@ import type {
   AllProjectCardContent,
   AllProjectID,
   AllWorkCardContent,
+  AllWorkID,
   HomeContent,
   MUNContent,
   PortofolioContent,
   ProjectPageContent,
   WorkContent,
+  WorkPageContent,
 } from "@/types/cms";
 
 async function fetcher<T>(
@@ -144,6 +146,20 @@ export async function projectsIdFetcher(): Promise<AllProjectID> {
   }
 }
 
+export async function worksIdFetcher(): Promise<AllWorkID> {
+  const query = `query {
+      allWorks {
+      id
+  }
+  }`;
+  const { error, result } = await fetcher<AllWorkID>(query);
+  if (error === null && result?.data) {
+    return result.data as AllWorkID;
+  } else {
+    return { allWorks: [] } as AllWorkID;
+  }
+}
+
 export async function portofolioContentFetcher(): Promise<PortofolioContent> {
   const query = `query {
     portofolio {
@@ -207,9 +223,11 @@ export async function workContentFetcher(): Promise<WorkContent> {
   throw new Error("Failed to fetch works page content!");
 }
 
-export async function worksPageContentFetcher(): Promise<WorkContent> {
+export async function worksPageContentFetcher(
+  id: string
+): Promise<WorkPageContent> {
   const query = `query {
-    allWorks {
+    work (filter : {id : {eq : ${id}}}) {
       id
       ongoing,
       companyName,
@@ -232,9 +250,11 @@ export async function worksPageContentFetcher(): Promise<WorkContent> {
     }
   }
   `;
-  const { error, result } = await fetcher<WorkContent>(query);
+  const { error, result } = await fetcher<{
+    work: WorkPageContent;
+  }>(query);
   if (error === null && result?.data) {
-    return result.data as WorkContent;
+    return result.data.work as WorkPageContent;
   }
 
   throw new Error("Failed to fetch work page content!");

@@ -21,6 +21,11 @@ export interface Gradiented {
   gradientEndColor: string;
 }
 
+export type HasGallery = {
+  galleryTitle: string;
+  galleryPhotos: Image[];
+};
+
 export type ProjectCardContent = {
   id: string;
   projectName: string;
@@ -55,7 +60,7 @@ export type MUNCardContent = {
   roleOrAward: string;
 } & Gradiented;
 
-export interface ProjectID {
+export interface IDAble {
   id: string;
 }
 
@@ -72,7 +77,15 @@ export interface AllProjectCardContent {
 }
 
 export interface AllProjectID {
-  allProjects: ProjectID[];
+  allProjects: IDAble[];
+}
+
+export interface AllWorkID {
+  allWorks: IDAble[];
+}
+
+export interface AllMunsID {
+  allMuns: IDAble[];
 }
 
 export interface PortofolioContent {
@@ -104,7 +117,7 @@ export interface TechStack {
   link: string;
 }
 
-export interface ProjectPageContent {
+export type ProjectPageContent = {
   id: string;
   projectName: string;
   ongoing: boolean;
@@ -115,8 +128,20 @@ export interface ProjectPageContent {
   projectEndDate?: string;
   description: StructuredText;
   techStack: TechStack[];
-  gradientStartColor: string;
-  gradientEndColor: string;
-  galleryTitle: string;
-  galleryPhotos: Image[];
-}
+} & Gradiented &
+  HasGallery;
+
+export type WorkPageContent = {
+  id: string;
+  companyName: string;
+  shortRemark: string;
+  role: string;
+  ongoing: boolean;
+  repositoryLink: string;
+  projectLink: string;
+  workStartDate: string;
+  workEndDate?: string;
+  description: StructuredText;
+  techStack: TechStack[];
+} & Gradiented &
+  HasGallery;

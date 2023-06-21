@@ -1,12 +1,12 @@
 ---
-import { projectsIdFetcher, projectsContentFetcher } from "@/api";
-import Spacer from "@/components/Spacer.astro";
+import { worksIdFetcher, worksPageContentFetcher } from "@/api";
 import Layout from "@/layouts/Layout.astro";
 import { dateConverter, months, projectPCompareFunction } from "@/utils";
 import { render } from "datocms-structured-text-to-html-string";
+import ActionButton from "@/components/ActionButton.svelte";
 
 export async function getStaticPaths() {
-  return (await projectsIdFetcher()).allProjects.map(({ id }) => {
+  return (await worksIdFetcher()).allWorks.map(({ id }) => {
     return {
       params: { id },
     };
@@ -22,21 +22,21 @@ const {
   gradientEndColor,
   gradientStartColor,
   projectLink,
-  projectName,
-  projectStartDate,
+  companyName,
+  ongoing,
+  role,
+  shortRemark,
+  workStartDate,
+  workEndDate,
   repositoryLink,
-  shortDescription,
   techStack,
-  projectEndDate,
-} = await projectsContentFetcher(id ?? "");
+} = await worksPageContentFetcher(id ?? "");
 
 // const projectIndexFromFetchedData = allProjects.findIndex(
 //   ({ id: projectId }) => projectId === id
 // );
 
 // const b = allProjects[projectIndexFromFetchedData];
-
-const processedTechStack = techStack.map(({ name }) => name);
 
 // const nextProjectIndex = (projectIndexFromFetchedData + 1) % allProjects.length;
 // const prevProjectIndex =
@@ -56,9 +56,12 @@ const processedTechStack = techStack.map(({ name }) => name);
 //   gradientStartColor: prevProjectGradientStartColor,
 // } = allProjects[prevProjectIndex];
 
-const { month: startMonth, year: startYear } = dateConverter(projectStartDate);
-const { month: endMonth, year: endYear } = projectEndDate
-  ? dateConverter(projectEndDate)
+console.log(role);
+console.log(id);
+
+const { month: startMonth, year: startYear } = dateConverter(workStartDate);
+const { month: endMonth, year: endYear } = workEndDate
+  ? dateConverter(workEndDate)
   : { month: 0, year: 0 };
 ---
 
@@ -77,8 +80,8 @@ const { month: endMonth, year: endYear } = projectEndDate
 </style>
 
 <Layout
-  title={`${projectName}`}
-  pageDescription={`${shortDescription} - Made by Fatih NRI`}
+  title={`${role} - ${companyName}`}
+  pageDescription={`Fatih NRI experience working as ${role} at ${companyName}. ${shortRemark}`}
   activeNavigationOption={""}
 >
   <div
@@ -100,10 +103,13 @@ const { month: endMonth, year: endYear } = projectEndDate
       >
         <div class="flex flex-col items-start justify-start w-full gap-1">
           <h1 class="text-3xl lg:text-4xl text-left font-black">
-            {projectName}
+            {role}
           </h1>
+          <h2 class="text-2xl lg:text-3xl text-left font-black">
+            {companyName}
+          </h2>
           <p class="text-xl text-left text-black-100">
-            {shortDescription}
+            {shortRemark}
           </p>
         </div>
         <div class="flex justify-start items-center gap-2">
@@ -111,86 +117,35 @@ const { month: endMonth, year: endYear } = projectEndDate
           <p class="text-base font-medium text-left">
             {months[startMonth - 1]}
             {startYear}
-            {projectEndDate ? `${months[endMonth - 1]} ${endYear}` : null}
+            {workEndDate ? `${months[endMonth - 1]} ${endYear}` : null}
           </p>
         </div>
       </header>
-      <section class="w-full relative">
-        <!-- <h2 class="absolute -left-[-9999px]">Tech Stack</h2> -->
-        <div
-          class="items-stretch justify-center w-full gap-4 invisible md:visible hidden md:flex"
-        >
-          <div
-            class="summary-container flex flex-col items-center justify-center gap-2 flex-grow bg-none border-4 rounded-lg p-4"
-            style={`
-      border-color: ${gradientStartColor};`}
+      <div
+        class="w-full border-y-[1px] py-2"
+        style={`
+        border-color: ${gradientEndColor};
+    `}
+      >
+        <ActionButton client:visible stackContent={techStack}>
+          <a
+            href={repositoryLink}
+            class="right-sidebar-button flex-grow"
+            slot="side-button"
+            target="_blank"
           >
-            <p class="text-2xl lg:text-3xl font-bold">Tech</p>
-          </div>
-          <div
-            class="summary-container flex flex-col items-center justify-center gap-2 flex-grow bg-none border-x-4 border-b-4 rounded-b-lg px-2 pb-2 box-border"
-            style={`
-    border-color: ${gradientStartColor};`}
+            Visit the Repo
+          </a>
+          <a
+            href={projectLink}
+            class="right-sidebar-button flex-grow"
+            slot="side-button"
+            target="_blank"
           >
-            <p class="border-4 w-full text-center p-1 invisible">
-              {null}
-            </p>
-            {
-              processedTechStack.map((name) => {
-                return (
-                  <p
-                    class="rounded-lg border-silver-100 border-4 w-full text-center p-1"
-                    style={`
-      border-color: ${gradientEndColor};`}
-                  >
-                    {name}
-                  </p>
-                );
-              })
-            }
-          </div>
-          <div
-            class="summary-container flex flex-col items-center justify-center gap-2 flex-grow bg-none border-4 rounded-lg p-4"
-            style={`
-    border-color: ${gradientStartColor};`}
-          >
-            <p class="text-2xl lg:text-3xl font-bold">Stack</p>
-          </div>
-        </div>
-        <div
-          class="items-stretch justify-center w-full gap-4 relative flex flex-col md:hidden visible md:invisible"
-        >
-          <div
-            class="summary-container flex flex-col items-center justify-center gap-2 flex-grow bg-none border-x-4 border-b-4 rounded-b-lg px-2 pb-2 box-border"
-            style={`
-      border-color: ${gradientStartColor};`}
-          >
-            <p class="border-4 w-full text-center p-1 invisible">
-              {null}
-            </p>
-            {
-              processedTechStack.map((name) => {
-                return (
-                  <p
-                    class="rounded-lg border-silver-100 border-4 w-full text-center p-1"
-                    style={`
-        border-color: ${gradientEndColor};`}
-                  >
-                    {name}
-                  </p>
-                );
-              })
-            }
-            <div
-              class="flex flex-col items-center justify-center gap-2 bg-none border-4 p-4 box-border rounded-lg w-full"
-              style={`
-      border-color: ${gradientStartColor};`}
-            >
-              <p class="text-2xl lg:text-3xl font-bold">Tech Stack</p>
-            </div>
-          </div>
-        </div>
-      </section>
+            Try the Project
+          </a>
+        </ActionButton>
+      </div>
       <section
         class="summary-container flex flex-col items-start justify-start gap-2 w-full border-4 rounded-lg p-4"
         style={`
