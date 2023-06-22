@@ -29,7 +29,7 @@
       class="absolute flex justify-end lg:justify-center items-center flex-col z-50 top-0 bottom-0 right-full h-full"
     >
       <button
-        class={`px-2 py-1 rounded-r-md bg-black-500 lg:bg-transparent ${
+        class={`px-2 py-1 rounded-l-md bg-black-500 lg:bg-transparent ${
           shown ? "" : "opacity-0"
         } transition-all`}
         on:click={(e) => {
@@ -51,7 +51,7 @@
       <i class="fa-solid fa-chevron-right text-xl text-silver-100 font-bold" />
     </button> -->
     <div
-      class="bg-black rounded-l-md lg:rounded-l-xl p-2 flex-grow flex flex-col items-center justify-start"
+      class="bg-black rounded-tl-md lg:rounded-l-xl p-2 flex-grow flex flex-col items-center justify-start"
     >
       <div
         class="self-end w-full h-full flex flex-col items-center justify-end gap-1 bg-none"

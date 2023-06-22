@@ -235,6 +235,7 @@ export async function worksPageContentFetcher(
         projectLink,
       workStartDate,
       workEndDate,
+      shortRemark,
       description {
         blocks
         value
