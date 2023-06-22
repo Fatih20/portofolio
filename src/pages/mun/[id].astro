@@ -1,12 +1,11 @@
 ---
-import { projectsIdFetcher, projectsContentFetcher } from "@/api";
+import { munsIdFetcher, munPageContentFetcher } from "@/api";
 import Layout from "@/layouts/Layout.astro";
-import { dateConverter, months } from "@/utils";
+import { dateConverter } from "@/utils";
 import { render } from "datocms-structured-text-to-html-string";
-import ActionButton from "@/components/ActionButton.svelte";
 
 export async function getStaticPaths() {
-  return (await projectsIdFetcher()).allProjects.map(({ id }) => {
+  return (await munsIdFetcher()).allMuns.map(({ id }) => {
     return {
       params: { id },
     };
@@ -21,14 +20,15 @@ const {
   galleryTitle,
   gradientEndColor,
   gradientStartColor,
-  projectLink,
-  projectName,
-  projectStartDate,
-  repositoryLink,
-  shortDescription,
-  techStack,
-  projectEndDate,
-} = await projectsContentFetcher(id ?? "");
+  council,
+  country,
+  countryFlag,
+  eventName,
+  roleOrAward,
+  shortRemark,
+  startDate,
+  topic,
+} = await munPageContentFetcher(id ?? "");
 
 // const projectIndexFromFetchedData = allProjects.findIndex(
 //   ({ id: projectId }) => projectId === id
@@ -54,10 +54,7 @@ const {
 //   gradientStartColor: prevProjectGradientStartColor,
 // } = allProjects[prevProjectIndex];
 
-const { month: startMonth, year: startYear } = dateConverter(projectStartDate);
-const { month: endMonth, year: endYear } = projectEndDate
-  ? dateConverter(projectEndDate)
-  : { month: 0, year: 0 };
+const { year } = dateConverter(startDate);
 ---
 
 <style>
@@ -79,8 +76,8 @@ const { month: endMonth, year: endYear } = projectEndDate
 </style>
 
 <Layout
-  title={`${projectName}`}
-  pageDescription={`${shortDescription} - Made by Fatih NRI`}
+  title={`${eventName}`}
+  pageDescription={`Fatih Nararya R. I. experience in ${eventName} ${year}. ${shortRemark}`}
   activeNavigationOption={""}
 >
   <div
@@ -98,18 +95,13 @@ const { month: endMonth, year: endYear } = projectEndDate
       >
         <div class="flex flex-col items-start justify-start gap-1 w-full">
           <h1 class="text-4xl lg:text-5xl text-left font-black">
-            {projectName}
+            {eventName}
           </h1>
+          <h2 class="text-2xl text-left font-bold">
+            {year}
+          </h2>
           <p class="text-xl text-left text-silver-500">
-            {shortDescription}
-          </p>
-        </div>
-        <div class="flex justify-start gap-2 items-center text-silver-500">
-          <i class="fa-regular fa-calendar-days" style={``}></i>
-          <p class="text-base font-medium text-left">
-            {months[startMonth - 1]}
-            {startYear}
-            {projectEndDate ? `${months[endMonth - 1]} ${endYear}` : null}
+            {shortRemark}
           </p>
         </div>
       </header>
@@ -119,24 +111,6 @@ const { month: endMonth, year: endYear } = projectEndDate
         border-color: ${gradientEndColor};
     `}
       >
-        <ActionButton client:visible stackContent={techStack}>
-          <a
-            href={repositoryLink}
-            class="right-sidebar-button flex-grow"
-            slot="side-button"
-            target="_blank"
-          >
-            Visit the Repo
-          </a>
-          <a
-            href={projectLink}
-            class="right-sidebar-button flex-grow"
-            slot="side-button"
-            target="_blank"
-          >
-            Try the Project
-          </a>
-        </ActionButton>
       </div>
       <section
         class="summary-container flex flex-col items-start justify-start w-full rounded-lg px-4 pb-4"

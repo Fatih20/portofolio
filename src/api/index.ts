@@ -331,8 +331,12 @@ export async function munPageContentFetcher(
       country
       countryFlag
       topic
-      description
-    	roleOrAward
+      description {
+        blocks
+        value
+        links
+      },
+      roleOrAward
       shortRemark
         gradientStartColor
         gradientEndColor
