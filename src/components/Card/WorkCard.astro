@@ -35,7 +35,7 @@ const { month: endMonth, year: endYear } = workEndDate
     target="_blank"
     aria-label={`Link to the page for ${role} in ${companyName}`}
     class="absolute inset-0"></a>
-  <div class="flex justify-start items-start w-full h-full gap-2">
+  <div class="flex justify-start items-stretch w-full h-full gap-2">
     <div class="flex flex-col items-start justify-start">
       <div class="flex flex-col items-start justify-start mb-2">
         <h2 class="text-xl lg:text-2xl text-silver-100 text-left font-bold">
@@ -56,11 +56,13 @@ const { month: endMonth, year: endYear } = workEndDate
           }
         </p>
       </div>
-      <p>{shortRemark}</p>
+      <p class="text-sm lg:text-base text-silver-100 flex-grow">
+        {shortRemark}
+      </p>
     </div>
     <Spacer />
     <div
-      class={`border-l-2 border-silver-100 h-full pl-4 flex flex-col items-center justify-center`}
+      class={`border-l-2 border-silver-100 pl-4 flex flex-col items-center justify-center`}
     >
       {
         repositoryLink && (

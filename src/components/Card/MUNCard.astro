@@ -32,11 +32,11 @@ const { year: startYear } = dateConverter(startDate);
   gradientStartColor={gradientStartColor}
 >
   <a
-    href={`/hobby-project/${id}`}
+    href={`/mun/${id}`}
     target="_blank"
     aria-label={`Link to the page for ${eventName} ${startYear}`}
     class="absolute inset-0"></a>
-  <div class="flex justify-start items-start w-full h-full gap-2">
+  <div class="flex justify-start items-stretch w-full h-full gap-2">
     <div class="flex flex-col items-start justify-start w-full gap-3">
       <div class="flex flex-col items-start justify-start w-full">
         <h2 class="text-xl lg:text-2xl text-silver-100 text-left font-bold">
@@ -49,12 +49,14 @@ const { year: startYear } = dateConverter(startDate);
           {council} - {countryFlag}
         </p>
       </div>
-      <p>{shortRemark}</p>
+      <p class="text-sm lg:text-base text-silver-100 flex-grow">
+        {shortRemark}
+      </p>
     </div>
     <div
       class={`${
         roleOrAwardAbbreviation === "D" ? "hidden" : ""
-      } border-l-2 border-silver-100 h-full pl-4 flex flex-col items-center justify-center`}
+      } border-l-2 border-silver-100 pl-4 flex flex-col items-center justify-center`}
     >
       <p
         class={`award-text text-left self-start text-xl lg:text-2xl text-silver-100 font-bold ${
@@ -72,11 +74,11 @@ const { year: startYear } = dateConverter(startDate);
       </i>
     </div>
   </div>
-</Card>
 
-<style define:vars={{ gradientEndColor, gradientStartColor }}>
-  .award-text {
-    --start-color: var(--gradientStartColor);
-    --end-color: var(--gradientEndColor);
-  }
-</style>
+  <style define:vars={{ gradientEndColor, gradientStartColor }}>
+    .award-text {
+      --start-color: var(--gradientStartColor);
+      --end-color: var(--gradientEndColor);
+    }
+  </style>
+</Card>
