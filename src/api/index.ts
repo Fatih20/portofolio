@@ -1,11 +1,13 @@
 import type {
   AllMUNCardContent,
+  AllMunsID,
   AllProjectCardContent,
   AllProjectID,
   AllWorkCardContent,
   AllWorkID,
   HomeContent,
   MUNContent,
+  MUNPageContent,
   PortofolioContent,
   ProjectPageContent,
   WorkContent,
@@ -160,7 +162,21 @@ export async function worksIdFetcher(): Promise<AllWorkID> {
   }
 }
 
-export async function portofolioContentFetcher(): Promise<PortofolioContent> {
+export async function munsIdFetcher(): Promise<AllMunsID> {
+  const query = `query {
+      allMuns {
+      id
+  }
+  }`;
+  const { error, result } = await fetcher<AllMunsID>(query);
+  if (error === null && result?.data) {
+    return result.data as AllMunsID;
+  } else {
+    return { allMuns: [] } as AllMunsID;
+  }
+}
+
+export async function projectsContentFetcher(): Promise<PortofolioContent> {
   const query = `query {
     portofolio {
       title
@@ -261,7 +277,7 @@ export async function worksPageContentFetcher(
   throw new Error("Failed to fetch work page content!");
 }
 
-export async function projectsContentFetcher(
+export async function projectsPageContentFetcher(
   id: string
 ): Promise<ProjectPageContent> {
   const query = `query {
@@ -299,7 +315,32 @@ export async function projectsContentFetcher(
   }>(query);
   if (error === null && result?.data) {
     return result.data.project as ProjectPageContent;
-  } else {
-    throw new Error("Error getting project's data");
   }
+  throw new Error(`Error getting project's data. ID : ${id}`);
+}
+
+export async function munPageContentFetcher(
+  id: string
+): Promise<MUNPageContent> {
+  const query = `query {
+    mun (filter : {id : {eq : ${id}}}) {
+      id
+      eventName
+    	startDate
+      council
+      country
+      countryFlag
+      topic
+      description
+    	roleOrAward
+      shortRemark
+        gradientStartColor
+        gradientEndColor
+    }
+  }`;
+  const { error, result } = await fetcher<{ mun: MUNPageContent }>(query);
+  if (error === null && result?.data) {
+    return result.data.mun as MUNPageContent;
+  }
+  throw new Error(`Error getting MUN's data. ID : ${id}`);
 }

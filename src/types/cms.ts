@@ -145,3 +145,17 @@ export type WorkPageContent = {
   techStack: TechStack[];
 } & Gradiented &
   HasGallery;
+
+export type MUNPageContent = {
+  id: string;
+  eventName: string;
+  council: string;
+  country: string;
+  countryFlag: string;
+  shortRemark: string;
+  topic: string;
+  description: StructuredText;
+  startDate: string;
+  roleOrAward: string;
+} & Gradiented &
+  HasGallery;
