@@ -22,13 +22,15 @@ const {
   gradientStartColor,
   council,
   country,
-  countryFlag,
   eventName,
   roleOrAward,
   shortRemark,
   startDate,
   topic,
 } = await munPageContentFetcher(id ?? "");
+
+const { flag, name: countryName } = country[0];
+const { name: councilName, acronym: councilAcronym } = council[0];
 
 // const projectIndexFromFetchedData = allProjects.findIndex(
 //   ({ id: projectId }) => projectId === id

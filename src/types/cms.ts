@@ -52,9 +52,8 @@ export type WorkCardContent = {
 export type MUNCardContent = {
   id: string;
   eventName: string;
-  council: string;
-  country: string;
-  countryFlag: string;
+  council: Council[];
+  country: Country[];
   shortRemark: string;
   startDate: string;
   roleOrAward: string;
@@ -146,14 +145,23 @@ export type WorkPageContent = {
 } & Gradiented &
   HasGallery;
 
+export type Council = {
+  name: string;
+  acronym: string;
+};
+
+export type Country = {
+  name: string;
+  flag: string;
+};
+
 export type MUNPageContent = {
   id: string;
   eventName: string;
-  council: string;
-  country: string;
-  countryFlag: string;
+  council: Council[];
+  country: Country[];
+  topic: { name: string }[];
   shortRemark: string;
-  topic: string;
   description: StructuredText;
   startDate: string;
   roleOrAward: string;

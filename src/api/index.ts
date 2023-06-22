@@ -117,9 +117,14 @@ export async function munCardContentFetcher(): Promise<AllMUNCardContent> {
       id
       eventName
     	startDate
-      council
-      country
-      countryFlag
+      council {
+        name
+        acronym
+      }
+      country {
+        name
+        flag
+      }
     	roleOrAward
       shortRemark
         gradientStartColor
@@ -327,10 +332,17 @@ export async function munPageContentFetcher(
       id
       eventName
     	startDate
-      council
-      country
-      countryFlag
-      topic
+      council {
+        name
+        acronym
+      }
+      country {
+        name
+        flag
+      }
+      topic {
+        name
+      }
       description {
         blocks
         value

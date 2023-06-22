@@ -45,16 +45,15 @@ const {
             gradientEndColor,
             shortRemark,
             country,
-            countryFlag,
           }) => (
             <MUNCard
               id={id}
               eventName={eventName}
               roleOrAward={roleOrAward}
               startDate={startDate}
-              council={council}
-              country={country}
-              countryFlag={countryFlag}
+              council={council[0].acronym}
+              country={country[0].name}
+              countryFlag={country[0].flag}
               shortRemark={shortRemark}
               gradientStartColor={gradientStartColor}
               gradientEndColor={gradientEndColor}
