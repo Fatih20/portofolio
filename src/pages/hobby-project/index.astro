@@ -1,5 +1,5 @@
 ---
-import { portofolioContentFetcher, projectsCardContentFetcher } from "@/api";
+import { projectsContentFetcher, projectsCardContentFetcher } from "@/api";
 import ProjectCard from "@/components/Card/ProjectCard.astro";
 import Spacer from "@/components/Spacer.astro";
 import Layout from "@/layouts/Layout.astro";
@@ -9,7 +9,7 @@ const projects = (await projectsCardContentFetcher()).allProjects;
 
 const {
   portofolio: { title, description, pageDescription },
-} = await portofolioContentFetcher();
+} = await projectsContentFetcher();
 ---
 
 <Layout

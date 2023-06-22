@@ -1,5 +1,5 @@
 ---
-import { projectsIdFetcher, projectsContentFetcher } from "@/api";
+import { projectsIdFetcher, projectsPageContentFetcher } from "@/api";
 import Layout from "@/layouts/Layout.astro";
 import { dateConverter, months } from "@/utils";
 import { render } from "datocms-structured-text-to-html-string";
@@ -28,7 +28,7 @@ const {
   shortDescription,
   techStack,
   projectEndDate,
-} = await projectsContentFetcher(id ?? "");
+} = await projectsPageContentFetcher(id ?? "");
 
 // const projectIndexFromFetchedData = allProjects.findIndex(
 //   ({ id: projectId }) => projectId === id
