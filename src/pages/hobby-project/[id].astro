@@ -50,30 +50,6 @@ const {
   projectEndDate,
 } = await projectsPageContentFetcher(id ?? "");
 
-// const projectIndexFromFetchedData = allProjects.findIndex(
-//   ({ id: projectId }) => projectId === id
-// );
-
-// const b = allProjects[projectIndexFromFetchedData];
-
-// const nextProjectIndex = (projectIndexFromFetchedData + 1) % allProjects.length;
-// const prevProjectIndex =
-//   projectIndexFromFetchedData - 1 < 0
-//     ? allProjects.length - 1
-//     : projectIndexFromFetchedData - 1;
-
-// const {
-//   projectName: nextProjectName,
-//   gradientEndColor: nextProjectGradientEndColor,
-//   gradientStartColor: nextProjectGradientStartColor,
-// } = allProjects[nextProjectIndex];
-
-// const {
-//   projectName: prevProjectName,
-//   gradientEndColor: prevProjectGradientEndColor,
-//   gradientStartColor: prevProjectGradientStartColor,
-// } = allProjects[prevProjectIndex];
-
 const { month: startMonth, year: startYear } = dateConverter(projectStartDate);
 const { month: endMonth, year: endYear } = projectEndDate
   ? dateConverter(projectEndDate)
@@ -173,7 +149,7 @@ const { month: endMonth, year: endYear } = projectEndDate
       >
         <a
           href={`/hobby-project/${prevID}`}
-          class="flex items-center justify-start w-full lg:w-1/2 gap-2 rounded-lg px-4 py-2 bg-gradient-to-b hover:shadow-hoveredCard hover:scale-101 transition-all"
+          class="group flex items-center justify-start w-full lg:w-1/2 gap-2 rounded-lg px-4 py-2 bg-gradient-to-l hover:shadow-hoveredCard hover:scale-101 transition-all"
           style={`
             --tw-gradient-from: ${prevGradientStartColor};
             --tw-gradient-to: ${prevGradientEndColor};
@@ -182,7 +158,8 @@ const { month: endMonth, year: endYear } = projectEndDate
             --tw-shadow: var(--tw-shadow-colored);
         `}
         >
-          <i class="fa-solid fa-arrow-left text-xl"></i>
+          <i class="fa-solid fa-arrow-left text-xl group-hover:-translate-x-1"
+          ></i>
           <p>
             {prevProjectName}
           </p>
@@ -190,7 +167,7 @@ const { month: endMonth, year: endYear } = projectEndDate
         <Spacer />
         <a
           href={`/hobby-project/${nextID}`}
-          class="flex items-center justify-end w-full lg:w-1/2 gap-2 rounded-lg px-4 py-2 bg-gradient-to-b hover:shadow-hoveredCard hover:scale-101 transition-all"
+          class="group flex items-center justify-end w-full lg:w-1/2 gap-2 rounded-lg px-4 py-2 bg-gradient-to-r hover:shadow-hoveredCard hover:scale-101 transition-all"
           style={`
             --tw-gradient-from: ${nextGradientStartColor};
             --tw-gradient-to: ${nextGradientEndColor};
@@ -202,7 +179,8 @@ const { month: endMonth, year: endYear } = projectEndDate
           <p>
             {nextProjectName}
           </p>
-          <i class="fa-solid fa-arrow-right text-xl"></i>
+          <i class="fa-solid fa-arrow-right text-xl group-hover:translate-x-1"
+          ></i>
         </a>
       </div>
     </main>
