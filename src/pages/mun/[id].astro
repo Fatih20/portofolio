@@ -1,11 +1,11 @@
 ---
-import { munsIdFetcher, munPageContentFetcher } from "@/api";
+import { munPageContentFetcher, munIdFetcher } from "@/api";
 import Layout from "@/layouts/Layout.astro";
 import { dateConverter } from "@/utils";
 import { render } from "datocms-structured-text-to-html-string";
 
 export async function getStaticPaths() {
-  return (await munsIdFetcher()).allMuns.map(({ id }) => {
+  return (await munIdFetcher()).map((id) => {
     return {
       params: { id },
     };

@@ -6,7 +6,7 @@ import { render } from "datocms-structured-text-to-html-string";
 import ActionButton from "@/components/ActionButton.svelte";
 
 export async function getStaticPaths() {
-  return (await projectsIdFetcher()).allProjects.map(({ id }) => {
+  return (await projectsIdFetcher()).map((id) => {
     return {
       params: { id },
     };

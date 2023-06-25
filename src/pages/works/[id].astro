@@ -1,12 +1,12 @@
 ---
-import { worksIdFetcher, worksPageContentFetcher } from "@/api";
+import { workIdFetcher, worksPageContentFetcher } from "@/api";
 import Layout from "@/layouts/Layout.astro";
-import { dateConverter, months, projectPCompareFunction } from "@/utils";
+import { dateConverter, months } from "@/utils";
 import { render } from "datocms-structured-text-to-html-string";
 import ActionButton from "@/components/ActionButton.svelte";
 
 export async function getStaticPaths() {
-  return (await worksIdFetcher()).allWorks.map(({ id }) => {
+  return (await workIdFetcher()).map((id) => {
     return {
       params: { id },
     };
