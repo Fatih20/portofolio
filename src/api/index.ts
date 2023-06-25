@@ -6,6 +6,7 @@ import type {
   AllWorkCardContent,
   AllWorkID,
   HomeContent,
+  IDAble,
   MUNContent,
   MUNPageContent,
   PortofolioContent,
@@ -66,19 +67,19 @@ export async function homeContentFetcher(): Promise<HomeContent> {
 
 export async function projectsCardContentFetcher(): Promise<AllProjectCardContent> {
   const query = `query {
-        allProjects (orderBy :[projectStartDate_DESC]) {
-        id,
-        ongoing,
-        projectName,
-        repositoryLink,
-        projectLink,
-        projectStartDate,
-        projectEndDate,
-        shortDescription
-        gradientStartColor,
-        gradientEndColor
-    }
-    }`;
+    allProjects (orderBy :[ongoing_DESC, projectStartDate_DESC]) {
+    id,
+    ongoing,
+    projectName,
+    repositoryLink,
+    projectLink,
+    projectStartDate,
+    projectEndDate,
+    shortDescription
+    gradientStartColor,
+    gradientEndColor
+}
+}`;
   const { error, result } = await fetcher<AllProjectCardContent>(query);
   if (error === null && result?.data) {
     return result.data as AllProjectCardContent;
@@ -89,7 +90,7 @@ export async function projectsCardContentFetcher(): Promise<AllProjectCardConten
 
 export async function workCardContentFetcher(): Promise<AllWorkCardContent> {
   const query = `query {
-    allWorks (orderBy :[workStartDate_DESC]) {
+    allWorks (orderBy :[ongoing_DESC, workStartDate_DESC]) {
       id
       ongoing,
       companyName,
@@ -136,48 +137,6 @@ export async function munCardContentFetcher(): Promise<AllMUNCardContent> {
     return result.data as AllMUNCardContent;
   } else {
     return { allMuns: [] } as AllMUNCardContent;
-  }
-}
-
-export async function projectsIdFetcher(): Promise<AllProjectID> {
-  const query = `query {
-      allProjects {
-      id
-  }
-  }`;
-  const { error, result } = await fetcher<AllProjectID>(query);
-  if (error === null && result?.data) {
-    return result.data as AllProjectID;
-  } else {
-    return { allProjects: [] } as AllProjectID;
-  }
-}
-
-export async function worksIdFetcher(): Promise<AllWorkID> {
-  const query = `query {
-      allWorks {
-      id
-  }
-  }`;
-  const { error, result } = await fetcher<AllWorkID>(query);
-  if (error === null && result?.data) {
-    return result.data as AllWorkID;
-  } else {
-    return { allWorks: [] } as AllWorkID;
-  }
-}
-
-export async function munsIdFetcher(): Promise<AllMunsID> {
-  const query = `query {
-      allMuns {
-      id
-  }
-  }`;
-  const { error, result } = await fetcher<AllMunsID>(query);
-  if (error === null && result?.data) {
-    return result.data as AllMunsID;
-  } else {
-    return { allMuns: [] } as AllMunsID;
   }
 }
 
@@ -353,6 +312,97 @@ export async function munPageContentFetcher(
         gradientStartColor
         gradientEndColor
     }
+  }`;
+  const { error, result } = await fetcher<{ mun: MUNPageContent }>(query);
+  if (error === null && result?.data) {
+    return result.data.mun as MUNPageContent;
+  }
+  throw new Error(`Error getting MUN's data. ID : ${id}`);
+}
+
+export async function munIdFetcher(): Promise<IDAble[]> {
+  const query = `query {
+    allMuns (orderBy :[startDate_DESC]) {
+      id
+    }
+  }`;
+  const { error, result } = await fetcher<{ allMuns: IDAble[] }>(query);
+  if (error === null && result?.data) {
+    return result.data.allMuns as IDAble[];
+  } else {
+    return [] as IDAble[];
+  }
+}
+
+export async function workIdFetcher(): Promise<IDAble[]> {
+  const query = `query {
+    allWorks (orderBy :[ongoing_DESC, workStartDate_DESC]) {
+      id
+    }
+  }`;
+  const { error, result } = await fetcher<{ allWorks: IDAble[] }>(query);
+  if (error === null && result?.data) {
+    return result.data.allWorks as IDAble[];
+  } else {
+    return [] as IDAble[];
+  }
+}
+
+export async function projectsIdFetcher(): Promise<IDAble[]> {
+  const query = `query {
+    allProjects (orderBy :[ongoing_DESC, projectStartDate_DESC]) {
+    id,
+}
+}`;
+  const { error, result } = await fetcher<{ allProjects: IDAble[] }>(query);
+  if (error === null && result?.data) {
+    return result.data.allProjects as IDAble[];
+  } else {
+    return [] as IDAble[];
+  }
+}
+
+export async function worksNameFetcher(id: string): Promise<WorkPageContent> {
+  const query = `query {
+    work (filter : {id : {eq : ${id}}}) {
+      companyName,
+      role
+    }
+  }
+  `;
+  const { error, result } = await fetcher<{
+    work: WorkPageContent;
+  }>(query);
+  if (error === null && result?.data) {
+    return result.data.work as WorkPageContent;
+  }
+
+  throw new Error(`Failed to fetch work page content with ID ${id}!`);
+}
+
+export async function projectsNameFetcher(
+  id: string
+): Promise<ProjectPageContent> {
+  const query = `query {
+    project (filter : {id : {eq : ${id}}}) {
+      projectName
+    }
+  }
+  `;
+  const { error, result } = await fetcher<{
+    project: ProjectPageContent;
+  }>(query);
+  if (error === null && result?.data) {
+    return result.data.project as ProjectPageContent;
+  }
+  throw new Error(`Error getting project's data. ID : ${id}`);
+}
+
+export async function munNameFetcher(id: string): Promise<MUNPageContent> {
+  const query = `query {
+    mun (filter : {id : {eq : ${id}}}) {
+      eventName
+    	startDate
   }`;
   const { error, result } = await fetcher<{ mun: MUNPageContent }>(query);
   if (error === null && result?.data) {
