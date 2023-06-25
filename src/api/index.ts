@@ -325,7 +325,7 @@ export async function munPageContentFetcher(
 
 export async function munIdFetcher(): Promise<IDAble[]> {
   const query = `query {
-    allMuns (orderBy :[startDate_DESC]) {
+    allMuns (orderBy :[startDate_ASC]) {
       id
     }
   }`;
@@ -339,7 +339,7 @@ export async function munIdFetcher(): Promise<IDAble[]> {
 
 export async function workIdFetcher(): Promise<IDAble[]> {
   const query = `query {
-    allWorks (orderBy :[ongoing_DESC, workStartDate_DESC]) {
+    allWorks (orderBy :[ongoing_ASC, workStartDate_ASC]) {
       id
     }
   }`;
@@ -353,7 +353,7 @@ export async function workIdFetcher(): Promise<IDAble[]> {
 
 export async function projectsIdFetcher(): Promise<IDAble[]> {
   const query = `query {
-    allProjects (orderBy :[ongoing_DESC, projectStartDate_DESC]) {
+    allProjects (orderBy :[ongoing_ASC, projectStartDate_ASC]) {
     id,
 }
 }`;
@@ -414,7 +414,7 @@ export async function munNextPrevFetcher(id: string): Promise<NextPrevMUN> {
     	startDate
       gradientStartColor
       gradientEndColor
-
+  }
   }`;
   const { error, result } = await fetcher<{ mun: NextPrevMUN }>(query);
   if (error === null && result?.data) {

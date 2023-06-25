@@ -29,6 +29,7 @@ const {
   gradientEndColor: nextGradientEndColor,
   gradientStartColor: nextGradientStartColor,
 } = await projectsNextPrevFetcher(nextID);
+
 const {
   projectName: prevProjectName,
   gradientEndColor: prevGradientEndColor,
@@ -145,11 +146,11 @@ const { month: endMonth, year: endYear } = projectEndDate
 
       <Spacer />
       <div
-        class="flex flex-col lg:flex-row w-full text-silver-100 h-fit justify-items-stretch gap-2 lg:gap-4 text-xl"
+        class="flex flex-col lg:flex-row w-full h-fit justify-items-stretch gap-2 lg:gap-4 text-xl"
       >
         <a
           href={`/hobby-project/${prevID}`}
-          class="group flex items-center justify-start w-full lg:w-1/2 gap-2 rounded-lg px-4 py-2 bg-gradient-to-l hover:shadow-hoveredCard hover:scale-101 transition-all"
+          class="group next-prev justify-start bg-gradient-to-r"
           style={`
             --tw-gradient-from: ${prevGradientStartColor};
             --tw-gradient-to: ${prevGradientEndColor};
@@ -160,14 +161,14 @@ const { month: endMonth, year: endYear } = projectEndDate
         >
           <i class="fa-solid fa-arrow-left text-xl group-hover:-translate-x-1"
           ></i>
-          <p>
+          <p class="">
             {prevProjectName}
           </p>
         </a>
         <Spacer />
         <a
           href={`/hobby-project/${nextID}`}
-          class="group flex items-center justify-end w-full lg:w-1/2 gap-2 rounded-lg px-4 py-2 bg-gradient-to-r hover:shadow-hoveredCard hover:scale-101 transition-all"
+          class="group next-prev justify-end bg-gradient-to-l"
           style={`
             --tw-gradient-from: ${nextGradientStartColor};
             --tw-gradient-to: ${nextGradientEndColor};
@@ -176,7 +177,7 @@ const { month: endMonth, year: endYear } = projectEndDate
             --tw-shadow: var(--tw-shadow-colored);
         `}
         >
-          <p>
+          <p class="">
             {nextProjectName}
           </p>
           <i class="fa-solid fa-arrow-right text-xl group-hover:translate-x-1"

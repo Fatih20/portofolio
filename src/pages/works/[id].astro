@@ -1,9 +1,19 @@
 ---
-import { workIdFetcher, worksPageContentFetcher } from "@/api";
+import {
+  workIdFetcher,
+  worksNextPrevFetcher,
+  worksPageContentFetcher,
+} from "@/api";
 import Layout from "@/layouts/Layout.astro";
-import { dateConverter, idAbleToStaticPathConverter, months } from "@/utils";
+import {
+  dateConverter,
+  idAbleToStaticPathConverter,
+  months,
+  nextPrevIDMaker,
+} from "@/utils";
 import { render } from "datocms-structured-text-to-html-string";
 import ActionButton from "@/components/ActionButton.svelte";
+import Spacer from "@/components/Spacer.astro";
 
 const workIDs = await workIdFetcher();
 
@@ -12,6 +22,25 @@ export async function getStaticPaths() {
 }
 
 const { id } = Astro.params;
+
+const { nextID, prevID } = nextPrevIDMaker(
+  id ?? "",
+  workIDs.map(({ id }) => id)
+);
+
+const {
+  companyName: nextCompanyName,
+  role: nextRole,
+  gradientEndColor: nextGradientEndColor,
+  gradientStartColor: nextGradientStartColor,
+} = await worksNextPrevFetcher(nextID);
+
+const {
+  companyName: prevCompanyName,
+  role: prevRole,
+  gradientEndColor: prevGradientEndColor,
+  gradientStartColor: prevGradientStartColor,
+} = await worksNextPrevFetcher(prevID);
 
 const {
   description,
@@ -156,44 +185,56 @@ const { month: endMonth, year: endYear } = workEndDate
         <Fragment set:html={render(description)} />
       </section>
 
-      <!-- <Spacer />
+      <Spacer />
       <div
         class="flex flex-col lg:flex-row w-full text-silver-100 h-fit justify-items-stretch gap-2 lg:gap-4 text-xl"
       >
         <a
-          href={`/portofolio/${allProjects[prevProjectIndex].id}`}
-          class="flex items-center justify-start w-full lg:w-1/2 gap-2 rounded-lg px-4 py-2 bg-gradient-to-b hover:shadow-hoveredCard hover:scale-101 transition-all"
+          href={`/works/${prevID}`}
+          class="group next-prev bg-gradient-to-r justify-start"
           style={`
-            --tw-gradient-from: ${prevProjectGradientStartColor};
-            --tw-gradient-to: ${prevProjectGradientEndColor};
+            --tw-gradient-from: ${prevGradientStartColor};
+            --tw-gradient-to: ${prevGradientEndColor};
             --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-            --tw-shadow-color: ${prevProjectGradientStartColor};
+            --tw-shadow-color: ${prevGradientStartColor};
             --tw-shadow: var(--tw-shadow-colored);
         `}
         >
-          <i class="fa-solid fa-arrow-left text-xl"></i>
-          <p>
-            {prevProjectName}
-          </p>
+          <i class="fa-solid fa-arrow-left text-xl group-hover:-translate-x-1"
+          ></i>
+          <div class="flex flex-col">
+            <p>
+              {prevCompanyName}
+            </p>
+            <p class="text-sm">
+              {prevRole}
+            </p>
+          </div>
         </a>
         <Spacer />
         <a
-          href={`/portofolio/${allProjects[nextProjectIndex].id}`}
-          class="flex items-center justify-end w-full lg:w-1/2 gap-2 rounded-lg px-4 py-2 bg-gradient-to-b hover:shadow-hoveredCard hover:scale-101 transition-all"
+          href={`/works/${nextID}`}
+          class="group next-prev bg-gradient-to-l justify-end"
           style={`
-            --tw-gradient-from: ${nextProjectGradientStartColor};
-            --tw-gradient-to: ${nextProjectGradientEndColor};
+            --tw-gradient-from: ${nextGradientStartColor};
+            --tw-gradient-to: ${nextGradientEndColor};
             --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-            --tw-shadow-color: ${nextProjectGradientStartColor};
+            --tw-shadow-color: ${nextGradientStartColor};
             --tw-shadow: var(--tw-shadow-colored);
         `}
         >
-          <p>
-            {nextProjectName}
-          </p>
-          <i class="fa-solid fa-arrow-right text-xl"></i>
+          <div class="flex flex-col">
+            <p>
+              {nextCompanyName}
+            </p>
+            <p class="text-sm">
+              {nextRole}
+            </p>
+          </div>
+          <i class="fa-solid fa-arrow-right text-xl group-hover:translate-x-1"
+          ></i>
         </a>
-      </div> -->
+      </div>
     </main>
   </div>
 </Layout>

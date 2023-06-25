@@ -57,6 +57,14 @@ const { title, activeNavigationOption, pageDescription } = Astro.props;
     @apply font-inter m-0 p-0;
   }
 
+  .next-prev {
+    @apply flex items-center text-background w-full lg:w-1/2 gap-2 rounded-lg px-4 py-2 hover:shadow-hoveredCard hover:scale-101 transition-all;
+  }
+  /* 
+  .next-prev * {
+    @apply mix-blend-exclusion;
+  } */
+
   .right-sidebar-button {
     @apply p-2 leading-none shadow-md shadow-black-900/30 font-bold text-center bg-black text-silver-100 hover:bg-silver-100 hover:text-black transition-all rounded-lg flex flex-col normal-case pointer-events-auto;
   }
