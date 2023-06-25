@@ -8,10 +8,13 @@ import type {
   HomeContent,
   IDAble,
   MUNContent,
+  MUNName,
   MUNPageContent,
   PortofolioContent,
+  ProjectName,
   ProjectPageContent,
   WorkContent,
+  WorkName,
   WorkPageContent,
 } from "@/types/cms";
 
@@ -362,7 +365,7 @@ export async function projectsIdFetcher(): Promise<IDAble[]> {
   }
 }
 
-export async function worksNameFetcher(id: string): Promise<WorkPageContent> {
+export async function worksNameFetcher(id: string): Promise<WorkName> {
   const query = `query {
     work (filter : {id : {eq : ${id}}}) {
       companyName,
@@ -371,18 +374,16 @@ export async function worksNameFetcher(id: string): Promise<WorkPageContent> {
   }
   `;
   const { error, result } = await fetcher<{
-    work: WorkPageContent;
+    work: WorkName;
   }>(query);
   if (error === null && result?.data) {
-    return result.data.work as WorkPageContent;
+    return result.data.work as WorkName;
   }
 
   throw new Error(`Failed to fetch work page content with ID ${id}!`);
 }
 
-export async function projectsNameFetcher(
-  id: string
-): Promise<ProjectPageContent> {
+export async function projectsNameFetcher(id: string): Promise<ProjectName> {
   const query = `query {
     project (filter : {id : {eq : ${id}}}) {
       projectName
@@ -390,23 +391,23 @@ export async function projectsNameFetcher(
   }
   `;
   const { error, result } = await fetcher<{
-    project: ProjectPageContent;
+    project: ProjectName;
   }>(query);
   if (error === null && result?.data) {
-    return result.data.project as ProjectPageContent;
+    return result.data.project as ProjectName;
   }
   throw new Error(`Error getting project's data. ID : ${id}`);
 }
 
-export async function munNameFetcher(id: string): Promise<MUNPageContent> {
+export async function munNameFetcher(id: string): Promise<MUNName> {
   const query = `query {
     mun (filter : {id : {eq : ${id}}}) {
       eventName
     	startDate
   }`;
-  const { error, result } = await fetcher<{ mun: MUNPageContent }>(query);
+  const { error, result } = await fetcher<{ mun: MUNName }>(query);
   if (error === null && result?.data) {
-    return result.data.mun as MUNPageContent;
+    return result.data.mun as MUNName;
   }
   throw new Error(`Error getting MUN's data. ID : ${id}`);
 }

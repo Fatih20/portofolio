@@ -167,3 +167,17 @@ export type MUNPageContent = {
   roleOrAward: string;
 } & Gradiented &
   HasGallery;
+
+export type MUNName = {
+  eventName: string;
+  startDate: string;
+};
+
+export type WorkName = {
+  companyName: string;
+  role: string;
+};
+
+export type ProjectName = {
+  projectName: string;
+};
