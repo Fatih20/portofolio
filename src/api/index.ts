@@ -8,13 +8,13 @@ import type {
   HomeContent,
   IDAble,
   MUNContent,
-  MUNName,
   MUNPageContent,
+  NextPrevMUN,
+  NextPrevProject,
+  NextPrevWork,
   PortofolioContent,
-  ProjectName,
   ProjectPageContent,
   WorkContent,
-  WorkName,
   WorkPageContent,
 } from "@/types/cms";
 
@@ -365,49 +365,60 @@ export async function projectsIdFetcher(): Promise<IDAble[]> {
   }
 }
 
-export async function worksNameFetcher(id: string): Promise<WorkName> {
+export async function worksNextPrevFetcher(id: string): Promise<NextPrevWork> {
   const query = `query {
     work (filter : {id : {eq : ${id}}}) {
       companyName,
       role
+      gradientStartColor
+      gradientEndColor
+
     }
   }
   `;
   const { error, result } = await fetcher<{
-    work: WorkName;
+    work: NextPrevWork;
   }>(query);
   if (error === null && result?.data) {
-    return result.data.work as WorkName;
+    return result.data.work as NextPrevWork;
   }
 
   throw new Error(`Failed to fetch work page content with ID ${id}!`);
 }
 
-export async function projectsNameFetcher(id: string): Promise<ProjectName> {
+export async function projectsNextPrevFetcher(
+  id: string
+): Promise<NextPrevProject> {
   const query = `query {
     project (filter : {id : {eq : ${id}}}) {
       projectName
+      gradientStartColor
+      gradientEndColor
+
     }
   }
   `;
   const { error, result } = await fetcher<{
-    project: ProjectName;
+    project: NextPrevProject;
   }>(query);
   if (error === null && result?.data) {
-    return result.data.project as ProjectName;
+    return result.data.project as NextPrevProject;
   }
   throw new Error(`Error getting project's data. ID : ${id}`);
 }
 
-export async function munNameFetcher(id: string): Promise<MUNName> {
+export async function munNextPrevFetcher(id: string): Promise<NextPrevMUN> {
   const query = `query {
     mun (filter : {id : {eq : ${id}}}) {
       eventName
     	startDate
+      gradientStartColor
+      gradientEndColor
+
   }`;
-  const { error, result } = await fetcher<{ mun: MUNName }>(query);
+  const { error, result } = await fetcher<{ mun: NextPrevMUN }>(query);
   if (error === null && result?.data) {
-    return result.data.mun as MUNName;
+    return result.data.mun as NextPrevMUN;
   }
   throw new Error(`Error getting MUN's data. ID : ${id}`);
 }

@@ -1,15 +1,13 @@
 ---
 import { munPageContentFetcher, munIdFetcher } from "@/api";
 import Layout from "@/layouts/Layout.astro";
-import { dateConverter } from "@/utils";
+import { dateConverter, idAbleToStaticPathConverter } from "@/utils";
 import { render } from "datocms-structured-text-to-html-string";
 
+const munIDs = await munIdFetcher();
+
 export async function getStaticPaths() {
-  return (await munIdFetcher()).map((id) => {
-    return {
-      params: { id },
-    };
-  });
+  return idAbleToStaticPathConverter(await munIdFetcher());
 }
 
 const { id } = Astro.params;

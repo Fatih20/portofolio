@@ -168,16 +168,16 @@ export type MUNPageContent = {
 } & Gradiented &
   HasGallery;
 
-export type MUNName = {
+export type NextPrevMUN = {
   eventName: string;
   startDate: string;
-};
+} & Gradiented;
 
-export type WorkName = {
+export type NextPrevWork = {
   companyName: string;
   role: string;
-};
+} & Gradiented;
 
-export type ProjectName = {
+export type NextPrevProject = {
   projectName: string;
-};
+} & Gradiented;

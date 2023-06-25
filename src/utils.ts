@@ -1,5 +1,9 @@
-import type { ProjectCardContent, ProjectPageContent } from "./types/cms";
-import type { Date } from "./types/types";
+import type {
+  IDAble,
+  ProjectCardContent,
+  ProjectPageContent,
+} from "./types/cms";
+import type { Date, NextPrevID } from "./types/types";
 
 export function dateConverter(dateString: string) {
   const numbers = dateString.split("-");
@@ -99,4 +103,31 @@ export function projectPCompareFunction(
 
     return 0;
   }
+}
+
+export function nextPrevIDMaker(id: string, idArray: string[]): NextPrevID {
+  const indexOfID = idArray.indexOf(id);
+
+  if (indexOfID < 0) {
+    throw new Error(`${id} not found in id array [${idArray.join(", ")}] !`);
+  }
+
+  const length = idArray.length;
+
+  let prev = indexOfID - 1;
+  let next = (indexOfID + 1) % length;
+
+  if (prev < 0) {
+    prev = length - 1;
+  }
+
+  return { nextID: idArray[next], prevID: idArray[prev] };
+}
+
+export function idAbleToStaticPathConverter(idAbles: IDAble[]) {
+  return idAbles.map(({ id }) => {
+    return {
+      params: { id },
+    };
+  });
 }

@@ -1,19 +1,39 @@
 ---
-import { projectsIdFetcher, projectsPageContentFetcher } from "@/api";
+import {
+  projectsIdFetcher,
+  projectsNextPrevFetcher,
+  projectsPageContentFetcher,
+} from "@/api";
 import Layout from "@/layouts/Layout.astro";
 import { dateConverter, months } from "@/utils";
 import { render } from "datocms-structured-text-to-html-string";
 import ActionButton from "@/components/ActionButton.svelte";
+import { nextPrevIDMaker, idAbleToStaticPathConverter } from "@/utils";
+import Spacer from "@/components/Spacer.astro";
+
+const projectIDs = await projectsIdFetcher();
 
 export async function getStaticPaths() {
-  return (await projectsIdFetcher()).map((id) => {
-    return {
-      params: { id },
-    };
-  });
+  return idAbleToStaticPathConverter(await projectsIdFetcher());
 }
 
 const { id } = Astro.params;
+
+const { nextID, prevID } = nextPrevIDMaker(
+  id ?? "",
+  projectIDs.map(({ id }) => id)
+);
+
+const {
+  projectName: nextProjectName,
+  gradientEndColor: nextGradientEndColor,
+  gradientStartColor: nextGradientStartColor,
+} = await projectsNextPrevFetcher(nextID);
+const {
+  projectName: prevProjectName,
+  gradientEndColor: prevGradientEndColor,
+  gradientStartColor: prevGradientStartColor,
+} = await projectsNextPrevFetcher(prevID);
 
 const {
   description,
@@ -147,18 +167,18 @@ const { month: endMonth, year: endYear } = projectEndDate
         <Fragment set:html={render(description)} />
       </section>
 
-      <!-- <Spacer />
+      <Spacer />
       <div
         class="flex flex-col lg:flex-row w-full text-silver-100 h-fit justify-items-stretch gap-2 lg:gap-4 text-xl"
       >
         <a
-          href={`/portofolio/${allProjects[prevProjectIndex].id}`}
+          href={`/hobby-project/${prevID}`}
           class="flex items-center justify-start w-full lg:w-1/2 gap-2 rounded-lg px-4 py-2 bg-gradient-to-b hover:shadow-hoveredCard hover:scale-101 transition-all"
           style={`
-            --tw-gradient-from: ${prevProjectGradientStartColor};
-            --tw-gradient-to: ${prevProjectGradientEndColor};
+            --tw-gradient-from: ${prevGradientStartColor};
+            --tw-gradient-to: ${prevGradientEndColor};
             --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-            --tw-shadow-color: ${prevProjectGradientStartColor};
+            --tw-shadow-color: ${prevGradientStartColor};
             --tw-shadow: var(--tw-shadow-colored);
         `}
         >
@@ -169,13 +189,13 @@ const { month: endMonth, year: endYear } = projectEndDate
         </a>
         <Spacer />
         <a
-          href={`/portofolio/${allProjects[nextProjectIndex].id}`}
+          href={`/hobby-project/${nextID}`}
           class="flex items-center justify-end w-full lg:w-1/2 gap-2 rounded-lg px-4 py-2 bg-gradient-to-b hover:shadow-hoveredCard hover:scale-101 transition-all"
           style={`
-            --tw-gradient-from: ${nextProjectGradientStartColor};
-            --tw-gradient-to: ${nextProjectGradientEndColor};
+            --tw-gradient-from: ${nextGradientStartColor};
+            --tw-gradient-to: ${nextGradientEndColor};
             --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-            --tw-shadow-color: ${nextProjectGradientStartColor};
+            --tw-shadow-color: ${nextGradientStartColor};
             --tw-shadow: var(--tw-shadow-colored);
         `}
         >
@@ -184,7 +204,7 @@ const { month: endMonth, year: endYear } = projectEndDate
           </p>
           <i class="fa-solid fa-arrow-right text-xl"></i>
         </a>
-      </div> -->
+      </div>
     </main>
   </div>
 </Layout>
