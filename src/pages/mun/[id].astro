@@ -143,16 +143,16 @@ const { year } = dateConverter(startDate);
           <i class="fa-solid fa-building-columns"></i>
           <p class="attribute">{councilAcronym} ({councilName})</p>
         </div>
-        <div class="attribute-container">
-          <i class="fa-solid fa-flag"></i>
-          <p class="attribute">{countryName} ({flag})</p>
-        </div>
         <div class="attribute-container items-start">
           <i class="fa-solid fa-question"></i>
           <p class="attribute">{topic.map(({ name }) => name).join(" & ")}</p>
           <!-- <div class="flex flex-col items-start justify-start">
             {topic.map(({ name }) => <p class="attribute">{name}</p>)}
           </div> -->
+        </div>
+        <div class="attribute-container">
+          <i class="fa-solid fa-flag"></i>
+          <p class="attribute">{countryName} ({flag})</p>
         </div>
         <div class="attribute-container">
           <i class="fa-solid fa-award"></i>
