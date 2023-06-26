@@ -77,7 +77,7 @@
         </p>
       </div>
       <img
-        class="w-full h-full object-none"
+        class="w-full h-full object-scale-down"
         src={selectedImage.url}
         alt={selectedImage.alt}
         title={selectedImage.title}
