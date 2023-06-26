@@ -10,6 +10,7 @@ import { render } from "datocms-structured-text-to-html-string";
 import ActionButton from "@/components/ActionButton.svelte";
 import { nextPrevIDMaker, idAbleToStaticPathConverter } from "@/utils";
 import Spacer from "@/components/Spacer.astro";
+import Gallery from "@/components/Gallery.svelte";
 
 const projectIDs = await projectsIdFetcher();
 
@@ -136,22 +137,28 @@ const { month: endMonth, year: endYear } = projectEndDate
         </ActionButton>
       </div>
       <section
-        class="summary-container flex flex-col items-start justify-start w-full rounded-lg px-4 pb-4"
+        class="summary-container flex flex-col items-start justify-start w-full px-4 pb-4 border-b-[1px]"
         style={`
         border-color: ${gradientEndColor};
     `}
       >
         <Fragment set:html={render(description)} />
       </section>
+      <Gallery images={galleryPhotos} title={galleryTitle} />
 
       <Spacer />
       <div
-        class="flex flex-col lg:flex-row w-full h-fit justify-items-stretch gap-2 lg:gap-4 text-xl"
+        class="flex flex-col lg:flex-row w-full h-fit justify-items-stretch gap-2 lg:gap-4 text-xl border-t-[1px] pt-4 mt-4"
+        style={`
+            border-color: ${gradientEndColor};
+        
+        `}
       >
         <a
           href={`/hobby-project/${prevID}`}
           class="group next-prev justify-start bg-gradient-to-r"
           style={`
+            border-color: ${gradientEndColor};
             --tw-gradient-from: ${prevGradientStartColor};
             --tw-gradient-to: ${prevGradientEndColor};
             --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
