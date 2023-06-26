@@ -144,7 +144,7 @@ const { month: endMonth, year: endYear } = projectEndDate
       >
         <Fragment set:html={render(description)} />
       </section>
-      <Gallery images={galleryPhotos} title={galleryTitle} />
+      <Gallery images={galleryPhotos} title={galleryTitle} client:visible />
 
       <Spacer />
       <div
