@@ -89,24 +89,6 @@ const { month: endMonth, year: endYear } = workEndDate
   : { month: 0, year: 0 };
 ---
 
-<style>
-  .summary-container :global(h2) {
-    @apply text-3xl font-bold mt-4;
-  }
-
-  .summary-container :global(h3) {
-    @apply text-2xl font-bold;
-  }
-
-  .summary-container :global(h4) {
-    @apply text-xl font-bold;
-  }
-
-  .summary-container :global(h5) {
-    @apply text-xl font-medium;
-  }
-</style>
-
 <Layout
   title={`${role} - ${companyName}`}
   pageDescription={`Fatih NRI experience working as ${role} at ${companyName}. ${shortRemark}`}

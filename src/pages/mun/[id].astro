@@ -84,24 +84,6 @@ const { name: councilName, acronym: councilAcronym } = council[0];
 const { year } = dateConverter(startDate);
 ---
 
-<style>
-  .summary-container :global(h2) {
-    @apply text-3xl font-bold mt-4;
-  }
-
-  .summary-container :global(h3) {
-    @apply text-2xl font-bold;
-  }
-
-  .summary-container :global(h4) {
-    @apply text-xl font-bold;
-  }
-
-  .summary-container :global(h5) {
-    @apply text-xl font-medium;
-  }
-</style>
-
 <Layout
   title={`${eventName}`}
   pageDescription={`Fatih Nararya R. I. experience in ${eventName} ${year}. ${shortRemark}`}

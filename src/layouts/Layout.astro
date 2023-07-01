@@ -100,4 +100,28 @@ const { title, activeNavigationOption, pageDescription } = Astro.props;
     font-style: normal;
     font-display: swap;
   }
+
+  .summary-container * {
+    @apply leading-loose;
+  }
+
+  .summary-container h2 {
+    @apply text-3xl font-bold mt-4 lg:text-4xl mb-2;
+  }
+
+  .summary-container h3 {
+    @apply text-2xl font-bold lg:text-3xl;
+  }
+
+  .summary-container h4 {
+    @apply text-xl font-bold lg:text-2xl;
+  }
+
+  .summary-container h5 {
+    @apply text-xl font-medium lg:text-2xl;
+  }
+
+  .summary-container p {
+    @apply text-lg leading-8 mb-2 lg:text-xl;
+  }
 </style>
