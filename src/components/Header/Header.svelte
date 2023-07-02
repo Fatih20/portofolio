@@ -21,21 +21,29 @@
     on:focus={() => {}}
   >
     <div
-      class="absolute flex justify-end lg:justify-center items-center flex-col z-20 top-0 bottom-0 left-full h-full"
+      class="absolute flex justify-center items-center flex-col z-20 top-0 bottom-0 left-full h-full"
     >
+      <!-- <button
+        class={`lg:hidden px-2 py-1 rounded-r-md bg-black-500 ${
+          open ? "" : "hidden"
+        }`}
+        on:click={() => (open = false)}
+      >
+        <i class="fa-solid fa-chevron-left text-xl text-silver-100 font-bold" />
+      </button> -->
       <button
         class={`px-2 py-1 rounded-r-md bg-black-500 lg:bg-transparent lg:pointer-events-none ${
-          open ? "opacity-0" : ""
+          open ? "lg:opacity-0" : ""
         } transition-all`}
         on:click={(e) => {
-          open = true;
+          open = !open;
           e.stopPropagation();
         }}
       >
         <i
           class={`fa-solid fa-chevron-right text-xl text-silver-100 ${
-            open ? "rotate-180 opacity-0" : "rotate-0"
-          } transition-all duration-200`}
+            open ? "rotate-180 lg:opacity-0" : "rotate-0"
+          } transition-all duration-300 lg:duration-200`}
         />
       </button>
     </div>
@@ -76,9 +84,6 @@
       {activeNavigationOption}
       text={"MUNs"}
     />
-    <div class="lg:hidden flex-grow" />
-    <button class="lg:hidden" on:click={() => (open = false)}>
-      <i class="fa-solid fa-chevron-left text-xl text-silver-100 font-bold" />
-    </button>
+    <div class="flex-grow lg:hidden" />
   </nav>
 </div>
