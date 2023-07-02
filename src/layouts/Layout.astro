@@ -105,6 +105,23 @@ const { title, activeNavigationOption, pageDescription } = Astro.props;
     @apply leading-loose;
   }
 
+  .summary-container ol,
+  .summary-container ul {
+    @apply list-inside mb-2 pl-2 lg:pl-4;
+  }
+
+  .summary-container ol {
+    @apply list-decimal;
+  }
+
+  .summary-container li::marker {
+    @apply text-lg lg:text-xl;
+  }
+
+  .summary-container li > p {
+    @apply inline;
+  }
+
   .summary-container h2 {
     @apply text-3xl font-bold mt-4 lg:text-4xl mb-2;
   }
