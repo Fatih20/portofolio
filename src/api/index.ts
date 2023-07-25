@@ -130,6 +130,7 @@ export async function munCardContentFetcher(): Promise<AllMUNCardContent> {
         flag
       }
     	roleOrAward
+      bestPositionPaper
       shortRemark
         gradientStartColor
         gradientEndColor
@@ -137,6 +138,8 @@ export async function munCardContentFetcher(): Promise<AllMUNCardContent> {
   }`;
   const { error, result } = await fetcher<AllMUNCardContent>(query);
   if (error === null && result?.data) {
+    console.log(result.data);
+
     return result.data as AllMUNCardContent;
   } else {
     return { allMuns: [] } as AllMUNCardContent;
@@ -311,6 +314,7 @@ export async function munPageContentFetcher(
         links
       },
       roleOrAward
+      bestPositionPaper
       shortRemark
         gradientStartColor
         gradientEndColor

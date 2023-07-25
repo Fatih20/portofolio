@@ -6,8 +6,10 @@ import {
   dateConverter,
   idAbleToStaticPathConverter,
   nextPrevIDMaker,
-} from "@/utils";
+} from "@/utils/utils";
 import { render } from "datocms-structured-text-to-html-string";
+import { pageAwardMaker } from "@/utils/awardMaker";
+import MUNAwardPage from "@/components/Card/MUNAward/MUNAwardPage.astro";
 
 const munIDs = await munIdFetcher();
 
@@ -51,6 +53,7 @@ const {
   roleOrAward,
   shortRemark,
   startDate,
+  bestPositionPaper,
   topic,
 } = await munPageContentFetcher(id ?? "");
 
@@ -136,10 +139,10 @@ const { year } = dateConverter(startDate);
           <i class="fa-solid fa-flag"></i>
           <p class="attribute">{countryName} ({flag})</p>
         </div>
-        <div class="attribute-container">
-          <i class="fa-solid fa-award"></i>
-          <p class="attribute">{roleOrAward}</p>
-        </div>
+        <MUNAwardPage
+          bestPositionPaper={bestPositionPaper}
+          roleOrAward={roleOrAward}
+        />
       </div>
       <section
         class="summary-container flex flex-col items-start justify-start w-full rounded-lg px-4 pb-4"
@@ -204,7 +207,7 @@ const { year } = dateConverter(startDate);
   </div>
 </Layout>
 
-<style>
+<style is:global>
   .attribute-container {
     @apply flex justify-start items-center gap-2;
   }

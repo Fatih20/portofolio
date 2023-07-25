@@ -1,0 +1,38 @@
+---
+import type { Gradiented } from "@/types/cms";
+import { cardAwardMaker } from "@/utils/awardMaker";
+type MUNAwardCardProp = {
+  roleOrAward: string;
+  bestPositionPaper: boolean;
+} & Gradiented;
+const { bestPositionPaper, roleOrAward, gradientEndColor, gradientStartColor } =
+  Astro.props as MUNAwardCardProp;
+
+console.log(bestPositionPaper);
+
+const roleOrAwardAbbreviation = roleOrAward
+  .split(" ")
+  .map((word) => word[0])
+  .join("");
+---
+
+<div
+  class={`${
+    roleOrAwardAbbreviation !== "D" || bestPositionPaper ? "" : "hidden"
+  } border-l-2 border-silver-100 pl-4 flex flex-col items-center justify-center`}
+>
+  <p
+    class={`award-text text-left self-start text-xl lg:text-2xl text-silver-100 font-bold ${
+      ["HC", "AC"].includes(roleOrAwardAbbreviation) ? "hidden" : ""
+    } animate-variableColorChange group-hover:animate-none`}
+    style={`--startColor:${gradientStartColor}; --endColor:${gradientEndColor};`}
+  >
+    {cardAwardMaker(roleOrAwardAbbreviation, bestPositionPaper)}
+  </p>
+  <i
+    class={`fa-solid fa-chair text-xl lg:text-2xl ${
+      ["HC", "AC"].includes(roleOrAwardAbbreviation) ? "" : "hidden"
+    } ${roleOrAwardAbbreviation === "HC" ? "animate-glow-pulse" : ""} `}
+  >
+  </i>
+</div>

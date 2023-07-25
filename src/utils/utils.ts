@@ -2,8 +2,8 @@ import type {
   IDAble,
   ProjectCardContent,
   ProjectPageContent,
-} from "./types/cms";
-import type { Date, NextPrevID } from "./types/types";
+} from "@/types/cms";
+import type { Date, NextPrevID } from "@/types/types";
 
 export function dateConverter(dateString: string) {
   const numbers = dateString.split("-");

@@ -57,6 +57,7 @@ export type MUNCardContent = {
   shortRemark: string;
   startDate: string;
   roleOrAward: string;
+  bestPositionPaper: boolean;
 } & Gradiented;
 
 export interface IDAble {
@@ -165,6 +166,7 @@ export type MUNPageContent = {
   description: StructuredText;
   startDate: string;
   roleOrAward: string;
+  bestPositionPaper: boolean;
 } & Gradiented &
   HasGallery;
 

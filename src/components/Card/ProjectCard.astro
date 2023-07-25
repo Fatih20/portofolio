@@ -1,7 +1,7 @@
 ---
 import type { ProjectCardContent } from "@/types/cms";
-import { dateConverter } from "@/utils";
-import { months } from "@/utils";
+import { dateConverter } from "@/utils/utils";
+import { months } from "@/utils/utils";
 import Card from "./Card.astro";
 import Spacer from "../Spacer.astro";
 
@@ -81,7 +81,7 @@ const { month: endMonth, year: endYear } = projectEndDate
           <a
             href={projectLink}
             target="_blank"
-            onclick="(e) => e.stopPropagation()"
+            onclick="(e) => e.stopPropagation();"
             class="transition-colors hover:scale-105 relative z-10 group-hover:animate-none animate-variableColorChange"
             aria-label={`Link to the ${projectName}`}
             style={`--startColor:${gradientEndColor}; --endColor:${gradientStartColor};`}

@@ -1,0 +1,25 @@
+---
+import type { Gradiented } from "@/types/cms";
+import { cardAwardMaker, pageAwardMaker } from "@/utils/awardMaker";
+type MUNAwardCardProp = {
+  roleOrAward: string;
+  bestPositionPaper: boolean;
+};
+const { bestPositionPaper, roleOrAward } = Astro.props as MUNAwardCardProp;
+
+const roleOrAwardAbbreviation = roleOrAward
+  .split(" ")
+  .map((word) => word[0])
+  .join("");
+---
+
+<div
+  class={`attribute-container ${
+    roleOrAwardAbbreviation !== "D" || bestPositionPaper ? "" : "hidden"
+  }`}
+>
+  <i class="fa-solid fa-award"></i>
+  <p class="attribute">
+    {pageAwardMaker(roleOrAward, bestPositionPaper)}
+  </p>
+</div>

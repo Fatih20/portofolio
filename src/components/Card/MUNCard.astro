@@ -1,9 +1,8 @@
 ---
 import type { MUNCardContent, ProjectCardContent } from "@/types/cms";
-import { dateConverter } from "@/utils";
-import { months } from "@/utils";
+import { dateConverter, months } from "@/utils/utils";
 import Card from "./Card.astro";
-import Spacer from "../Spacer.astro";
+import MUNAwardCard from "./MUNAward/MUNAwardCard.astro";
 
 type MUNCardProp = MUNCardContent;
 const {
@@ -15,14 +14,11 @@ const {
   gradientStartColor,
   gradientEndColor,
   shortRemark,
+  bestPositionPaper,
   country,
-  countryFlag,
 } = Astro.props as MUNCardProp;
 
-const roleOrAwardAbbreviation = roleOrAward
-  .split(" ")
-  .map((word) => word[0])
-  .join("");
+console.log("MUNCard", bestPositionPaper);
 
 const { year: startYear } = dateConverter(startDate);
 ---
@@ -46,33 +42,19 @@ const { year: startYear } = dateConverter(startDate);
           {startYear}
         </p>
         <p class="text-sm lg:text-base text-silver-100 font-medium">
-          {council} - {countryFlag}
+          {council} - {country[0].flag}
         </p>
       </div>
       <p class="text-sm lg:text-base text-silver-100 flex-grow">
         {shortRemark}
       </p>
     </div>
-    <div
-      class={`${
-        roleOrAwardAbbreviation === "D" ? "hidden" : ""
-      } border-l-2 border-silver-100 pl-4 flex flex-col items-center justify-center`}
-    >
-      <p
-        class={`award-text text-left self-start text-xl lg:text-2xl text-silver-100 font-bold ${
-          ["HC", "AC"].includes(roleOrAwardAbbreviation) ? "hidden" : ""
-        } animate-variableColorChange group-hover:animate-none`}
-        style={`--startColor:${gradientStartColor}; --endColor:${gradientEndColor};`}
-      >
-        {roleOrAwardAbbreviation}
-      </p>
-      <i
-        class={`fa-solid fa-chair text-xl lg:text-2xl ${
-          ["HC", "AC"].includes(roleOrAwardAbbreviation) ? "" : "hidden"
-        } ${roleOrAwardAbbreviation === "HC" ? "animate-glow-pulse" : ""} `}
-      >
-      </i>
-    </div>
+    <MUNAwardCard
+      bestPositionPaper={bestPositionPaper}
+      roleOrAward={roleOrAward}
+      gradientEndColor={gradientEndColor}
+      gradientStartColor={gradientStartColor}
+    />
   </div>
 
   <style define:vars={{ gradientEndColor, gradientStartColor }}>
