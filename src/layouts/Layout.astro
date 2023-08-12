@@ -143,6 +143,10 @@ const { title, activeNavigationOption, pageDescription } = Astro.props;
   }
 
   .summary-container code {
-    @apply font-mono;
+    @apply font-mono bg-black-500 p-1 rounded-md;
+  }
+
+  .summary-container a {
+    @apply underline decoration-1 underline-offset-2;
   }
 </style>
