@@ -76,6 +76,11 @@ export async function projectsCardContentFetcher(): Promise<AllProjectCardConten
     projectName,
     repositoryLink,
     projectLink,
+    links {
+      customLinkText
+      link
+      linkType
+    },
     projectStartDate,
     projectEndDate,
     shortDescription
@@ -98,8 +103,13 @@ export async function workCardContentFetcher(): Promise<AllWorkCardContent> {
       ongoing,
       companyName,
       shortRemark,
-        repositoryLink,
-        projectLink,
+      repositoryLink,
+      projectLink,
+      links {
+        customLinkText
+        link
+        linkType
+      },
       workStartDate,
       workEndDate,
       role
@@ -217,8 +227,13 @@ export async function worksPageContentFetcher(
       id
       ongoing,
       companyName,
-        repositoryLink,
-        projectLink,
+      repositoryLink,
+      projectLink,
+      links {
+        customLinkText
+        link
+        linkType
+      },
       workStartDate,
       workEndDate,
       shortRemark,
@@ -257,6 +272,11 @@ export async function projectsPageContentFetcher(
       projectName,
     repositoryLink,
     projectLink,
+    links {
+      customLinkText
+      link
+      linkType
+    },
     shortDescription,
     projectStartDate,
     projectEndDate,

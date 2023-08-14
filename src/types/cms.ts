@@ -26,12 +26,23 @@ export type HasGallery = {
   galleryPhotos: Image[];
 };
 
+const possibleProjectLink = ["repo", "custom", "project"] as const;
+
+export type ProjectLinkType = typeof possibleProjectLink[number];
+
+export type ProjectLink = {
+  link: string;
+  linkType: ProjectLinkType;
+  customLinkText: "";
+};
+
 export type ProjectCardContent = {
   id: string;
   projectName: string;
   ongoing: boolean;
   repositoryLink: string;
   projectLink: string;
+  links: ProjectLink[];
   projectStartDate: string;
   projectEndDate?: string;
   shortDescription: string;
@@ -45,6 +56,7 @@ export type WorkCardContent = {
   ongoing: boolean;
   repositoryLink: string;
   projectLink: string;
+  links: ProjectLink[];
   workStartDate: string;
   workEndDate?: string;
 } & Gradiented;
@@ -124,6 +136,7 @@ export type ProjectPageContent = {
   shortDescription: string;
   repositoryLink: string;
   projectLink: string;
+  links: ProjectLink[];
   projectStartDate: string;
   projectEndDate?: string;
   description: StructuredText;
@@ -139,6 +152,7 @@ export type WorkPageContent = {
   ongoing: boolean;
   repositoryLink: string;
   projectLink: string;
+  links: ProjectLink[];
   workStartDate: string;
   workEndDate?: string;
   description: StructuredText;

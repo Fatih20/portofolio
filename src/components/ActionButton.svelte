@@ -6,14 +6,14 @@
   let shown = false;
 </script>
 
-<div class="flex items-center w-full gap-2">
-  <slot name="side-button" />
+<div class="grid-cols-1 lg:grid-cols-3 grid w-full gap-2">
   <button
     class={`right-sidebar-button flex items-center flex-grow`}
     on:click={() => (shown = true)}
   >
     See the Stack
   </button>
+  <slot name="side-button" />
 </div>
 <div
   class={`fixed inset-0 z-20 w-screen h-screen ${
