@@ -8,8 +8,6 @@ type MUNAwardCardProp = {
 const { bestPositionPaper, roleOrAward, gradientEndColor, gradientStartColor } =
   Astro.props as MUNAwardCardProp;
 
-console.log(bestPositionPaper);
-
 const roleOrAwardAbbreviation = roleOrAward
   .split(" ")
   .map((word) => word[0])

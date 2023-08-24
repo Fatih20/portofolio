@@ -148,8 +148,6 @@ export async function munCardContentFetcher(): Promise<AllMUNCardContent> {
   }`;
   const { error, result } = await fetcher<AllMUNCardContent>(query);
   if (error === null && result?.data) {
-    console.log(result.data);
-
     return result.data as AllMUNCardContent;
   } else {
     return { allMuns: [] } as AllMUNCardContent;
