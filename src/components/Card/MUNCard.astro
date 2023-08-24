@@ -4,7 +4,10 @@ import { dateConverter, months } from "@/utils/utils";
 import Card from "./Card.astro";
 import MUNAwardCard from "./MUNAward/MUNAwardCard.astro";
 
-type MUNCardProp = MUNCardContent;
+type MUNCardProp = Omit<MUNCardContent, "country"> & {
+  country: string;
+  countryFlag: string;
+};
 const {
   id,
   eventName,
@@ -16,6 +19,7 @@ const {
   shortRemark,
   bestPositionPaper,
   country,
+  countryFlag,
 } = Astro.props as MUNCardProp;
 
 const { year: startYear } = dateConverter(startDate);
@@ -40,7 +44,8 @@ const { year: startYear } = dateConverter(startDate);
           {startYear}
         </p>
         <p class="text-sm lg:text-base text-silver-100 font-medium">
-          {council} - {country[0].name}
+          {council} - {country}
+          {countryFlag}
         </p>
       </div>
       <p class="text-sm lg:text-base text-silver-100 flex-grow">
