@@ -16,8 +16,12 @@
   <slot name="side-button" />
 </div>
 <div
+  on:click={() => (shown = false)}
+  on:keydown={() => {}}
   class={`fixed inset-0 z-20 w-screen h-screen ${
-    shown ? "bg-slate-900/75 pointer-events-auto" : "pointer-events-none"
+    shown
+      ? "bg-slate-900/75 pointer-events-auto backdrop-blur-sm"
+      : "pointer-events-none"
   } flex flex-row-reverse items-center box-border py-8`}
 >
   <div
@@ -44,12 +48,6 @@
         />
       </button>
     </div>
-    <!-- <button
-      on:click={() => (shown = false)}
-      class={`${shown ? "" : "hidden"} mr-3 w-full absolute`}
-    >
-      <i class="fa-solid fa-chevron-right text-xl text-silver-100 font-bold" />
-    </button> -->
     <div
       class="bg-black rounded-tl-md lg:rounded-l-xl p-2 flex-grow flex flex-col items-center justify-start"
     >
@@ -58,7 +56,7 @@
       >
         {#each stackContent as { link, name }}
           <p
-            class="rounded-lg text-background font-medium shadow-md shadow-black-900/30 w-full text-center py-1 px-2 from-silver-100 to-silver-300 bg-gradient-to-b relative"
+            class="rounded-lg text-background font-medium shadow-md shadow-black-900/30 w-full text-center py-1 px-2 from-silver-100 to-silver-300 bg-gradient-to-b relative hover:-translate-x-4 transition-all"
           >
             {#if link}
               <a
