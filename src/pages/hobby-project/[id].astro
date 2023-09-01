@@ -11,6 +11,7 @@ import ActionButton from "@/components/ActionButton.svelte";
 import { nextPrevIDMaker, idAbleToStaticPathConverter } from "@/utils/utils";
 import Spacer from "@/components/Spacer.astro";
 import Gallery from "@/components/Gallery.svelte";
+import ToOther from "@/components/ToOther.astro";
 
 const projectIDs = await projectsIdFetcher();
 
@@ -137,42 +138,23 @@ const { month: endMonth, year: endYear } = projectEndDate
         
         `}
       >
-        <a
-          href={`/hobby-project/${prevID}`}
-          class="group next-prev justify-start bg-gradient-to-r"
-          style={`
-            border-color: ${gradientEndColor};
-            --tw-gradient-from: ${prevGradientStartColor};
-            --tw-gradient-to: ${prevGradientEndColor};
-            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-            --tw-shadow-color: ${prevGradientStartColor};
-            --tw-shadow: var(--tw-shadow-colored);
-        `}
+        <ToOther
+          gradientStartColor={prevGradientStartColor}
+          gradientEndColor={prevGradientEndColor}
+          ;
+          link={`/hobby-project/${prevID}`}
         >
-          <i class="fa-solid fa-arrow-left text-xl group-hover:-translate-x-1"
-          ></i>
-          <p class="">
-            {prevProjectName}
-          </p>
-        </a>
+          <p slot="other-title">{prevProjectName}</p>
+        </ToOther>
         <Spacer />
-        <a
-          href={`/hobby-project/${nextID}`}
-          class="group next-prev justify-end bg-gradient-to-l"
-          style={`
-            --tw-gradient-from: ${nextGradientStartColor};
-            --tw-gradient-to: ${nextGradientEndColor};
-            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-            --tw-shadow-color: ${nextGradientStartColor};
-            --tw-shadow: var(--tw-shadow-colored);
-        `}
-        >
-          <p class="">
-            {nextProjectName}
-          </p>
-          <i class="fa-solid fa-arrow-right text-xl group-hover:translate-x-1"
-          ></i>
-        </a>
+        <ToOther
+          gradientStartColor={nextGradientStartColor}
+          gradientEndColor={nextGradientEndColor}
+          next={true}
+          ;
+          link={`/hobby-project/${nextID}`}
+          ><p slot="other-title">{nextProjectName}</p>
+        </ToOther>
       </div>
     </main>
   </div>

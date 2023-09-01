@@ -10,6 +10,7 @@ import {
 import { render } from "datocms-structured-text-to-html-string";
 import { pageAwardMaker } from "@/utils/awardMaker";
 import MUNAwardPage from "@/components/Card/MUNAward/MUNAwardPage.astro";
+import ToOther from "@/components/ToOther.astro";
 
 const munIDs = await munIdFetcher();
 
@@ -157,20 +158,13 @@ const { year } = dateConverter(startDate);
       <div
         class="flex flex-col lg:flex-row w-full text-silver-100 h-fit justify-items-stretch gap-2 lg:gap-4 text-xl"
       >
-        <a
-          href={`/mun/${prevID}`}
-          class="group next-prev bg-gradient-to-r justify-start"
-          style={`
-            --tw-gradient-from: ${prevGradientStartColor};
-            --tw-gradient-to: ${prevGradientEndColor};
-            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-            --tw-shadow-color: ${prevGradientStartColor};
-            --tw-shadow: var(--tw-shadow-colored);
-        `}
+        <ToOther
+          gradientStartColor={prevGradientStartColor}
+          gradientEndColor={prevGradientEndColor}
+          ;
+          link={`/hobby-project/${prevID}`}
         >
-          <i class="fa-solid fa-arrow-left text-xl group-hover:-translate-x-1"
-          ></i>
-          <div class="flex flex-col">
+          <div class="flex flex-col" slot="other-title">
             <p>
               {prevEventName}
             </p>
@@ -178,20 +172,16 @@ const { year } = dateConverter(startDate);
               {prevYear}
             </p>
           </div>
-        </a>
+        </ToOther>
         <Spacer />
-        <a
-          href={`/mun/${nextID}`}
-          class="group next-prev bg-gradient-to-l justify-end"
-          style={`
-            --tw-gradient-from: ${nextGradientStartColor};
-            --tw-gradient-to: ${nextGradientEndColor};
-            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-            --tw-shadow-color: ${nextGradientStartColor};
-            --tw-shadow: var(--tw-shadow-colored);
-        `}
+        <ToOther
+          gradientStartColor={nextGradientStartColor}
+          gradientEndColor={nextGradientEndColor}
+          next={true}
+          ;
+          link={`/mun/${nextID}`}
         >
-          <div class="flex flex-col">
+          <div class="flex flex-col" slot="other-title">
             <p>
               {nextEventName}
             </p>
@@ -199,9 +189,7 @@ const { year } = dateConverter(startDate);
               {nextYear}
             </p>
           </div>
-          <i class="fa-solid fa-arrow-right text-xl group-hover:translate-x-1"
-          ></i>
-        </a>
+        </ToOther>
       </div>
     </main>
   </div>

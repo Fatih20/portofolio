@@ -1,0 +1,53 @@
+---
+type ToOtherProp = {
+  gradientStartColor: string;
+  gradientEndColor: string;
+  name: string;
+  link: string;
+  next?: boolean;
+};
+const {
+  gradientEndColor,
+  gradientStartColor,
+  link,
+  next = false,
+} = Astro.props as ToOtherProp;
+---
+
+<a
+  href={link}
+  class={`group flex items-center w-full lg:w-1/2 gap-2 px-4 py-2 hover:scale-101 transition-all justify-start border-2 border-solid text-silver-100 rounded-md to-other animate-variableColorChange ${
+    next ? "flex-row-reverse items-end" : ""
+  }`}
+  style={`
+            --startColor:${gradientStartColor};
+            --endColor:${gradientEndColor};
+            border-color: ${gradientEndColor};
+            --tw-gradient-from: ${gradientStartColor};
+            --tw-gradient-to: ${gradientEndColor};
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+            --tw-shadow-color: ${gradientStartColor};
+            --tw-shadow: var(--tw-shadow-colored);
+        `}
+>
+  <i
+    class={`fa-solid ${
+      next
+        ? "fa-arrow-right  group-hover:translate-x-1"
+        : "fa-arrow-left  group-hover:-translate-x-1"
+    } text-xl`}></i>
+  <slot name="other-title" />
+</a>
+
+<style>
+  a.to-other {
+    border-left: 0;
+    border-right: 0;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(
+      to left,
+      var(--tw-gradient-from),
+      var(--tw-gradient-to)
+    );
+  }
+</style>
