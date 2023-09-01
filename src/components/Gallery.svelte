@@ -50,7 +50,7 @@
           carouselShown = false;
           selectedIndex = undefined;
         }}
-        class="absolute top-2 right-2 lg:top-4 lg:right-4 text-xl text-silver-100 rounded-md bg-black py-1 px-2"
+        class="absolute top-2 right-2 lg:top-4 lg:right-4 text-xl text-silver-100 rounded-md bg-black py-1 px-2 hover:scale-110 transition-all"
       >
         <i class="fa-solid fa-xmark" />
       </button>
@@ -58,30 +58,30 @@
         class="absolute inset-0 z-10 w-full h-full flex items-center justify-start px-4 pointer-events-none text-lg"
       >
         <button
-          class="bg-black px-3 py-2 rounded-md pointer-events-auto"
+          class="bg-black px-3 py-2 rounded-md pointer-events-auto hover:scale-110 transition-all"
           on:click={() => handlePrevImage()}
           ><i class="fa-solid fa-chevron-left" /></button
         >
         <div class="flex-grow" />
         <button
-          class="bg-black px-3 py-2 rounded-md pointer-events-auto"
+          class="bg-black px-3 py-2 rounded-md pointer-events-auto hover:scale-110 transition-all"
           on:click={() => handleNextImage()}
           ><i class="fa-solid fa-chevron-right" /></button
         >
       </div>
-      <div
-        class="absolute inset-0 w-full h-full flex flex-col items-center justify-end pb-4 pointer-events-none"
-      >
-        <p class="text-silver-100 bg-black rounded-md py-1 px-2">
-          {selectedImage.title}
-        </p>
+      <div class="w-full h-full flex flex-col items-center justify-start">
+        <img
+          class="w-full h-full object-scale-down"
+          src={selectedImage.url}
+          alt={selectedImage.alt}
+          title={selectedImage.title}
+        />
+        <div class="p-4 bg-black text-center w-full">
+          <h2 class="text-silver-100 font-medium">
+            {selectedImage.title}
+          </h2>
+        </div>
       </div>
-      <img
-        class="w-full h-full object-scale-down"
-        src={selectedImage.url}
-        alt={selectedImage.alt}
-        title={selectedImage.title}
-      />
     </div>
     <h2 class="text-3xl font-bold">
       {title}
