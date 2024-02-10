@@ -37,6 +37,7 @@ const {
         muns.map(
           ({
             id,
+            slug,
             eventName,
             roleOrAward,
             startDate,
@@ -49,6 +50,7 @@ const {
           }) => (
             <MUNCard
               id={id}
+              slug={slug}
               eventName={eventName}
               roleOrAward={roleOrAward}
               startDate={startDate}

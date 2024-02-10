@@ -9,7 +9,7 @@ import {
   dateConverter,
   idAbleToStaticPathConverter,
   months,
-  nextPrevIDMaker,
+  nextPrevSlugMaker,
 } from "@/utils/utils";
 import { render } from "datocms-structured-text-to-html-string";
 import ActionButton from "@/components/ActionButton.svelte";
@@ -22,11 +22,11 @@ export async function getStaticPaths() {
   return idAbleToStaticPathConverter(await workIdFetcher());
 }
 
-const { id } = Astro.params;
+const { slug } = Astro.params;
 
-const { nextID, prevID } = nextPrevIDMaker(
-  id ?? "",
-  workIDs.map(({ id }) => id)
+const { nextSlug, prevSlug } = nextPrevSlugMaker(
+  slug ?? "",
+  workIDs.map(({ slug }) => slug)
 );
 
 const {
@@ -34,14 +34,14 @@ const {
   role: nextRole,
   gradientEndColor: nextGradientEndColor,
   gradientStartColor: nextGradientStartColor,
-} = await worksNextPrevFetcher(nextID);
+} = await worksNextPrevFetcher(nextSlug);
 
 const {
   companyName: prevCompanyName,
   role: prevRole,
   gradientEndColor: prevGradientEndColor,
   gradientStartColor: prevGradientStartColor,
-} = await worksNextPrevFetcher(prevID);
+} = await worksNextPrevFetcher(prevSlug);
 
 const {
   description,
@@ -59,7 +59,7 @@ const {
   repositoryLink,
   techStack,
   links,
-} = await worksPageContentFetcher(id ?? "");
+} = await worksPageContentFetcher(slug ?? "");
 
 const { month: startMonth, year: startYear } = dateConverter(workStartDate);
 const { month: endMonth, year: endYear } = workEndDate
@@ -153,7 +153,7 @@ const { month: endMonth, year: endYear } = workEndDate
           gradientStartColor={prevGradientStartColor}
           gradientEndColor={prevGradientEndColor}
           ;
-          link={`/works/${prevID}`}
+          link={`/works/${prevSlug}`}
         >
           <div class="flex flex-col" slot="other-title">
             <p>
@@ -170,7 +170,7 @@ const { month: endMonth, year: endYear } = workEndDate
           gradientEndColor={nextGradientEndColor}
           next={true}
           ;
-          link={`/works/${nextID}`}
+          link={`/works/${nextSlug}`}
         >
           <div class="flex flex-col" slot="other-title">
             <p>

@@ -6,7 +6,7 @@ import Spacer from "../Spacer.astro";
 
 type WorkCardProp = WorkCardContent;
 const {
-  id,
+  slug,
   companyName,
   role,
   workStartDate,
@@ -31,7 +31,7 @@ const { month: endMonth, year: endYear } = workEndDate
   gradientStartColor={gradientStartColor}
 >
   <a
-    href={`/works/${id}`}
+    href={`/works/${slug}`}
     target="_blank"
     aria-label={`Link to the page for ${role} in ${companyName}`}
     class="absolute inset-0"></a>

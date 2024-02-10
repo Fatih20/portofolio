@@ -72,6 +72,7 @@ export async function projectsCardContentFetcher(): Promise<AllProjectCardConten
   const query = `query {
     allProjects (orderBy :[ongoing_DESC, projectStartDate_DESC]) {
     id,
+    slug,
     ongoing,
     projectName,
     repositoryLink,
@@ -99,7 +100,8 @@ export async function projectsCardContentFetcher(): Promise<AllProjectCardConten
 export async function workCardContentFetcher(): Promise<AllWorkCardContent> {
   const query = `query {
     allWorks (orderBy :[ongoing_DESC, workStartDate_DESC]) {
-      id
+      id,
+      slug,
       ongoing,
       companyName,
       shortRemark,
@@ -129,6 +131,7 @@ export async function munCardContentFetcher(): Promise<AllMUNCardContent> {
   const query = `query {
     allMuns (orderBy :[startDate_DESC]) {
       id
+      slug
       eventName
     	startDate
       council {
@@ -218,10 +221,10 @@ export async function workContentFetcher(): Promise<WorkContent> {
 }
 
 export async function worksPageContentFetcher(
-  id: string
+  slug: string
 ): Promise<WorkPageContent> {
   const query = `query {
-    work (filter : {id : {eq : ${id}}}) {
+    work (filter : {slug : {eq : "${slug}"}}) {
       id
       ongoing,
       companyName,
@@ -261,11 +264,12 @@ export async function worksPageContentFetcher(
 }
 
 export async function projectsPageContentFetcher(
-  id: string
+  slug: string
 ): Promise<ProjectPageContent> {
   const query = `query {
-    project (filter : {id : {eq : ${id}}}) {
+    project (filter : {slug : {eq : "${slug}"}}) {
       id,
+      slug,
       projectName,
       projectName,
     repositoryLink,
@@ -304,14 +308,14 @@ export async function projectsPageContentFetcher(
   if (error === null && result?.data) {
     return result.data.project as ProjectPageContent;
   }
-  throw new Error(`Error getting project's data. ID : ${id}`);
+  throw new Error(`Error getting project's data. Slug : ${slug}`);
 }
 
 export async function munPageContentFetcher(
-  id: string
+  slug: string
 ): Promise<MUNPageContent> {
   const query = `query {
-    mun (filter : {id : {eq : ${id}}}) {
+    mun (filter : {slug : {eq : "${slug}"}}) {
       id
       eventName
     	startDate
@@ -342,13 +346,14 @@ export async function munPageContentFetcher(
   if (error === null && result?.data) {
     return result.data.mun as MUNPageContent;
   }
-  throw new Error(`Error getting MUN's data. ID : ${id}`);
+  throw new Error(`Error getting MUN's data. Slug : ${slug}`);
 }
 
 export async function munIdFetcher(): Promise<IDAble[]> {
   const query = `query {
     allMuns (orderBy :[startDate_ASC]) {
       id
+      slug
     }
   }`;
   const { error, result } = await fetcher<{ allMuns: IDAble[] }>(query);
@@ -363,6 +368,7 @@ export async function workIdFetcher(): Promise<IDAble[]> {
   const query = `query {
     allWorks (orderBy :[ongoing_ASC, workStartDate_ASC]) {
       id
+      slug
     }
   }`;
   const { error, result } = await fetcher<{ allWorks: IDAble[] }>(query);
@@ -377,6 +383,7 @@ export async function projectsIdFetcher(): Promise<IDAble[]> {
   const query = `query {
     allProjects (orderBy :[ongoing_ASC, projectStartDate_ASC]) {
     id,
+    slug
 }
 }`;
   const { error, result } = await fetcher<{ allProjects: IDAble[] }>(query);
@@ -387,9 +394,11 @@ export async function projectsIdFetcher(): Promise<IDAble[]> {
   }
 }
 
-export async function worksNextPrevFetcher(id: string): Promise<NextPrevWork> {
+export async function worksNextPrevFetcher(
+  slug: string
+): Promise<NextPrevWork> {
   const query = `query {
-    work (filter : {id : {eq : ${id}}}) {
+    work (filter : {slug : {eq : "${slug}"}}) {
       companyName,
       role
       gradientStartColor
@@ -405,14 +414,14 @@ export async function worksNextPrevFetcher(id: string): Promise<NextPrevWork> {
     return result.data.work as NextPrevWork;
   }
 
-  throw new Error(`Failed to fetch work page content with ID ${id}!`);
+  throw new Error(`Failed to fetch work page content with slug ${slug}!`);
 }
 
 export async function projectsNextPrevFetcher(
-  id: string
+  slug: string
 ): Promise<NextPrevProject> {
   const query = `query {
-    project (filter : {id : {eq : ${id}}}) {
+    project (filter : {slug : {eq : "${slug}"}}) {
       projectName
       gradientStartColor
       gradientEndColor
@@ -423,15 +432,16 @@ export async function projectsNextPrevFetcher(
   const { error, result } = await fetcher<{
     project: NextPrevProject;
   }>(query);
+
   if (error === null && result?.data) {
     return result.data.project as NextPrevProject;
   }
-  throw new Error(`Error getting project's data. ID : ${id}`);
+  throw new Error();
 }
 
-export async function munNextPrevFetcher(id: string): Promise<NextPrevMUN> {
+export async function munNextPrevFetcher(slug: string): Promise<NextPrevMUN> {
   const query = `query {
-    mun (filter : {id : {eq : ${id}}}) {
+    mun (filter : {slug : {eq : "${slug}"}}) {
       eventName
     	startDate
       gradientStartColor
@@ -442,5 +452,5 @@ export async function munNextPrevFetcher(id: string): Promise<NextPrevMUN> {
   if (error === null && result?.data) {
     return result.data.mun as NextPrevMUN;
   }
-  throw new Error(`Error getting MUN's data. ID : ${id}`);
+  throw new Error(`Error getting MUN's data. Slug : ${slug}`);
 }

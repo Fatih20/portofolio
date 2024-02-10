@@ -37,6 +37,7 @@ const {
         works.map(
           ({
             id,
+            slug,
             projectLink,
             companyName,
             role,
@@ -50,6 +51,7 @@ const {
           }) => (
             <WorkCard
               id={id}
+              slug={slug}
               ongoing={ongoing}
               projectLink={projectLink}
               companyName={companyName}

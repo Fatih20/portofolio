@@ -5,10 +5,9 @@ import Layout from "@/layouts/Layout.astro";
 import {
   dateConverter,
   idAbleToStaticPathConverter,
-  nextPrevIDMaker,
+  nextPrevSlugMaker,
 } from "@/utils/utils";
 import { render } from "datocms-structured-text-to-html-string";
-import { pageAwardMaker } from "@/utils/awardMaker";
 import MUNAwardPage from "@/components/Card/MUNAward/MUNAwardPage.astro";
 import ToOther from "@/components/ToOther.astro";
 
@@ -18,11 +17,11 @@ export async function getStaticPaths() {
   return idAbleToStaticPathConverter(await munIdFetcher());
 }
 
-const { id } = Astro.params;
+const { slug } = Astro.params;
 
-const { nextID, prevID } = nextPrevIDMaker(
-  id ?? "",
-  munIDs.map(({ id }) => id)
+const { nextSlug, prevSlug } = nextPrevSlugMaker(
+  slug ?? "",
+  munIDs.map(({ slug }) => slug)
 );
 
 const {
@@ -30,14 +29,14 @@ const {
   startDate: nextStartDate,
   gradientEndColor: nextGradientEndColor,
   gradientStartColor: nextGradientStartColor,
-} = await munNextPrevFetcher(nextID);
+} = await munNextPrevFetcher(nextSlug);
 
 const {
   eventName: prevEventName,
   startDate: prevStartDate,
   gradientEndColor: prevGradientEndColor,
   gradientStartColor: prevGradientStartColor,
-} = await munNextPrevFetcher(prevID);
+} = await munNextPrevFetcher(prevSlug);
 
 const { year: prevYear } = dateConverter(prevStartDate);
 const { year: nextYear } = dateConverter(nextStartDate);
@@ -56,34 +55,10 @@ const {
   startDate,
   bestPositionPaper,
   topic,
-} = await munPageContentFetcher(id ?? "");
+} = await munPageContentFetcher(slug ?? "");
 
 const { flag, name: countryName } = country[0];
 const { name: councilName, acronym: councilAcronym } = council[0];
-
-// const projectIndexFromFetchedData = allProjects.findIndex(
-//   ({ id: projectId }) => projectId === id
-// );
-
-// const b = allProjects[projectIndexFromFetchedData];
-
-// const nextProjectIndex = (projectIndexFromFetchedData + 1) % allProjects.length;
-// const prevProjectIndex =
-//   projectIndexFromFetchedData - 1 < 0
-//     ? allProjects.length - 1
-//     : projectIndexFromFetchedData - 1;
-
-// const {
-//   projectName: nextProjectName,
-//   gradientEndColor: nextProjectGradientEndColor,
-//   gradientStartColor: nextProjectGradientStartColor,
-// } = allProjects[nextProjectIndex];
-
-// const {
-//   projectName: prevProjectName,
-//   gradientEndColor: prevProjectGradientEndColor,
-//   gradientStartColor: prevProjectGradientStartColor,
-// } = allProjects[prevProjectIndex];
 
 const { year } = dateConverter(startDate);
 ---
@@ -162,7 +137,7 @@ const { year } = dateConverter(startDate);
           gradientStartColor={prevGradientStartColor}
           gradientEndColor={prevGradientEndColor}
           ;
-          link={`/mun/${prevID}`}
+          link={`/mun/${prevSlug}`}
         >
           <div class="flex flex-col" slot="other-title">
             <p>
@@ -179,7 +154,7 @@ const { year } = dateConverter(startDate);
           gradientEndColor={nextGradientEndColor}
           next={true}
           ;
-          link={`/mun/${nextID}`}
+          link={`/mun/${nextSlug}`}
         >
           <div class="flex flex-col" slot="other-title">
             <p>

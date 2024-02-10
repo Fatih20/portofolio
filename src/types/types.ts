@@ -9,6 +9,6 @@ const headerOptions = ["", "home", "hobbyProject", "works", "mun"] as const;
 export type HeaderOption = typeof headerOptions[number];
 
 export type NextPrevID = {
-  nextID: string;
-  prevID: string;
+  nextSlug: string;
+  prevSlug: string;
 };

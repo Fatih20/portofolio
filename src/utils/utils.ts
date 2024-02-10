@@ -105,29 +105,30 @@ export function projectPCompareFunction(
   }
 }
 
-export function nextPrevIDMaker(id: string, idArray: string[]): NextPrevID {
-  const indexOfID = idArray.indexOf(id);
+export function nextPrevSlugMaker(
+  slug: string,
+  slugLinkArray: string[]
+): NextPrevID {
+  const indexOfID = slugLinkArray.indexOf(slug);
 
   if (indexOfID < 0) {
-    throw new Error(`${id} not found in id array [${idArray.join(", ")}] !`);
+    throw new Error(
+      `${slug} not found in slug array [${slugLinkArray.join(", ")}] !`
+    );
   }
 
-  const length = idArray.length;
+  const length = slugLinkArray.length;
 
-  let prev = indexOfID - 1;
-  let next = (indexOfID + 1) % length;
+  const prev = indexOfID - 1 < 0 ? length - 1 : indexOfID - 1;
+  const next = (indexOfID + 1) % length;
 
-  if (prev < 0) {
-    prev = length - 1;
-  }
-
-  return { nextID: idArray[next], prevID: idArray[prev] };
+  return { nextSlug: slugLinkArray[next], prevSlug: slugLinkArray[prev] };
 }
 
 export function idAbleToStaticPathConverter(idAbles: IDAble[]) {
-  return idAbles.map(({ id }) => {
+  return idAbles.map(({ slug }) => {
     return {
-      params: { id },
+      params: { slug },
     };
   });
 }

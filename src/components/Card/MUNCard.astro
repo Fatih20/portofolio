@@ -9,7 +9,7 @@ type MUNCardProp = Omit<MUNCardContent, "country"> & {
   countryFlag: string;
 };
 const {
-  id,
+  slug,
   eventName,
   council,
   roleOrAward,
@@ -30,7 +30,7 @@ const { year: startYear } = dateConverter(startDate);
   gradientStartColor={gradientStartColor}
 >
   <a
-    href={`/mun/${id}`}
+    href={`/mun/${slug}`}
     target="_blank"
     aria-label={`Link to the page for ${eventName} ${startYear}`}
     class="absolute inset-0"></a>

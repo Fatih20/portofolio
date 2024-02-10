@@ -37,7 +37,6 @@ export type ProjectLink = {
 };
 
 export type ProjectCardContent = {
-  id: string;
   projectName: string;
   ongoing: boolean;
   repositoryLink: string;
@@ -46,10 +45,10 @@ export type ProjectCardContent = {
   projectStartDate: string;
   projectEndDate?: string;
   shortDescription: string;
-} & Gradiented;
+} & Gradiented &
+  IDAble;
 
 export type WorkCardContent = {
-  id: string;
   companyName: string;
   shortRemark: string;
   role: string;
@@ -59,10 +58,10 @@ export type WorkCardContent = {
   links: ProjectLink[];
   workStartDate: string;
   workEndDate?: string;
-} & Gradiented;
+} & Gradiented &
+  IDAble;
 
 export type MUNCardContent = {
-  id: string;
   eventName: string;
   council: Council[];
   country: Country[];
@@ -70,10 +69,12 @@ export type MUNCardContent = {
   startDate: string;
   roleOrAward: string;
   bestPositionPaper: boolean;
-} & Gradiented;
+} & Gradiented &
+  IDAble;
 
 export interface IDAble {
   id: string;
+  slug: string;
 }
 
 export interface AllWorkCardContent {

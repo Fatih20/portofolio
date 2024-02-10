@@ -8,7 +8,7 @@ import Layout from "@/layouts/Layout.astro";
 import { dateConverter, months } from "@/utils/utils";
 import { render } from "datocms-structured-text-to-html-string";
 import ActionButton from "@/components/ActionButton.svelte";
-import { nextPrevIDMaker, idAbleToStaticPathConverter } from "@/utils/utils";
+import { nextPrevSlugMaker, idAbleToStaticPathConverter } from "@/utils/utils";
 import Spacer from "@/components/Spacer.astro";
 import Gallery from "@/components/Gallery.svelte";
 import ToOther from "@/components/ToOther.astro";
@@ -19,24 +19,24 @@ export async function getStaticPaths() {
   return idAbleToStaticPathConverter(await projectsIdFetcher());
 }
 
-const { id } = Astro.params;
+const { slug } = Astro.params;
 
-const { nextID, prevID } = nextPrevIDMaker(
-  id ?? "",
-  projectIDs.map(({ id }) => id)
+const { nextSlug, prevSlug } = nextPrevSlugMaker(
+  slug ?? "",
+  projectIDs.map(({ slug }) => slug)
 );
 
 const {
   projectName: nextProjectName,
   gradientEndColor: nextGradientEndColor,
   gradientStartColor: nextGradientStartColor,
-} = await projectsNextPrevFetcher(nextID);
+} = await projectsNextPrevFetcher(nextSlug);
 
 const {
   projectName: prevProjectName,
   gradientEndColor: prevGradientEndColor,
   gradientStartColor: prevGradientStartColor,
-} = await projectsNextPrevFetcher(prevID);
+} = await projectsNextPrevFetcher(prevSlug);
 
 const {
   description,
@@ -52,7 +52,7 @@ const {
   techStack,
   projectEndDate,
   links,
-} = await projectsPageContentFetcher(id ?? "");
+} = await projectsPageContentFetcher(slug ?? "");
 
 const { month: startMonth, year: startYear } = dateConverter(projectStartDate);
 const { month: endMonth, year: endYear } = projectEndDate
@@ -142,7 +142,7 @@ const { month: endMonth, year: endYear } = projectEndDate
           gradientStartColor={prevGradientStartColor}
           gradientEndColor={prevGradientEndColor}
           ;
-          link={`/hobby-project/${prevID}`}
+          link={`/hobby-project/${prevSlug}`}
         >
           <p slot="other-title">{prevProjectName}</p>
         </ToOther>
@@ -152,7 +152,7 @@ const { month: endMonth, year: endYear } = projectEndDate
           gradientEndColor={nextGradientEndColor}
           next={true}
           ;
-          link={`/hobby-project/${nextID}`}
+          link={`/hobby-project/${nextSlug}`}
           ><p slot="other-title">{nextProjectName}</p>
         </ToOther>
       </div>

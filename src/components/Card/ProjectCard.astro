@@ -7,7 +7,7 @@ import Spacer from "../Spacer.astro";
 
 type ProjectCardProp = ProjectCardContent;
 const {
-  id,
+  slug,
   projectName,
   projectEndDate,
   projectStartDate,
@@ -31,7 +31,7 @@ const { month: endMonth, year: endYear } = projectEndDate
   gradientStartColor={gradientStartColor}
 >
   <a
-    href={`/hobby-project/${id}`}
+    href={`/hobby-project/${slug}`}
     target="_blank"
     aria-label={`Link to the page for ${projectName}`}
     class="absolute inset-0"></a>

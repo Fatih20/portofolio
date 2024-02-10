@@ -37,6 +37,7 @@ const {
         projects.map(
           ({
             id,
+            slug,
             projectLink,
             projectName,
             projectStartDate,
@@ -49,6 +50,7 @@ const {
           }) => (
             <ProjectCard
               id={id}
+              slug={slug}
               ongoing={ongoing}
               projectName={projectName}
               projectEndDate={projectEndDate}
