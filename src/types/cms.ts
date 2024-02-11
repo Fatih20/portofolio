@@ -77,6 +77,12 @@ export interface IDAble {
   slug: string;
 }
 
+export interface HasThumbnail {
+  thumbnail: {
+    thumbnail: Image | null;
+  };
+}
+
 export interface AllWorkCardContent {
   allWorks: WorkCardContent[];
 }
@@ -144,7 +150,8 @@ export type ProjectPageContent = {
   description: StructuredText;
   techStack: TechStack[];
 } & Gradiented &
-  HasGallery;
+  HasGallery &
+  HasThumbnail;
 
 export type WorkPageContent = {
   id: string;
@@ -160,7 +167,8 @@ export type WorkPageContent = {
   description: StructuredText;
   techStack: TechStack[];
 } & Gradiented &
-  HasGallery;
+  HasGallery &
+  HasThumbnail;
 
 export type Council = {
   name: string;
@@ -184,7 +192,8 @@ export type MUNPageContent = {
   roleOrAward: string;
   bestPositionPaper: boolean;
 } & Gradiented &
-  HasGallery;
+  HasGallery &
+  HasThumbnail;
 
 export type NextPrevMUN = {
   eventName: string;

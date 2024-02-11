@@ -59,6 +59,7 @@ const {
   repositoryLink,
   techStack,
   links,
+  thumbnail: { thumbnail },
 } = await worksPageContentFetcher(slug ?? "");
 
 const { month: startMonth, year: startYear } = dateConverter(workStartDate);
@@ -71,7 +72,7 @@ const { month: endMonth, year: endYear } = workEndDate
   metaInfo={{
     title: `${role} - ${companyName}`,
     description: `Fatih NRI experience working as ${role} at ${companyName}. ${shortRemark}`,
-    customThumbnail: null,
+    customThumbnail: thumbnail,
   }}
   activeNavigationOption={""}
 >

@@ -52,6 +52,7 @@ const {
   techStack,
   projectEndDate,
   links,
+  thumbnail: { thumbnail },
 } = await projectsPageContentFetcher(slug ?? "");
 
 const { month: startMonth, year: startYear } = dateConverter(projectStartDate);
@@ -64,7 +65,7 @@ const { month: endMonth, year: endYear } = projectEndDate
   metaInfo={{
     title: `${projectName}`,
     description: `A project made by Fatih Nararya R. I. called ${projectName}. ${shortDescription}`,
-    customThumbnail: null,
+    customThumbnail: thumbnail,
   }}
   activeNavigationOption={""}
 >

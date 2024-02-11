@@ -55,6 +55,7 @@ const {
   startDate,
   bestPositionPaper,
   topic,
+  thumbnail: { thumbnail },
 } = await munPageContentFetcher(slug ?? "");
 
 const { flag, name: countryName } = country[0];
@@ -67,7 +68,7 @@ const { year } = dateConverter(startDate);
   metaInfo={{
     title: `${eventName} - ${year}`,
     description: `Fatih Nararya R. I. experience in ${eventName} ${year}. ${shortRemark}`,
-    customThumbnail: null,
+    customThumbnail: thumbnail,
   }}
   activeNavigationOption={""}
 >
