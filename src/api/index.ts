@@ -5,6 +5,7 @@ import type {
   AllProjectID,
   AllWorkCardContent,
   AllWorkID,
+  HasSlugAndID,
   HomeContent,
   IDAble,
   ListPageName,
@@ -332,48 +333,50 @@ export async function munPageContentFetcher(
   throw new Error(`Error getting MUN's data. Slug : ${slug}`);
 }
 
-export async function munIdFetcher(): Promise<IDAble[]> {
+export async function munIdFetcher(): Promise<HasSlugAndID[]> {
   const query = `query {
     allMuns (orderBy :[startDate_ASC]) {
       id
       slug
     }
   }`;
-  const { error, result } = await fetcher<{ allMuns: IDAble[] }>(query);
+  const { error, result } = await fetcher<{ allMuns: HasSlugAndID[] }>(query);
   if (error === null && result?.data) {
-    return result.data.allMuns as IDAble[];
+    return result.data.allMuns as HasSlugAndID[];
   } else {
-    return [] as IDAble[];
+    return [] as HasSlugAndID[];
   }
 }
 
-export async function workIdFetcher(): Promise<IDAble[]> {
+export async function workIdFetcher(): Promise<HasSlugAndID[]> {
   const query = `query {
     allWorks (orderBy :[ongoing_ASC, workStartDate_ASC]) {
       id
       slug
     }
   }`;
-  const { error, result } = await fetcher<{ allWorks: IDAble[] }>(query);
+  const { error, result } = await fetcher<{ allWorks: HasSlugAndID[] }>(query);
   if (error === null && result?.data) {
-    return result.data.allWorks as IDAble[];
+    return result.data.allWorks as HasSlugAndID[];
   } else {
-    return [] as IDAble[];
+    return [] as HasSlugAndID[];
   }
 }
 
-export async function projectsIdFetcher(): Promise<IDAble[]> {
+export async function projectsIdFetcher(): Promise<HasSlugAndID[]> {
   const query = `query {
     allProjects (orderBy :[ongoing_ASC, projectStartDate_ASC]) {
     id,
     slug
 }
 }`;
-  const { error, result } = await fetcher<{ allProjects: IDAble[] }>(query);
+  const { error, result } = await fetcher<{ allProjects: HasSlugAndID[] }>(
+    query
+  );
   if (error === null && result?.data) {
-    return result.data.allProjects as IDAble[];
+    return result.data.allProjects as HasSlugAndID[];
   } else {
-    return [] as IDAble[];
+    return [] as HasSlugAndID[];
   }
 }
 

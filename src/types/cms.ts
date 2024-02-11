@@ -46,7 +46,7 @@ export type ProjectCardContent = {
   projectEndDate?: string;
   shortDescription: string;
 } & Gradiented &
-  IDAble;
+  HasSlugAndID;
 
 export type WorkCardContent = {
   companyName: string;
@@ -59,7 +59,7 @@ export type WorkCardContent = {
   workStartDate: string;
   workEndDate?: string;
 } & Gradiented &
-  IDAble;
+  HasSlugAndID;
 
 export type MUNCardContent = {
   eventName: string;
@@ -70,12 +70,17 @@ export type MUNCardContent = {
   roleOrAward: string;
   bestPositionPaper: boolean;
 } & Gradiented &
-  IDAble;
+  HasSlugAndID;
 
 export interface IDAble {
   id: string;
+}
+
+export interface HasSlug {
   slug: string;
 }
+
+export type HasSlugAndID = HasSlug & IDAble;
 
 export interface HasThumbnail {
   thumbnail: {
@@ -96,15 +101,15 @@ export interface AllProjectCardContent {
 }
 
 export interface AllProjectID {
-  allProjects: IDAble[];
+  allProjects: HasSlugAndID[];
 }
 
 export interface AllWorkID {
-  allWorks: IDAble[];
+  allWorks: HasSlugAndID[];
 }
 
 export interface AllMunsID {
-  allMuns: IDAble[];
+  allMuns: HasSlugAndID[];
 }
 
 export interface ListPageContent {
