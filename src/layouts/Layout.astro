@@ -1,31 +1,22 @@
 ---
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header/Header.svelte";
+import type { Image, ListPageContent } from "@/types/cms";
 import type { HeaderOption } from "@/types/types";
 
-export interface Props {
-  title: string;
+export type Props = { metaInfo: ListPageContent["metaInfo"] } & {
   activeNavigationOption: HeaderOption;
-  pageDescription: string;
   indexedAndFollowed?: boolean;
-  imagePreviewLinks?: {
-    inTheSite?: boolean;
-    path?: string;
-  };
-}
+};
 
 const {
-  title,
+  metaInfo: { title, description, customThumbnail },
   activeNavigationOption,
-  pageDescription,
   indexedAndFollowed = true,
-  imagePreviewLinks: { inTheSite = true, path = "/favicon/favicon.ico" } = {
-    inTheSite: true,
-    path: "/favicon/favicon.ico",
-  },
 } = Astro.props as Props;
 
-const thumbnailPath = inTheSite ? `${import.meta.env.BASE_URL}${path}` : path;
+const thumbnailPath =
+  customThumbnail?.url ?? `${import.meta.env.BASE_URL}/favicon/favicon.ico`;
 ---
 
 <!DOCTYPE html>
@@ -37,7 +28,7 @@ const thumbnailPath = inTheSite ? `${import.meta.env.BASE_URL}${path}` : path;
     <link rel="manifest" href="/manifest.json" />
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.ico" />
     <title>{title}</title>
-    <meta name="description" content={pageDescription} />
+    <meta name="description" content={description} />
     <meta name="author" content="Fatih Nararya Rashadyfa Ilhamsyah" />
     <meta name="copyright" content="Fatih Nararya Rashadyfa Ilhamsyah" />
     <meta name="application-name" content="Fatih NRI homepage" />
@@ -58,10 +49,10 @@ const thumbnailPath = inTheSite ? `${import.meta.env.BASE_URL}${path}` : path;
     <meta property="og:title" content={title} />
     <meta property="og:type" content="article" />
     <meta property="og:image" content={thumbnailPath} />
-    <meta property="og:description" content={pageDescription} />
+    <meta property="og:description" content={description} />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={thumbnailPath} />
 
     <!-- Third party script -->

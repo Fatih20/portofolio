@@ -101,28 +101,29 @@ export interface AllMunsID {
   allMuns: IDAble[];
 }
 
-export interface PortofolioContent {
-  portofolio: {
+export interface ListPageContent {
+  title: string;
+  description: StructuredText;
+  metaInfo: {
     title: string;
-    description: StructuredText;
-    pageDescription: string;
+    description: string;
+    customThumbnail: Image | null;
   };
+}
+
+const listPageNames = ["portofolio", "munPage", "workPage"] as const;
+export type ListPageName = typeof listPageNames[number];
+
+export interface PortofolioContent {
+  portofolio: ListPageContent;
 }
 
 export interface MUNContent {
-  munPage: {
-    title: string;
-    description: StructuredText;
-    pageDescription: string;
-  };
+  munPage: ListPageContent;
 }
 
 export interface WorkContent {
-  workPage: {
-    title: string;
-    description: StructuredText;
-    pageDescription: string;
-  };
+  workPage: ListPageContent;
 }
 
 export interface TechStack {

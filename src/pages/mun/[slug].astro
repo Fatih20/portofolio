@@ -64,8 +64,11 @@ const { year } = dateConverter(startDate);
 ---
 
 <Layout
-  title={`${eventName}`}
-  pageDescription={`Fatih Nararya R. I. experience in ${eventName} ${year}. ${shortRemark}`}
+  metaInfo={{
+    title: `${eventName} - ${year}`,
+    description: `Fatih Nararya R. I. experience in ${eventName} ${year}. ${shortRemark}`,
+    customThumbnail: null,
+  }}
   activeNavigationOption={""}
 >
   <div

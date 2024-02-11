@@ -7,6 +7,7 @@ import type {
   AllWorkID,
   HomeContent,
   IDAble,
+  ListPageName,
   MUNContent,
   MUNPageContent,
   NextPrevMUN,
@@ -157,9 +158,9 @@ export async function munCardContentFetcher(): Promise<AllMUNCardContent> {
   }
 }
 
-export async function projectsContentFetcher(): Promise<PortofolioContent> {
-  const query = `query {
-    portofolio {
+const listPageQueryGenerator = (pageName: ListPageName) => {
+  return `query {
+    ${pageName} {
       title
       pageDescription
       description {
@@ -170,6 +171,10 @@ export async function projectsContentFetcher(): Promise<PortofolioContent> {
     }
   }
   `;
+};
+
+export async function projectsContentFetcher(): Promise<PortofolioContent> {
+  const query = listPageQueryGenerator("portofolio");
   const { error, result } = await fetcher<PortofolioContent>(query);
   if (error === null && result?.data) {
     return result.data as PortofolioContent;
@@ -179,18 +184,7 @@ export async function projectsContentFetcher(): Promise<PortofolioContent> {
 }
 
 export async function munContentFetcher(): Promise<MUNContent> {
-  const query = `query {
-    munPage {
-      title
-      pageDescription
-      description {
-        blocks
-        value
-        links
-      }
-    }
-  }
-  `;
+  const query = listPageQueryGenerator("munPage");
   const { error, result } = await fetcher<MUNContent>(query);
   if (error === null && result?.data) {
     return result.data as MUNContent;
@@ -200,18 +194,7 @@ export async function munContentFetcher(): Promise<MUNContent> {
 }
 
 export async function workContentFetcher(): Promise<WorkContent> {
-  const query = `query {
-    workPage {
-      title
-      pageDescription
-      description {
-        blocks
-        value
-        links
-      }
-    }
-  }
-  `;
+  const query = listPageQueryGenerator("workPage");
   const { error, result } = await fetcher<WorkContent>(query);
   if (error === null && result?.data) {
     return result.data as WorkContent;

@@ -68,8 +68,11 @@ const { month: endMonth, year: endYear } = workEndDate
 ---
 
 <Layout
-  title={`${role} - ${companyName}`}
-  pageDescription={`Fatih NRI experience working as ${role} at ${companyName}. ${shortRemark}`}
+  metaInfo={{
+    title: `${role} - ${companyName}`,
+    description: `Fatih NRI experience working as ${role} at ${companyName}. ${shortRemark}`,
+    customThumbnail: null,
+  }}
   activeNavigationOption={""}
 >
   <div

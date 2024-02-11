@@ -61,8 +61,11 @@ const { month: endMonth, year: endYear } = projectEndDate
 ---
 
 <Layout
-  title={`${projectName}`}
-  pageDescription={`A project made by Fatih Nararya R. I. called ${projectName}. ${shortDescription}`}
+  metaInfo={{
+    title: `${projectName}`,
+    description: `A project made by Fatih Nararya R. I. called ${projectName}. ${shortDescription}`,
+    customThumbnail: null,
+  }}
   activeNavigationOption={""}
 >
   <div
