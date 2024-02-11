@@ -16,7 +16,8 @@ const {
 } = Astro.props as Props;
 
 const thumbnailPath =
-  customThumbnail?.url ?? `${import.meta.env.URL}/favicon/android-chrome-192x192.png`;
+  customThumbnail?.url ??
+  `${import.meta.env.URL}/favicon/android-chrome-192x192.png`;
 ---
 
 <!DOCTYPE html>
@@ -65,7 +66,14 @@ const thumbnailPath =
   <body
     class="flex flex-col justify-start items-center pt-headerHeight bg-background min-h-screen relative"
   >
-    <Header activeNavigationOption={activeNavigationOption} client:visible />
+    {
+      activeNavigationOption !== "home" && (
+        <Header
+          activeNavigationOption={activeNavigationOption}
+          client:visible
+        />
+      )
+    }
     <slot />
     <Footer />
   </body>

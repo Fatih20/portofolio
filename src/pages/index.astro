@@ -3,6 +3,7 @@ import { homeContentFetcher } from "@/api";
 import PhotoOfUs from "@/components/PhotoOfUs.svelte";
 import Layout from "../layouts/Layout.astro";
 import { render } from "datocms-structured-text-to-html-string";
+import Option from "@/components/Option.astro";
 
 const {
   home: { name, description, metaInfo, photoOfUs, photoCycleTime },
@@ -14,30 +15,44 @@ const {
     class="flex-grow flex flex-col justify-center items-center w-full px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop"
   >
     <header
-      class="flex flex-col justify-center items-center h-full gap-1 lg:gap-4"
+      class="flex flex-col justify-center items-center h-full w-full max-w-2xl"
     >
       <PhotoOfUs
         cycleInterval={photoCycleTime}
         photoSet={photoOfUs}
         client:visible
       />
-      <h1 class="text-center font-bold text-3xl lg:text-5xl text-silver-100">
+      <h1
+        class="text-center font-bold text-3xl md:text-5xl text-silver-100 mb-1 lg:mb-4"
+      >
         {name}
       </h1>
-      <div class="text-silver-300 text-sm lg:text-base max-w-2xl">
+      <div class="text-silver-300 text-sm md:text-base w-full mb-4">
         <Fragment set:html={render(description)} />
       </div>
+      <ul class="w-full flex flex-col sm:flex-row justify-between gap-6">
+        <Option
+          startColor={"#e4c6fa"}
+          endColor={"#a56de2"}
+          destination={"/mun"}
+          iconName={"globe"}
+          text={"MUNs"}
+        />
+        <Option
+          startColor={"#89ffdd"}
+          endColor={"#28bca3"}
+          destination={"/works"}
+          iconName={"briefcase"}
+          text={"Works & Contributions"}
+        />
+        <Option
+          startColor={"#d1ff82"}
+          endColor={"#68b723"}
+          destination={"/hobby-project"}
+          iconName={"pencil"}
+          text={"Hobby Projects"}
+        />
+      </ul>
     </header>
-
-    <script defer>
-      const photoContainer = document.getElementById("photo-container");
-      setInterval(() => {
-        if (photoContainer) {
-          photoContainer.src;
-        }
-      }, 3000);
-    </script>
-
-    <style></style>
   </main>
 </Layout>
