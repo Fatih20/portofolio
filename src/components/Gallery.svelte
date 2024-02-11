@@ -51,7 +51,7 @@
           selectedIndex = undefined;
         }}
         class="absolute top-2 right-2 lg:top-4 lg:right-4 text-xl text-silver-100 rounded-md bg-black py-1 px-2 hover:scale-110 transition-all"
-        aria-labelledby="close carousel"
+        aria-label="close carousel"
       >
         <i class="fa-solid fa-xmark" />
       </button>
@@ -61,14 +61,14 @@
         <button
           class="bg-black px-3 py-2 rounded-md pointer-events-auto hover:scale-110 transition-all"
           on:click={() => handlePrevImage()}
-          aria-labelledby="see previous image"
+          aria-label="see previous image"
           ><i class="fa-solid fa-chevron-left" /></button
         >
         <div class="flex-grow" />
         <button
           class="bg-black px-3 py-2 rounded-md pointer-events-auto hover:scale-110 transition-all"
           on:click={() => handleNextImage()}
-          aria-labelledby="see next image"
+          aria-label="see next image"
           ><i class="fa-solid fa-chevron-right" /></button
         >
       </div>

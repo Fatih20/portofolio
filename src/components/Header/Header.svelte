@@ -31,7 +31,7 @@
           open = !open;
           e.stopPropagation();
         }}
-        aria-labelledby="open header menu"
+        aria-label="open header menu"
       >
         <i
           class={`fa-solid fa-chevron-right text-xl text-silver-100 ${
