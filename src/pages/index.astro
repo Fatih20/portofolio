@@ -15,20 +15,22 @@ const {
     class="flex-grow flex flex-col justify-center items-center w-full px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop"
   >
     <header
-      class="flex flex-col justify-center items-center h-full gap-1 lg:gap-4 w-full max-w-2xl"
+      class="flex flex-col justify-center items-center h-full w-full max-w-2xl"
     >
       <PhotoOfUs
         cycleInterval={photoCycleTime}
         photoSet={photoOfUs}
         client:visible
       />
-      <h1 class="text-center font-bold text-3xl lg:text-5xl text-silver-100">
+      <h1
+        class="text-center font-bold text-3xl lg:text-5xl text-silver-100 mb-1 lg:mb-4"
+      >
         {name}
       </h1>
-      <div class="text-silver-300 text-sm lg:text-base w-full">
+      <div class="text-silver-300 text-sm lg:text-base w-full mb-4">
         <Fragment set:html={render(description)} />
       </div>
-      <ul class="w-full flex justify-between gap-6">
+      <ul class="w-full flex flex-col lg:flex-row justify-between gap-6">
         <Option
           startColor={"#e4c6fa"}
           endColor={"#a56de2"}
@@ -41,7 +43,7 @@ const {
           endColor={"#28bca3"}
           destination={"/works"}
           iconName={"briefcase"}
-          text={"Works/Contributions"}
+          text={"Works & Contributions"}
         />
         <Option
           startColor={"#d1ff82"}
