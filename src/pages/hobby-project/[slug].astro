@@ -5,7 +5,7 @@ import {
   projectsPageContentFetcher,
 } from "@/api";
 import Layout from "@/layouts/Layout.astro";
-import { dateConverter, months } from "@/utils/utils";
+import { dateConverter, months, thumbnailProcessor } from "@/utils/utils";
 import { render } from "datocms-structured-text-to-html-string";
 import ActionButton from "@/components/ActionButton.svelte";
 import { nextPrevSlugMaker, idAbleToStaticPathConverter } from "@/utils/utils";
@@ -52,7 +52,7 @@ const {
   techStack,
   projectEndDate,
   links,
-  thumbnail: { thumbnail },
+  thumbnail,
 } = await projectsPageContentFetcher(slug ?? "");
 
 const { month: startMonth, year: startYear } = dateConverter(projectStartDate);
@@ -65,7 +65,7 @@ const { month: endMonth, year: endYear } = projectEndDate
   metaInfo={{
     title: `${projectName}`,
     description: `A project made by Fatih Nararya R. I. called ${projectName}. ${shortDescription}`,
-    customThumbnail: thumbnail,
+    customThumbnail: thumbnailProcessor(thumbnail),
   }}
   activeNavigationOption={""}
 >

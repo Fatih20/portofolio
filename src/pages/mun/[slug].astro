@@ -6,6 +6,7 @@ import {
   dateConverter,
   idAbleToStaticPathConverter,
   nextPrevSlugMaker,
+  thumbnailProcessor,
 } from "@/utils/utils";
 import { render } from "datocms-structured-text-to-html-string";
 import MUNAwardPage from "@/components/Card/MUNAward/MUNAwardPage.astro";
@@ -55,7 +56,7 @@ const {
   startDate,
   bestPositionPaper,
   topic,
-  thumbnail: { thumbnail },
+  thumbnail,
 } = await munPageContentFetcher(slug ?? "");
 
 const { flag, name: countryName } = country[0];
@@ -68,7 +69,7 @@ const { year } = dateConverter(startDate);
   metaInfo={{
     title: `${eventName} - ${year}`,
     description: `Fatih Nararya R. I. experience in ${eventName} ${year}. ${shortRemark}`,
-    customThumbnail: thumbnail,
+    customThumbnail: thumbnailProcessor(thumbnail),
   }}
   activeNavigationOption={""}
 >

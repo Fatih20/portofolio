@@ -1,5 +1,6 @@
 import type {
   HasSlugAndID,
+  HasThumbnail,
   IDAble,
   ProjectCardContent,
   ProjectPageContent,
@@ -132,4 +133,8 @@ export function idAbleToStaticPathConverter(idAbles: HasSlugAndID[]) {
       params: { slug },
     };
   });
+}
+
+export function thumbnailProcessor(hasThumbnail: HasThumbnail["thumbnail"]) {
+  return hasThumbnail === null ? null : hasThumbnail.thumbnail;
 }

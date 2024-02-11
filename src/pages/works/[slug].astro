@@ -10,6 +10,7 @@ import {
   idAbleToStaticPathConverter,
   months,
   nextPrevSlugMaker,
+  thumbnailProcessor,
 } from "@/utils/utils";
 import { render } from "datocms-structured-text-to-html-string";
 import ActionButton from "@/components/ActionButton.svelte";
@@ -59,7 +60,7 @@ const {
   repositoryLink,
   techStack,
   links,
-  thumbnail: { thumbnail },
+  thumbnail,
 } = await worksPageContentFetcher(slug ?? "");
 
 const { month: startMonth, year: startYear } = dateConverter(workStartDate);
@@ -72,7 +73,7 @@ const { month: endMonth, year: endYear } = workEndDate
   metaInfo={{
     title: `${role} - ${companyName}`,
     description: `Fatih NRI experience working as ${role} at ${companyName}. ${shortRemark}`,
-    customThumbnail: thumbnail,
+    customThumbnail: thumbnailProcessor(thumbnail),
   }}
   activeNavigationOption={""}
 >

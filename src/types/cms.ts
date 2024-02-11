@@ -4,10 +4,9 @@ export interface HomeContent {
   home: {
     name: string;
     description: StructuredText;
-    pageDescription: string;
     photoOfUs: Image[];
     photoCycleTime: number;
-  };
+  } & HasMetaInfo;
 }
 
 export interface Image {
@@ -85,7 +84,7 @@ export type HasSlugAndID = HasSlug & IDAble;
 export interface HasThumbnail {
   thumbnail: {
     thumbnail: Image | null;
-  };
+  } | null;
 }
 
 export interface AllWorkCardContent {
@@ -112,15 +111,18 @@ export interface AllMunsID {
   allMuns: HasSlugAndID[];
 }
 
-export interface ListPageContent {
-  title: string;
-  description: StructuredText;
+export interface HasMetaInfo {
   metaInfo: {
     title: string;
     description: string;
     customThumbnail: Image | null;
   };
 }
+
+export type ListPageContent = {
+  title: string;
+  description: StructuredText;
+} & HasMetaInfo;
 
 const listPageNames = ["portofolio", "munPage", "workPage"] as const;
 export type ListPageName = typeof listPageNames[number];

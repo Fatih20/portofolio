@@ -47,7 +47,6 @@ export async function homeContentFetcher(): Promise<HomeContent> {
   const query = `query {
         home {
           name,
-          pageDescription,
           description {
             blocks
             links
@@ -58,7 +57,16 @@ export async function homeContentFetcher(): Promise<HomeContent> {
             url, 
             title
           },
-          photoCycleTime
+          photoCycleTime,
+          metaInfo {
+            title,
+            description,
+            customThumbnail {
+              alt,
+              url,
+              title
+            }
+          }
         }
       }
       `;
@@ -163,11 +171,19 @@ const listPageQueryGenerator = (pageName: ListPageName) => {
   return `query {
     ${pageName} {
       title
-      pageDescription
       description {
         blocks
         value
         links
+      }
+      metaInfo {
+        title,
+        description,
+        customThumbnail {
+          alt,
+          url,
+          title
+        }
       }
     }
   }
@@ -234,6 +250,13 @@ export async function worksPageContentFetcher(
       }
         gradientStartColor,
         gradientEndColor
+        thumbnail {
+          thumbnail {
+            alt
+            url
+            title
+          }
+        }
     }
   }
   `;
@@ -283,6 +306,13 @@ export async function projectsPageContentFetcher(
       title
       url
     }
+    thumbnail {
+      thumbnail {
+        alt
+        url
+        title
+      }
+    }
     }
   }
   `;
@@ -324,6 +354,13 @@ export async function munPageContentFetcher(
       shortRemark
         gradientStartColor
         gradientEndColor
+        thumbnail {
+          thumbnail {
+            alt
+            url
+            title
+          }
+        }
     }
   }`;
   const { error, result } = await fetcher<{ mun: MUNPageContent }>(query);
