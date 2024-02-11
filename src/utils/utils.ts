@@ -1,4 +1,5 @@
 import type {
+  HasSlugAndID,
   IDAble,
   ProjectCardContent,
   ProjectPageContent,
@@ -125,7 +126,7 @@ export function nextPrevSlugMaker(
   return { nextSlug: slugLinkArray[next], prevSlug: slugLinkArray[prev] };
 }
 
-export function idAbleToStaticPathConverter(idAbles: IDAble[]) {
+export function idAbleToStaticPathConverter(idAbles: HasSlugAndID[]) {
   return idAbles.map(({ slug }) => {
     return {
       params: { slug },
