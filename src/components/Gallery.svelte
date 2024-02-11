@@ -6,8 +6,8 @@
 
   let carouselShown = false;
   let selectedIndex: number | undefined = undefined;
-  let selectedImage = images[0];
-  $: selectedImage = images[selectedIndex ?? 0];
+  let selectedImage: Image | undefined = undefined;
+  $: selectedImage = selectedIndex ? images[selectedIndex ?? 0] : undefined;
 
   function handleImageClick(index: number) {
     selectedIndex = index;
@@ -72,19 +72,21 @@
           ><i class="fa-solid fa-chevron-right" /></button
         >
       </div>
-      <div class="w-full h-full flex flex-col items-center justify-start">
-        <img
-          class="w-full h-full object-scale-down"
-          src={selectedImage.url}
-          alt={selectedImage.alt}
-          title={selectedImage.title}
-        />
-        <div class="p-4 bg-black text-center w-full">
-          <h2 class="text-silver-100 font-medium">
-            {selectedImage.title}
-          </h2>
+      {#if selectedImage}
+        <div class="w-full h-full flex flex-col items-center justify-start">
+          <img
+            class="w-full h-full object-scale-down"
+            src={selectedImage.url}
+            alt={selectedImage.alt}
+            title={selectedImage.title}
+          />
+          <div class="p-4 bg-black text-center w-full">
+            <h2 class="text-silver-100 font-medium">
+              {selectedImage.title}
+            </h2>
+          </div>
         </div>
-      </div>
+      {/if}
     </div>
     <h2 class="text-3xl font-bold">
       {title}
@@ -93,14 +95,13 @@
       class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 md:gap-3 xl:gap-4 point"
     >
       {#each images as { alt, title, url }, index}
-        <img
-          src={url}
-          {alt}
-          {title}
+        <button
           on:click={() => handleImageClick(index)}
           on:keyup={() => handleImageClick(index)}
-          class="rounded-sm md:rounded-md lg:rounded-lg w-full transition-all hover:scale-105 aspect-video object-cover cursor-pointer"
-        />
+          class="rounded-sm md:rounded-md lg:rounded-lg w-full transition-all hover:scale-105 aspect-video cursor-pointer overflow-hidden"
+        >
+          <img class="object-cover h-full w-full" src={url} {alt} {title} />
+        </button>
       {/each}
     </div>
   </section>
