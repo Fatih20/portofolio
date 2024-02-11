@@ -10,18 +10,20 @@
   export let destination: string;
 </script>
 
-<a
-  href={destination}
-  class={`flex gap-4 items-center transition-all select-none font-bold ${
-    activeNavigationOption === navigationOption ? "selected" : "unselected"
-  }
-  `}
-  style:--startColor={startColor}
-  style:--endColor={endColor}
->
-  <i class={`fa-solid fa-${iconName} `} />
-  <p>{text}</p>
-</a>
+<li>
+  <a
+    href={destination}
+    class={`flex gap-4 items-center transition-all select-none font-bold ${
+      activeNavigationOption === navigationOption ? "selected" : "unselected"
+    }
+    `}
+    style:--startColor={startColor}
+    style:--endColor={endColor}
+  >
+    <i class={`fa-solid fa-${iconName} `} />
+    <p>{text}</p>
+  </a>
+</li>
 
 <style>
   .selected {

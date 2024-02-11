@@ -41,7 +41,7 @@
       </button>
     </div>
     <div class="lg:hidden flex-grow" />
-    <div
+    <ul
       class={`${
         open ? "visible" : "invisible"
       } items-start justify-center flex flex-col gap-4`}
@@ -82,7 +82,7 @@
         {activeNavigationOption}
         text={"MUNs"}
       />
-    </div>
+    </ul>
     <div class="flex-grow lg:hidden" />
   </nav>
 </div>
