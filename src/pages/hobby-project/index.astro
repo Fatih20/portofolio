@@ -8,15 +8,11 @@ import { render } from "datocms-structured-text-to-html-string";
 const projects = (await projectsCardContentFetcher()).allProjects;
 
 const {
-  portofolio: { title, description, pageDescription },
+  portofolio: { title, description, metaInfo },
 } = await projectsContentFetcher();
 ---
 
-<Layout
-  title="Fatih's Portofolio"
-  activeNavigationOption={"hobbyProject"}
-  pageDescription={pageDescription}
->
+<Layout metaInfo={metaInfo} activeNavigationOption={"hobbyProject"}>
   <main
     class="flex flex-col justify-start items-center max-w-7xl w-full gap-6 px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop pb-6 text-silver-100"
   >

@@ -8,15 +8,11 @@ import { render } from "datocms-structured-text-to-html-string";
 const muns = (await munCardContentFetcher()).allMuns;
 
 const {
-  munPage: { title, description, pageDescription },
+  munPage: { title, description, metaInfo },
 } = await munContentFetcher();
 ---
 
-<Layout
-  title="Fatih's Portofolio"
-  activeNavigationOption={"mun"}
-  pageDescription={pageDescription}
->
+<Layout metaInfo={metaInfo} activeNavigationOption={"mun"}>
   <main
     class="flex flex-col justify-start items-center max-w-7xl w-full gap-6 px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop pb-6 text-silver-100"
   >

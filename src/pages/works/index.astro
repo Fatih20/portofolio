@@ -8,15 +8,11 @@ import { render } from "datocms-structured-text-to-html-string";
 const works = (await workCardContentFetcher()).allWorks;
 
 const {
-  workPage: { title, description, pageDescription },
+  workPage: { description, metaInfo, title },
 } = await workContentFetcher();
 ---
 
-<Layout
-  title="Fatih's Portofolio"
-  activeNavigationOption={"works"}
-  pageDescription={pageDescription}
->
+<Layout metaInfo={metaInfo} activeNavigationOption={"works"}>
   <main
     class="flex flex-col justify-start items-center max-w-7xl w-full gap-6 px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop pb-6 text-silver-100"
   >

@@ -4,10 +4,9 @@ export interface HomeContent {
   home: {
     name: string;
     description: StructuredText;
-    pageDescription: string;
     photoOfUs: Image[];
     photoCycleTime: number;
-  };
+  } & HasMetaInfo;
 }
 
 export interface Image {
@@ -46,7 +45,7 @@ export type ProjectCardContent = {
   projectEndDate?: string;
   shortDescription: string;
 } & Gradiented &
-  IDAble;
+  HasSlugAndID;
 
 export type WorkCardContent = {
   companyName: string;
@@ -59,7 +58,7 @@ export type WorkCardContent = {
   workStartDate: string;
   workEndDate?: string;
 } & Gradiented &
-  IDAble;
+  HasSlugAndID;
 
 export type MUNCardContent = {
   eventName: string;
@@ -70,11 +69,22 @@ export type MUNCardContent = {
   roleOrAward: string;
   bestPositionPaper: boolean;
 } & Gradiented &
-  IDAble;
+  HasSlugAndID;
 
 export interface IDAble {
   id: string;
+}
+
+export interface HasSlug {
   slug: string;
+}
+
+export type HasSlugAndID = HasSlug & IDAble;
+
+export interface HasThumbnail {
+  thumbnail: {
+    thumbnail: Image | null;
+  } | null;
 }
 
 export interface AllWorkCardContent {
@@ -90,39 +100,43 @@ export interface AllProjectCardContent {
 }
 
 export interface AllProjectID {
-  allProjects: IDAble[];
+  allProjects: HasSlugAndID[];
 }
 
 export interface AllWorkID {
-  allWorks: IDAble[];
+  allWorks: HasSlugAndID[];
 }
 
 export interface AllMunsID {
-  allMuns: IDAble[];
+  allMuns: HasSlugAndID[];
 }
 
-export interface PortofolioContent {
-  portofolio: {
+export interface HasMetaInfo {
+  metaInfo: {
     title: string;
-    description: StructuredText;
-    pageDescription: string;
+    description: string;
+    customThumbnail: Image | null;
   };
+}
+
+export type ListPageContent = {
+  title: string;
+  description: StructuredText;
+} & HasMetaInfo;
+
+const listPageNames = ["portofolio", "munPage", "workPage"] as const;
+export type ListPageName = typeof listPageNames[number];
+
+export interface PortofolioContent {
+  portofolio: ListPageContent;
 }
 
 export interface MUNContent {
-  munPage: {
-    title: string;
-    description: StructuredText;
-    pageDescription: string;
-  };
+  munPage: ListPageContent;
 }
 
 export interface WorkContent {
-  workPage: {
-    title: string;
-    description: StructuredText;
-    pageDescription: string;
-  };
+  workPage: ListPageContent;
 }
 
 export interface TechStack {
@@ -143,7 +157,8 @@ export type ProjectPageContent = {
   description: StructuredText;
   techStack: TechStack[];
 } & Gradiented &
-  HasGallery;
+  HasGallery &
+  HasThumbnail;
 
 export type WorkPageContent = {
   id: string;
@@ -159,7 +174,8 @@ export type WorkPageContent = {
   description: StructuredText;
   techStack: TechStack[];
 } & Gradiented &
-  HasGallery;
+  HasGallery &
+  HasThumbnail;
 
 export type Council = {
   name: string;
@@ -183,7 +199,8 @@ export type MUNPageContent = {
   roleOrAward: string;
   bestPositionPaper: boolean;
 } & Gradiented &
-  HasGallery;
+  HasGallery &
+  HasThumbnail;
 
 export type NextPrevMUN = {
   eventName: string;

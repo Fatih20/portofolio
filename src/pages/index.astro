@@ -5,15 +5,11 @@ import Layout from "../layouts/Layout.astro";
 import { render } from "datocms-structured-text-to-html-string";
 
 const {
-  home: { name, description, pageDescription, photoOfUs, photoCycleTime },
+  home: { name, description, metaInfo, photoOfUs, photoCycleTime },
 } = await homeContentFetcher();
 ---
 
-<Layout
-  title="Fatih NRI"
-  activeNavigationOption={"home"}
-  pageDescription={pageDescription}
->
+<Layout metaInfo={metaInfo} activeNavigationOption={"home"}>
   <main
     class="flex-grow flex flex-col justify-center items-center w-full px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop"
   >

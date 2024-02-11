@@ -3,9 +3,13 @@ import Layout from "@/layouts/Layout.astro";
 ---
 
 <Layout
-  title="Address Not Found"
+  metaInfo={{
+    title: "Address Not Found",
+    description: "You're lost in Fatih NRI's page",
+    customThumbnail: null,
+  }}
+  indexedAndFollowed={false}
   activeNavigationOption={""}
-  pageDescription="You're lost in Fatih NRI's page"
 >
   <main
     class="flex-grow flex flex-col justify-center items-center w-full px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop"
