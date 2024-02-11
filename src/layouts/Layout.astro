@@ -7,9 +7,25 @@ export interface Props {
   title: string;
   activeNavigationOption: HeaderOption;
   pageDescription: string;
+  indexedAndFollowed?: boolean;
+  imagePreviewLinks?: {
+    inTheSite?: boolean;
+    path?: string;
+  };
 }
 
-const { title, activeNavigationOption, pageDescription } = Astro.props;
+const {
+  title,
+  activeNavigationOption,
+  pageDescription,
+  indexedAndFollowed = true,
+  imagePreviewLinks: { inTheSite = true, path = "/favicon/favicon.ico" } = {
+    inTheSite: true,
+    path: "/favicon/favicon.ico",
+  },
+} = Astro.props as Props;
+
+const thumbnailPath = inTheSite ? `${import.meta.env.BASE_URL}${path}` : path;
 ---
 
 <!DOCTYPE html>
@@ -26,17 +42,27 @@ const { title, activeNavigationOption, pageDescription } = Astro.props;
     <meta name="copyright" content="Fatih Nararya Rashadyfa Ilhamsyah" />
     <meta name="application-name" content="Fatih NRI homepage" />
     <meta charset="UTF-8" />
+    {
+      indexedAndFollowed ? (
+        <meta
+          name="robots"
+          content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"
+        />
+      ) : (
+        <meta name="robots" content="nofollow, noindex" />
+      )
+    }
 
     <!-- App-specific metadata -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta property="og:title" content={title} />
     <meta property="og:type" content="article" />
-    <meta property="og:image" content="/favicon.ico" />
+    <meta property="og:image" content={thumbnailPath} />
     <meta property="og:description" content={pageDescription} />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={pageDescription} />
-    <meta name="twitter:image" content="/favicon.ico" />
+    <meta name="twitter:image" content={thumbnailPath} />
 
     <!-- Third party script -->
     <script
