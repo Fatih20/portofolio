@@ -60,18 +60,18 @@
         endColor={"#a56de2"}
         destination={"/hobby-project"}
         iconName={"pencil"}
+        text={"Hobby Projects"}
         navigationOption={"hobbyProject"}
         {activeNavigationOption}
-        text={"Hobby Projects"}
       />
       <Option
         startColor={"#89ffdd"}
         endColor={"#28bca3"}
         destination={"/works"}
         iconName={"briefcase"}
+        text={"Works/Contributions"}
         navigationOption={"works"}
         {activeNavigationOption}
-        text={"Works/Contributions"}
       />
       <Option
         startColor={"#d1ff82"}
@@ -79,8 +79,8 @@
         destination={"/mun"}
         iconName={"globe"}
         navigationOption={"mun"}
-        {activeNavigationOption}
         text={"MUNs"}
+        {activeNavigationOption}
       />
     </ul>
     <div class="flex-grow lg:hidden" />

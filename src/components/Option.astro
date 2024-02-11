@@ -1,0 +1,43 @@
+---
+export type OptionProp = {
+iconName: string;
+text: string;
+destination: string;
+startColor : string;
+endColor : string;
+}
+
+    const {
+        startColor,
+        endColor,
+        destination,
+    iconName, text
+} = Astro.props as OptionProp;
+---    
+  
+  <li
+class="w-full"
+  >
+    <a
+      href={destination}
+      class={`flex gap-1 items-center select-none font-bold rounded-xl text-silver-100 bg-black-500 group  flex-col justify-start box-border p-4 hover:shadow-hoveredCard hover:scale-101 transition-all cursor-pointer h-full relative hover:bg-gradient-to-b
+      `}
+      style={`
+        --tw-gradient-from: ${startColor};
+        --tw-gradient-to: ${endColor};
+        --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+        --tw-shadow-color: ${startColor};
+        --tw-shadow: var(--tw-shadow-colored);
+    `}
+    >
+      <i class={`fa-solid fa-${iconName} `} />
+      <p>{text}</p>
+    </a>
+  </li>
+  
+  <style>
+.selected {
+    @apply animate-variableColorChange pointer-events-none;
+  }
+  </style>
+  
