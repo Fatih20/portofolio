@@ -106,6 +106,10 @@ const { title, activeNavigationOption, pageDescription } = Astro.props;
     @apply list-decimal;
   }
 
+  .summary-container ul {
+    @apply list-disc;
+  }
+
   .summary-container li::marker {
     @apply text-lg lg:text-xl;
   }
@@ -119,11 +123,11 @@ const { title, activeNavigationOption, pageDescription } = Astro.props;
   }
 
   .summary-container h3 {
-    @apply text-xl font-bold mt-2 lg:text-2xl;
+    @apply text-xl font-bold mt-2 lg:text-3xl;
   }
 
   .summary-container h4 {
-    @apply text-lg font-bold lg:text-xl;
+    @apply text-lg font-bold lg:text-2xl;
   }
 
   .summary-container h5 {
