@@ -18,6 +18,8 @@
 <div
   on:click={() => (shown = false)}
   on:keydown={() => {}}
+  role="button"
+  tabindex="-1"
   class={`fixed inset-0 z-20 w-screen h-screen ${
     shown
       ? "bg-slate-900/75 pointer-events-auto backdrop-blur-sm"
