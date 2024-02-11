@@ -40,6 +40,7 @@
           shown = false;
           e.stopPropagation();
         }}
+        aria-labelledby="close right sidebar"
       >
         <i
           class={`fa-solid fa-chevron-right text-xl text-silver-100 ${
