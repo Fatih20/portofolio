@@ -33,17 +33,17 @@ const {
   <div class="flex justify-start items-stretch w-full h-full gap-2">
     <div class="flex flex-col items-start justify-start">
       <div class="flex flex-col items-start justify-start mb-2">
-        <h2 class="text-xl lg:text-2xl text-card-color text-left font-bold">
+        <h2 class="text-xl lg:text-2xl text-card-color group-hover:mix-blend-multiply text-left font-bold">
           {role}
         </h2>
-        <p class="text-sm lg:text-base text-card-color flex-grow font-bold">
+        <p class="text-sm lg:text-base text-card-color group-hover:mix-blend-multiply flex-grow font-bold">
           {companyName}
         </p>
-        <p class="text-sm lg:text-base text-card-color font-medium">
+        <p class="text-sm lg:text-base text-card-color group-hover:mix-blend-multiply font-medium">
           {dateCardMaker(workStartDate, workEndDate, ongoing)}
         </p>
       </div>
-      <p class="text-sm lg:text-base text-card-color flex-grow">
+      <p class="text-sm lg:text-base text-card-color group-hover:mix-blend-multiply flex-grow">
         {shortRemark}
       </p>
     </div>
