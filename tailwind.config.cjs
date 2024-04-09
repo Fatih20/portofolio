@@ -77,6 +77,7 @@ module.exports = {
       background: "#1a1a1a",
       "black-900": "#000000",
       black: "#333333",
+      "card-color": "var(--card-color)",
     },
   },
   plugins: [require("daisyui")],
