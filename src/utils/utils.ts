@@ -31,6 +31,26 @@ export const months = [
   "December",
 ];
 
+export function dateCardMaker(dateStart : string, dateEnd : string | undefined, ongoing : boolean) {
+  const {month: startMonth, year: startYear } = dateConverter(dateStart);
+  const { month: endMonth, year: endYear } = dateEnd
+  ? dateConverter(dateEnd)
+  : { month: 0, year: 0 };
+
+  if (ongoing) {
+    return `${months[startMonth - 1]}
+    ${startYear} — Now`
+  }
+
+  if ((startMonth === endMonth && startYear === endYear) || dateEnd === undefined) {
+    return `${months[startMonth - 1]}
+    ${startYear}`
+  }
+
+  return `${months[startMonth - 1]} ${startYear} —
+          ${months[endMonth - 1]} ${endYear}`
+}
+
 export function projectCompareFunction(
   a: ProjectCardContent,
   b: ProjectCardContent

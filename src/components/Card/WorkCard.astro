@@ -1,6 +1,6 @@
 ---
 import type { ProjectCardContent, WorkCardContent } from "@/types/cms";
-import { months, dateConverter } from "@/utils/utils";
+import { months, dateConverter, dateCardMaker } from "@/utils/utils";
 import Card from "./Card.astro";
 import Spacer from "../Spacer.astro";
 
@@ -19,11 +19,6 @@ const {
   shortRemark,
   links,
 } = Astro.props as WorkCardProp;
-
-const { month: startMonth, year: startYear } = dateConverter(workStartDate);
-const { month: endMonth, year: endYear } = workEndDate
-  ? dateConverter(workEndDate)
-  : { month: 0, year: 0 };
 ---
 
 <Card
@@ -45,15 +40,7 @@ const { month: endMonth, year: endYear } = workEndDate
           {companyName}
         </p>
         <p class="text-sm lg:text-base text-silver-100 font-medium">
-          {months[startMonth - 1]}
-          {startYear}
-          {
-            ongoing
-              ? "- Now"
-              : workEndDate
-              ? `- ${months[endMonth - 1]} ${endYear}`
-              : ""
-          }
+          {dateCardMaker(workStartDate, workEndDate, ongoing)}
         </p>
       </div>
       <p class="text-sm lg:text-base text-silver-100 flex-grow">
