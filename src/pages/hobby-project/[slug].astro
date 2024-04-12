@@ -12,6 +12,7 @@ import { nextPrevSlugMaker, idAbleToStaticPathConverter } from "@/utils/utils";
 import Spacer from "@/components/Spacer.astro";
 import Gallery from "@/components/Gallery.svelte";
 import ToOther from "@/components/ToOther.astro";
+import { customRender, structuredTextRenderOptions } from "@/utils/redaction";
 
 const projectIDs = await projectsIdFetcher();
 
@@ -130,7 +131,7 @@ const { month: endMonth, year: endYear } = projectEndDate
         border-color: ${gradientEndColor};
     `}
       >
-        <Fragment set:html={render(description)} />
+        <Fragment set:html={customRender(description)} />
       </section>
       <Gallery images={galleryPhotos} title={galleryTitle} client:visible />
 

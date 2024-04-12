@@ -4,6 +4,7 @@ import PhotoOfUs from "@/components/PhotoOfUs.svelte";
 import Layout from "../layouts/Layout.astro";
 import { render } from "datocms-structured-text-to-html-string";
 import Option from "@/components/Option.astro";
+import { customRender } from "@/utils/redaction";
 
 const {
   home: { name, description, metaInfo, photoOfUs, photoCycleTime },
@@ -28,7 +29,7 @@ const {
         {name}
       </h1>
       <div class="text-silver-300 text-sm md:text-base w-full mb-4">
-        <Fragment set:html={render(description)} />
+        <Fragment set:html={customRender(description)} />
       </div>
       <ul class="w-full flex flex-col sm:flex-row justify-between gap-6">
         <Option

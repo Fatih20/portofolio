@@ -3,6 +3,7 @@ import { workCardContentFetcher, workContentFetcher } from "@/api";
 import WorkCard from "@/components/Card/WorkCard.astro";
 import Spacer from "@/components/Spacer.astro";
 import Layout from "@/layouts/Layout.astro";
+import { customRender } from "@/utils/redaction";
 import { render } from "datocms-structured-text-to-html-string";
 
 const works = (await workCardContentFetcher()).allWorks;
@@ -23,7 +24,7 @@ const {
         {title}
       </h1>
       <div class="text-center description">
-        <Fragment set:html={render(description)} />
+        <Fragment set:html={customRender(description)} />
       </div>
     </header>
     <div

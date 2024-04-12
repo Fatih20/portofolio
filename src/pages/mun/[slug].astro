@@ -11,6 +11,7 @@ import {
 import { render } from "datocms-structured-text-to-html-string";
 import MUNAwardPage from "@/components/Card/MUNAward/MUNAwardPage.astro";
 import ToOther from "@/components/ToOther.astro";
+import { customRender } from "@/utils/redaction";
 
 const munIDs = await munIdFetcher();
 
@@ -131,7 +132,7 @@ const { year } = dateConverter(startDate);
         border-color: ${gradientEndColor};
     `}
       >
-        <Fragment set:html={render(description)} />
+        <Fragment set:html={customRender(description)} />
       </section>
 
       <Spacer />
