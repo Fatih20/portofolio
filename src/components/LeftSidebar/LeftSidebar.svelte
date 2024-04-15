@@ -10,12 +10,12 @@
 <div
   class={`fixed inset-0 z-20 w-screen h-screen pointer-events-none ${
     open ? "bg-slate-900/75 backdrop-blur-sm" : ""
-  } flex items-center box-border py-8`}
+  } flex items-center box-border py-sidebarVerticalScreenGap`}
 >
   <nav
     class={`pointer-events-auto bg-black rounded-r-md lg:rounded-r-xl ${
       open ? "translate-x-0" : "-translate-x-full"
-    } h-full py-2 pl-4 pr-6 relative transition-transform items-start justify-center flex flex-col gap-4 duration-200`}
+    } h-full py-4 pl-4 pr-6 relative transition-transform items-start justify-center flex flex-col gap-4 duration-200`}
     on:mouseover={() => (open = true)}
     on:mouseleave={() => (open = false)}
     on:focus={() => {}}

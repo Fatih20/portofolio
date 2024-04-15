@@ -3,6 +3,10 @@
 
   export let stackContent: TechStack[] = [];
 
+  stackContent = [
+    { link: "", name: "BruhBruhBru hBruhBruhBruhBruhBruhBruhBruh" },
+  ];
+
   let shown = false;
 </script>
 
@@ -24,7 +28,7 @@
     shown
       ? "bg-slate-900/75 pointer-events-auto backdrop-blur-sm"
       : "pointer-events-none"
-  } flex flex-row-reverse items-center box-border py-8`}
+  } flex flex-row-reverse items-center box-border py-sidebarVerticalScreenGap`}
 >
   <div
     class={`pointer-events-auto ${
@@ -52,30 +56,36 @@
       </button>
     </div>
     <div
-      class="bg-black rounded-tl-md lg:rounded-l-xl p-2 flex-grow flex flex-col items-center justify-start"
+      class="bg-black rounded-tl-md lg:rounded-l-xl py-4 pl-4 pr-6 flex-grow flex flex-col items-center justify-center max-w-56"
     >
-      <div
-        class="self-end w-full h-full flex flex-col items-center justify-end gap-1 bg-none"
-      >
-        {#each stackContent as { link, name }}
-          <p
-            class="rounded-lg text-background font-medium shadow-md shadow-black-900/30 w-full text-center py-1 px-2 from-silver-100 to-silver-300 bg-gradient-to-b relative hover:-translate-x-4 transition-all"
-          >
-            {#if link}
-              <a
-                class="w-full h-full"
-                href={link}
-                target="_blank"
-                rel="noreferrer"
-              >
+      {#if stackContent.length === 0}
+        <p class="font-bold text-center self-center text-3xl">
+          Stack<br />is<br />empty!
+        </p>
+      {:else}
+        <div
+          class="self-end w-full h-full flex flex-col items-center justify-end gap-1 bg-none"
+        >
+          {#each stackContent as { link, name }}
+            <p
+              class="rounded-lg text-background font-medium shadow-md shadow-black-900/30 w-full text-center py-1 px-2 from-silver-100 to-silver-300 bg-gradient-to-b relative hover:-translate-x-4 transition-all text-wrap break-all"
+            >
+              {#if link}
+                <a
+                  class="w-full h-full"
+                  href={link}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {name}
+                </a>
+              {:else}
                 {name}
-              </a>
-            {:else}
-              {name}
-            {/if}
-          </p>
-        {/each}
-      </div>
+              {/if}
+            </p>
+          {/each}
+        </div>
+      {/if}
     </div>
   </div>
 </div>

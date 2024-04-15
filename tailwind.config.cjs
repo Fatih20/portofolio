@@ -44,6 +44,7 @@ module.exports = {
         headerHeight: "4rem",
         horizontalPaddingDesktop: "1rem",
         horizontalPaddingMobile: "1.5rem",
+        sidebarVerticalScreenGap: "2rem",
       },
       minHeight: {
         cardDesktop: "12rem",
