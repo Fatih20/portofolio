@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { HeaderOption } from "@/types/types";
-  import Option from "@/components/Header/Option.svelte";
+  import Option from "@/components/LeftSidebar/Option.svelte";
 
   export let activeNavigationOption: HeaderOption;
 
