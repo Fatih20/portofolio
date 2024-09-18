@@ -7,7 +7,8 @@
   let carouselShown = false;
   let selectedIndex: number | undefined = undefined;
   let selectedImage: Image | undefined = undefined;
-  $: selectedImage = selectedIndex ? images[selectedIndex ?? 0] : undefined;
+  $: selectedImage =
+    selectedIndex !== undefined ? images[selectedIndex ?? 0] : undefined;
 
   function handleImageClick(index: number) {
     selectedIndex = index;
