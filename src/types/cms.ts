@@ -1,4 +1,5 @@
 import type { StructuredText } from "datocms-structured-text-utils";
+import type { IismaJournalEntryStage } from "./types";
 
 export interface HomeContent {
   home: {
@@ -46,6 +47,16 @@ export type ProjectCardContent = {
   shortDescription: string;
 } & Gradiented &
   HasSlugAndID;
+
+export type IismaJournalCardContent = {
+  title: string;
+  stage: IismaJournalEntryStage;
+  publishedDate: string;
+  shortDescription: string;
+} & HasSlugAndID;
+
+export type IismaJournalCardContentAugmented = IismaJournalCardContent &
+  Gradiented;
 
 export type WorkCardContent = {
   companyName: string;
@@ -97,6 +108,10 @@ export interface AllMUNCardContent {
 
 export interface AllProjectCardContent {
   allProjects: ProjectCardContent[];
+}
+
+export interface AllIismaJournalCardContent {
+  allIismaJournals: IismaJournalCardContent[];
 }
 
 export interface AllProjectID {
@@ -184,6 +199,15 @@ export type WorkPageContent = {
   techStack: TechStack[];
 } & Gradiented &
   HasGallery &
+  HasThumbnail;
+
+export type IismaJournalPageContent = {
+  id: string;
+  title: string;
+  stage: IismaJournalEntryStage;
+  publishedDate: string;
+  description: StructuredText;
+} & HasGallery &
   HasThumbnail;
 
 export type Council = {

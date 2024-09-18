@@ -1,4 +1,5 @@
 import type {
+  AllIismaJournalCardContent,
   AllMUNCardContent,
   AllMunsID,
   AllProjectCardContent,
@@ -105,6 +106,27 @@ export async function projectsCardContentFetcher(): Promise<AllProjectCardConten
     return result.data as AllProjectCardContent;
   } else {
     return { allProjects: [] } as AllProjectCardContent;
+  }
+}
+
+export async function iismaJournalCardContentFetcher(): Promise<AllIismaJournalCardContent> {
+  const query = `
+  query {
+    allIismaJournals (orderBy: [publishedDate_DESC]) {
+      id
+      slug
+      title
+      stage
+      publishedDate
+      shortDescription
+    }
+  }
+  `;
+  const { error, result } = await fetcher<AllIismaJournalCardContent>(query);
+  if (error === null && result?.data) {
+    return result.data as AllIismaJournalCardContent;
+  } else {
+    return { allIismaJournals: [] } as AllIismaJournalCardContent;
   }
 }
 
@@ -276,6 +298,40 @@ export async function worksPageContentFetcher(
   }>(query);
   if (error === null && result?.data) {
     return result.data.work as WorkPageContent;
+  }
+
+  throw new Error("Failed to fetch work page content!");
+}
+
+export async function iismaJournalPageContentFetcher(
+  slug: string
+): Promise<IismaJournalContent> {
+  const query = `query {
+    iismaJournal (filter : {slug : {eq : "${slug}"}}) {
+      id
+      title
+      stage
+      publishedDate
+      description {
+        blocks
+        value
+        links
+      }
+      thumbnail {
+        thumbnail {
+          alt
+          url
+          title
+        }
+      }
+    }
+  }
+  `;
+  const { error, result } = await fetcher<{
+    iismaJournal: IismaJournalContent;
+  }>(query);
+  if (error === null && result?.data) {
+    return result.data.iismaJournal as IismaJournalContent;
   }
 
   throw new Error("Failed to fetch work page content!");

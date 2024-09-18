@@ -1,11 +1,18 @@
 import type {
+  Gradiented,
   HasSlugAndID,
   HasThumbnail,
   IDAble,
+  IismaJournalContent,
   ProjectCardContent,
   ProjectPageContent,
 } from "@/types/cms";
-import type { Date, NextPrevID } from "@/types/types";
+import type {
+  Date,
+  IismaJournalEntryStage,
+  IismaJournalEntryStageCount,
+  NextPrevID,
+} from "@/types/types";
 
 export function dateConverter(dateString: string) {
   const numbers = dateString.split("-");
@@ -31,24 +38,69 @@ export const months = [
   "December",
 ];
 
-export function dateCardMaker(dateStart : string, dateEnd : string | undefined, ongoing : boolean) {
-  const {month: startMonth, year: startYear } = dateConverter(dateStart);
+export function dateCardMaker(
+  dateStart: string,
+  dateEnd: string | undefined,
+  ongoing: boolean
+) {
+  const { month: startMonth, year: startYear } = dateConverter(dateStart);
   const { month: endMonth, year: endYear } = dateEnd
-  ? dateConverter(dateEnd)
-  : { month: 0, year: 0 };
+    ? dateConverter(dateEnd)
+    : { month: 0, year: 0 };
 
   if (ongoing) {
     return `${months[startMonth - 1]}
-    ${startYear} — Now`
+    ${startYear} — Now`;
   }
 
-  if ((startMonth === endMonth && startYear === endYear) || dateEnd === undefined) {
+  if (
+    (startMonth === endMonth && startYear === endYear) ||
+    dateEnd === undefined
+  ) {
     return `${months[startMonth - 1]}
-    ${startYear}`
+    ${startYear}`;
   }
 
   return `${months[startMonth - 1]} ${startYear} —
-          ${months[endMonth - 1]} ${endYear}`
+          ${months[endMonth - 1]} ${endYear}`;
+}
+
+export const iismaJournalGradient: Record<IismaJournalEntryStage, Gradiented> =
+  {
+    all: { gradientEndColor: "", gradientStartColor: "" },
+    abroad: { gradientEndColor: "", gradientStartColor: "" },
+    aftermath: { gradientEndColor: "", gradientStartColor: "" },
+    preambule: { gradientEndColor: "", gradientStartColor: "" },
+    registration: { gradientEndColor: "", gradientStartColor: "" },
+    "pre-departure": { gradientEndColor: "", gradientStartColor: "" },
+  };
+
+export function dateCardMakerIismaJournal(publishedDate: string) {
+  const { month, year, date } = dateConverter(publishedDate);
+
+  const monthName = months[month - 1];
+
+  return `${date} ${monthName} ${year}`;
+}
+
+export const emptyIismaJournalEntryStageCount: IismaJournalEntryStageCount = {
+  "pre-departure": 0,
+  abroad: 0,
+  aftermath: 0,
+  all: 0,
+  preambule: 0,
+  registration: 0,
+};
+
+export function iismaJournalEntryStageCountCounter(
+  stages: IismaJournalEntryStage[]
+) {
+  const iismaJournalEntryStageCount = { ...emptyIismaJournalEntryStageCount };
+  stages.forEach((stage) => {
+    iismaJournalEntryStageCount[stage]++;
+  });
+  iismaJournalEntryStageCount.all++;
+  return iismaJournalEntryStageCount;
 }
 
 export function projectCompareFunction(

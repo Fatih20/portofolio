@@ -1,12 +1,32 @@
 ---
-import { iismaJournalContentFetcher, workCardContentFetcher, workContentFetcher } from "@/api";
-import WorkCard from "@/components/Card/WorkCard.astro";
+import {
+  iismaJournalCardContentFetcher,
+  iismaJournalContentFetcher,
+} from "@/api";
+import IismaJournalContent from "@/components/IismaJournal/IismaJournalContent.svelte";
 import Spacer from "@/components/Spacer.astro";
 import Layout from "@/layouts/Layout.astro";
+import type { IismaJournalCardContentAugmented } from "@/types/cms";
 import { customRender } from "@/utils/redaction";
-import { render } from "datocms-structured-text-to-html-string";
+import {
+  iismaJournalEntryStageCountCounter,
+  iismaJournalGradient,
+} from "@/utils/utils";
 
-const works = (await workCardContentFetcher()).allWorks;
+const iismaJournalCards = (await iismaJournalCardContentFetcher())
+  .allIismaJournals;
+
+const iismaJournalCardsGradiented: IismaJournalCardContentAugmented[] =
+  iismaJournalCards.map((iismaJournalCard) => {
+    return {
+      ...iismaJournalCard,
+      ...iismaJournalGradient[iismaJournalCard.stage],
+    };
+  });
+
+const iismaJournalEntryStageCount = iismaJournalEntryStageCountCounter(
+  iismaJournalCards.map(({ stage }) => stage)
+);
 
 const {
   iismaJournalPage: { description, metaInfo, title },
@@ -27,49 +47,18 @@ const {
         <Fragment set:html={customRender(description)} />
       </div>
     </header>
-    <div
-      class="flex flex-col justify-start items-center w-full gap-8 md:grid md:grid-cols-2 md:items-start xl:grid-cols-3 lg:gap-6"
-    >
-      {
-        works.map(
-          ({
-            id,
-            slug,
-            projectLink,
-            companyName,
-            role,
-            workStartDate,
-            workEndDate,
-            repositoryLink,
-            gradientStartColor,
-            gradientEndColor,
-            ongoing,
-            shortRemark,
-          }) => (
-            <WorkCard
-              id={id}
-              slug={slug}
-              ongoing={ongoing}
-              projectLink={projectLink}
-              companyName={companyName}
-              role={role}
-              shortRemark={shortRemark}
-              workStartDate={workStartDate}
-              workEndDate={workEndDate}
-              repositoryLink={repositoryLink}
-              gradientStartColor={gradientStartColor}
-              gradientEndColor={gradientEndColor}
-            />
-          )
-        )
-      }
-    </div>
+    <!-- Container for the buttons -->
+    <IismaJournalContent
+      client:visible
+      journalCards={iismaJournalCardsGradiented}
+      iismaJournalEntryStageCount={iismaJournalEntryStageCount}
+    />
   </main>
   <Spacer />
-</Layout>
 
-<style>
-  .description {
-    @apply text-base lg:text-lg;
-  }
-</style>
+  <style>
+    .description {
+      @apply text-base lg:text-lg;
+    }
+  </style>
+</Layout>
