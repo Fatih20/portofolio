@@ -1,5 +1,5 @@
 ---
-import { workCardContentFetcher, workContentFetcher } from "@/api";
+import { iismaJournalContentFetcher, workCardContentFetcher, workContentFetcher } from "@/api";
 import WorkCard from "@/components/Card/WorkCard.astro";
 import Spacer from "@/components/Spacer.astro";
 import Layout from "@/layouts/Layout.astro";
@@ -9,8 +9,8 @@ import { render } from "datocms-structured-text-to-html-string";
 const works = (await workCardContentFetcher()).allWorks;
 
 const {
-  workPage: { description, metaInfo, title },
-} = await workContentFetcher();
+  iismaJournalPage: { description, metaInfo, title },
+} = await iismaJournalContentFetcher();
 ---
 
 <Layout metaInfo={metaInfo} activeNavigationOption={"iismaJournal"}>

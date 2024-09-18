@@ -8,6 +8,7 @@ import type {
   HasSlugAndID,
   HomeContent,
   IDAble,
+  IismaJournalContent,
   ListPageName,
   MUNContent,
   MUNPageContent,
@@ -208,6 +209,16 @@ export async function munContentFetcher(): Promise<MUNContent> {
   }
 
   throw new Error("Failed to fetch MUN page content!");
+}
+
+export async function iismaJournalContentFetcher(): Promise<IismaJournalContent> {
+  const query = listPageQueryGenerator("iismaJournalPage");
+  const { error, result } = await fetcher<IismaJournalContent>(query);
+  if (error === null && result?.data) {
+    return result.data as IismaJournalContent;
+  }
+
+  throw new Error("Failed to fetch works page content!");
 }
 
 export async function workContentFetcher(): Promise<WorkContent> {

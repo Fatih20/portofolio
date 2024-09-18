@@ -27,7 +27,7 @@ export type HasGallery = {
 
 const possibleProjectLink = ["repo", "custom", "project"] as const;
 
-export type ProjectLinkType = typeof possibleProjectLink[number];
+export type ProjectLinkType = (typeof possibleProjectLink)[number];
 
 export type ProjectLink = {
   link: string;
@@ -124,8 +124,13 @@ export type ListPageContent = {
   description: StructuredText;
 } & HasMetaInfo;
 
-const listPageNames = ["portofolio", "munPage", "workPage"] as const;
-export type ListPageName = typeof listPageNames[number];
+const listPageNames = [
+  "portofolio",
+  "munPage",
+  "workPage",
+  "iismaJournalPage",
+] as const;
+export type ListPageName = (typeof listPageNames)[number];
 
 export interface PortofolioContent {
   portofolio: ListPageContent;
@@ -137,6 +142,10 @@ export interface MUNContent {
 
 export interface WorkContent {
   workPage: ListPageContent;
+}
+
+export interface IismaJournalContent {
+  iismaJournalPage: ListPageContent;
 }
 
 export interface TechStack {
