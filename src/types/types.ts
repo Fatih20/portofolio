@@ -4,7 +4,7 @@ export interface Date {
   year: number;
 }
 
-const headerOptions = ["", "home", "hobbyProject", "works", "mun"] as const;
+const headerOptions = ["", "home", "hobbyProject", "works", "mun", "iismaJournal"] as const;
 
 export type HeaderOption = typeof headerOptions[number];
 

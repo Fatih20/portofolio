@@ -50,38 +50,52 @@
         startColor={"#8cd5ff"}
         endColor={"#64baff"}
         destination={"/"}
-        iconName={"home"}
         navigationOption={"home"}
         {activeNavigationOption}
         text={"Home"}
-      />
+      >
+        <i slot="icon" class={`fa-solid fa-home`} />
+      </Option>
       <Option
         startColor={"#e4c6fa"}
         endColor={"#a56de2"}
         destination={"/hobby-project"}
-        iconName={"pencil"}
         text={"Hobby Projects"}
         navigationOption={"hobbyProject"}
         {activeNavigationOption}
-      />
+      >
+        <i slot="icon" class={`fa-solid fa-pencil`} />
+      </Option>
       <Option
         startColor={"#89ffdd"}
         endColor={"#28bca3"}
         destination={"/works"}
-        iconName={"briefcase"}
         text={"Works/Contributions"}
         navigationOption={"works"}
         {activeNavigationOption}
-      />
+      >
+        <i slot="icon" class={`fa-solid fa-briefcase`} />
+      </Option>
       <Option
         startColor={"#d1ff82"}
         endColor={"#68b723"}
         destination={"/mun"}
-        iconName={"globe"}
         navigationOption={"mun"}
         text={"MUNs"}
         {activeNavigationOption}
-      />
+      >
+        <i slot="icon" class={`fa-solid fa-globe`} />
+      </Option>
+      <Option
+        startColor={"#ff453a"}
+        endColor={"#c12117"}
+        destination={"/iisma-journal"}
+        navigationOption={"iismaJournal"}
+        text={"IISMA Journal"}
+        {activeNavigationOption}
+      >
+        <i slot="icon" class="fa-brands fa-canadian-maple-leaf"></i>
+      </Option>
     </ul>
     <div class="flex-grow lg:hidden" />
   </nav>
