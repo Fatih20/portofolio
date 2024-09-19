@@ -67,12 +67,28 @@ export function dateCardMaker(
 
 export const iismaJournalGradient: Record<IismaJournalEntryStage, Gradiented> =
   {
-    all: { gradientEndColor: "", gradientStartColor: "" },
-    abroad: { gradientEndColor: "", gradientStartColor: "" },
+    all: { gradientEndColor: "#c12117", gradientStartColor: "#ff453a" },
+    abroad: { gradientEndColor: "#25355a", gradientStartColor: "#007fa3" },
     aftermath: { gradientEndColor: "", gradientStartColor: "" },
     preambule: { gradientEndColor: "", gradientStartColor: "" },
-    registration: { gradientEndColor: "", gradientStartColor: "" },
-    "pre-departure": { gradientEndColor: "", gradientStartColor: "" },
+    registration: {
+      gradientStartColor: "#6A2D6E",
+      gradientEndColor: "#4A0E4E",
+    },
+    "pre-departure": {
+      gradientStartColor: "#EEC900",
+      gradientEndColor: "#FF8C00",
+    },
+  };
+
+export const iismaJournalStageDisplay: Record<IismaJournalEntryStage, string> =
+  {
+    all: "All",
+    abroad: "Abroad",
+    aftermath: "Aftermath",
+    preambule: "Preambule",
+    registration: "Registration",
+    "pre-departure": "Pre-Departure",
   };
 
 export function dateCardMakerIismaJournal(publishedDate: string) {
@@ -98,8 +114,8 @@ export function iismaJournalEntryStageCountCounter(
   const iismaJournalEntryStageCount = { ...emptyIismaJournalEntryStageCount };
   stages.forEach((stage) => {
     iismaJournalEntryStageCount[stage]++;
+    iismaJournalEntryStageCount.all++;
   });
-  iismaJournalEntryStageCount.all++;
   return iismaJournalEntryStageCount;
 }
 

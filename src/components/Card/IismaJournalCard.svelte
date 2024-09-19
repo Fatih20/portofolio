@@ -1,6 +1,9 @@
 <script lang="ts">
   import type { IismaJournalCardContentAugmented } from "@/types/cms";
-  import { dateCardMakerIismaJournal } from "@/utils/utils";
+  import {
+    dateCardMakerIismaJournal,
+    iismaJournalStageDisplay,
+  } from "@/utils/utils";
   import Card from "./Card.svelte";
 
   type IismaJournalCardProp = IismaJournalCardContentAugmented & {
@@ -34,7 +37,7 @@
         </h2>
         {#if displayStage}
           <p class="text-sm lg:text-base text-silver-100 flex-grow font-bold">
-            {stage}
+            {iismaJournalStageDisplay[stage]}
           </p>
         {/if}
         <p class="text-sm lg:text-base text-silver-100 font-medium">

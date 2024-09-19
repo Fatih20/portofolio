@@ -47,6 +47,7 @@ module.exports = {
         sidebarVerticalScreenGap: "2rem",
       },
       minHeight: {
+        cardIismaJournalDesktop: "11rem",
         cardDesktop: "12rem",
         cardMobile: "16rem",
       },

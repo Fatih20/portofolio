@@ -13,14 +13,14 @@
 
   $: journalCardsProcessed = journalCards
     .map((journalCard) => {
-      return { ...journalCard, displayStage: true };
+      return { ...journalCard, displayStage: selectedStage === "all" };
     })
     .filter(({ stage }) => {
       return selectedStage === "all" || selectedStage === stage;
     });
 </script>
 
-<div class="w-full flex flex-col">
+<div class="w-full flex flex-col gap-6">
   <StageSelector
     {iismaJournalEntryStageCount}
     {selectedStage}
