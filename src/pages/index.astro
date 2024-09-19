@@ -31,39 +31,41 @@ const {
       <div class="text-silver-300 text-sm md:text-base w-full mb-4">
         <Fragment set:html={customRender(description)} />
       </div>
-      <ul class="w-full flex flex-col sm:flex-row justify-between gap-3 lg:gap-4">
-      <Option
-        startColor={"#e4c6fa"}
-        endColor={"#a56de2"}
-        destination={"/mun"}
-        text={"MUNs"}
-      > 
-        <i slot="icon" class={`fa-solid fa-globe `} />
-      </Option>
-      <Option
-        startColor={"#89ffdd"}
-        endColor={"#28bca3"}
-        destination={"/works"}
-        text={"Works & Jobs"}
-      > 
-        <i slot="icon" class={`fa-solid fa-briefcase `} />
-      </Option>
-      <Option
-        startColor={"#d1ff82"}
-        endColor={"#68b723"}
-        destination={"/hobby-project"}
-        text={"Hobby Projects"}
-      > 
-        <i slot="icon" class={`fa-solid fa-pencil `} />
-      </Option>
-      <Option
-        startColor={"#ff453a"}
-        endColor={"#c12117"}
-        destination={"/iisma-journal"}
-        text={"IISMA Journal"}
-    > 
-        <i slot="icon" class="fa-brands fa-canadian-maple-leaf fa-lg"></i>
-      </Option>
+      <ul
+        class="w-full flex flex-col sm:flex-row justify-between gap-3 lg:gap-4"
+      >
+        <Option
+          startColor={"#e4c6fa"}
+          endColor={"#a56de2"}
+          destination={"/mun"}
+          text={"MUNs"}
+        >
+          <i slot="icon" class={`fa-solid fa-globe `}></i>
+        </Option>
+        <Option
+          startColor={"#89ffdd"}
+          endColor={"#28bca3"}
+          destination={"/works"}
+          text={"Works & Jobs"}
+        >
+          <i slot="icon" class={`fa-solid fa-briefcase `}></i>
+        </Option>
+        <Option
+          startColor={"#d1ff82"}
+          endColor={"#68b723"}
+          destination={"/hobby-project"}
+          text={"Hobby Projects"}
+        >
+          <i slot="icon" class={`fa-solid fa-pencil `}></i>
+        </Option>
+        <Option
+          startColor={"#ff453a"}
+          endColor={"#c12117"}
+          destination={"/iisma-journal"}
+          text={"IISMA Journal"}
+        >
+          <i slot="icon" class={`fa-brands fa-canadian-maple-leaf`}></i>
+        </Option>
       </ul>
     </header>
   </main>
