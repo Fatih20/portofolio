@@ -11,6 +11,7 @@ import {
   dateConverter,
   idAbleToStaticPathConverter,
   iismaJournalGradient,
+  iismaJournalStageDisplay,
   nextPrevSlugMaker,
   thumbnailProcessor,
 } from "@/utils/utils";
@@ -91,16 +92,19 @@ const {
           <h1 class="text-4xl lg:text-5xl text-left font-black">
             {title}
           </h1>
-          <h2 class="text-2xl text-left font-bold">
-            {dateCardMakerIismaJournal(publishedDate)}
-          </h2>
           <p class="text-xl text-left text-silver-500">
             {shortDescription}
           </p>
+          <div class="flex justify-start gap-2 items-center text-silver-500">
+            <i class="fa-regular fa-calendar-days" style={``}></i>
+            <p class="text-base font-medium text-left">
+              {dateCardMakerIismaJournal(publishedDate)}
+            </p>
+          </div>
         </div>
       </header>
       <div
-        class="w-full border-y-[1px] py-2 px-4 flex flex-col justify-start items-start gap-2"
+        class="w-full border-y-[1px] py-2 flex flex-col justify-start items-start gap-2"
         style={`
         border-color: ${gradientEndColor};
         --icon-color: ${gradientEndColor};
@@ -123,14 +127,14 @@ const {
             gradientStartColor={prevGradientStartColor}
             gradientEndColor={prevGradientEndColor}
             ;
-            link={`/mun/${prevSlug}`}
+            link={`/iisma-journal/${prevSlug}`}
           >
             <div class="flex flex-col" slot="other-title">
               <p>
                 {prevTitle}
               </p>
               <p class="text-sm">
-                {prevStage}
+                {iismaJournalStageDisplay[prevStage]}
               </p>
             </div>
           </ToOther>
@@ -140,14 +144,14 @@ const {
             gradientEndColor={nextGradientEndColor}
             next={true}
             ;
-            link={`/mun/${nextSlug}`}
+            link={`/iisma-journal/${nextSlug}`}
           >
             <div class="flex flex-col" slot="other-title">
               <p>
                 {nextTitle}
               </p>
               <p class="text-sm">
-                {nextStage}
+                {iismaJournalStageDisplay[nextStage]}
               </p>
             </div>
           </ToOther>
