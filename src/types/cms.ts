@@ -207,8 +207,12 @@ export type IismaJournalPageContent = {
   stage: IismaJournalEntryStage;
   publishedDate: string;
   description: StructuredText;
+  shortDescription: string;
 } & HasGallery &
   HasThumbnail;
+
+export type IismaJournalPageContentAugmented = IismaJournalPageContent &
+  Gradiented;
 
 export type Council = {
   name: string;
@@ -244,6 +248,11 @@ export type NextPrevWork = {
   companyName: string;
   role: string;
 } & Gradiented;
+
+export type NextPrevIismaJournal = {
+  title: string;
+  stage: string;
+};
 
 export type NextPrevProject = {
   projectName: string;

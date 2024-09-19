@@ -10,9 +10,11 @@ import type {
   HomeContent,
   IDAble,
   IismaJournalContent,
+  IismaJournalPageContent,
   ListPageName,
   MUNContent,
   MUNPageContent,
+  NextPrevIismaJournal,
   NextPrevMUN,
   NextPrevProject,
   NextPrevWork,
@@ -305,13 +307,14 @@ export async function worksPageContentFetcher(
 
 export async function iismaJournalPageContentFetcher(
   slug: string
-): Promise<IismaJournalContent> {
+): Promise<IismaJournalPageContent> {
   const query = `query {
     iismaJournal (filter : {slug : {eq : "${slug}"}}) {
       id
       title
       stage
       publishedDate
+      shortDescription
       description {
         blocks
         value
@@ -328,10 +331,10 @@ export async function iismaJournalPageContentFetcher(
   }
   `;
   const { error, result } = await fetcher<{
-    iismaJournal: IismaJournalContent;
+    iismaJournal: IismaJournalPageContent;
   }>(query);
   if (error === null && result?.data) {
-    return result.data.iismaJournal as IismaJournalContent;
+    return result.data.iismaJournal as IismaJournalPageContent;
   }
 
   throw new Error("Failed to fetch work page content!");
@@ -484,6 +487,23 @@ export async function projectsIdFetcher(): Promise<HasSlugAndID[]> {
   }
 }
 
+export async function iismaJournalIdFetcher(): Promise<HasSlugAndID[]> {
+  const query = `query {
+    allIismaJournals (orderBy :[publishedDate_DESC]) {
+    id,
+    slug
+}
+}`;
+  const { error, result } = await fetcher<{ allIismaJournals: HasSlugAndID[] }>(
+    query
+  );
+  if (error === null && result?.data) {
+    return result.data.allIismaJournals as HasSlugAndID[];
+  } else {
+    return [] as HasSlugAndID[];
+  }
+}
+
 export async function worksNextPrevFetcher(
   slug: string
 ): Promise<NextPrevWork> {
@@ -543,4 +563,22 @@ export async function munNextPrevFetcher(slug: string): Promise<NextPrevMUN> {
     return result.data.mun as NextPrevMUN;
   }
   throw new Error(`Error getting MUN's data. Slug : ${slug}`);
+}
+
+export async function iismaJournalNextPrevFetcher(
+  slug: string
+): Promise<NextPrevIismaJournal> {
+  const query = `query {
+    iismaJournal (filter : {slug : {eq : "${slug}"}}) {
+      title
+      stage
+  }
+  }`;
+  const { error, result } = await fetcher<{
+    iismaJournal: NextPrevIismaJournal;
+  }>(query);
+  if (error === null && result?.data) {
+    return result.data.iismaJournal as NextPrevIismaJournal;
+  }
+  throw new Error(`Error getting IISMA Journal's data. Slug : ${slug}`);
 }
