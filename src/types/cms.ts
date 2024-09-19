@@ -1,4 +1,5 @@
 import type { StructuredText } from "datocms-structured-text-utils";
+import type { IismaJournalEntryStage } from "./types";
 
 export interface HomeContent {
   home: {
@@ -27,7 +28,7 @@ export type HasGallery = {
 
 const possibleProjectLink = ["repo", "custom", "project"] as const;
 
-export type ProjectLinkType = typeof possibleProjectLink[number];
+export type ProjectLinkType = (typeof possibleProjectLink)[number];
 
 export type ProjectLink = {
   link: string;
@@ -46,6 +47,16 @@ export type ProjectCardContent = {
   shortDescription: string;
 } & Gradiented &
   HasSlugAndID;
+
+export type IismaJournalCardContent = {
+  title: string;
+  stage: IismaJournalEntryStage;
+  publishedDate: string;
+  shortDescription: string;
+} & HasSlugAndID;
+
+export type IismaJournalCardContentAugmented = IismaJournalCardContent &
+  Gradiented;
 
 export type WorkCardContent = {
   companyName: string;
@@ -99,6 +110,10 @@ export interface AllProjectCardContent {
   allProjects: ProjectCardContent[];
 }
 
+export interface AllIismaJournalCardContent {
+  allIismaJournals: IismaJournalCardContent[];
+}
+
 export interface AllProjectID {
   allProjects: HasSlugAndID[];
 }
@@ -124,8 +139,13 @@ export type ListPageContent = {
   description: StructuredText;
 } & HasMetaInfo;
 
-const listPageNames = ["portofolio", "munPage", "workPage"] as const;
-export type ListPageName = typeof listPageNames[number];
+const listPageNames = [
+  "portofolio",
+  "munPage",
+  "workPage",
+  "iismaJournalPage",
+] as const;
+export type ListPageName = (typeof listPageNames)[number];
 
 export interface PortofolioContent {
   portofolio: ListPageContent;
@@ -137,6 +157,10 @@ export interface MUNContent {
 
 export interface WorkContent {
   workPage: ListPageContent;
+}
+
+export interface IismaJournalContent {
+  iismaJournalPage: ListPageContent;
 }
 
 export interface TechStack {
@@ -177,6 +201,19 @@ export type WorkPageContent = {
   HasGallery &
   HasThumbnail;
 
+export type IismaJournalPageContent = {
+  id: string;
+  title: string;
+  stage: IismaJournalEntryStage;
+  publishedDate: string;
+  description: StructuredText;
+  shortDescription: string;
+} & HasGallery &
+  HasThumbnail;
+
+export type IismaJournalPageContentAugmented = IismaJournalPageContent &
+  Gradiented;
+
 export type Council = {
   name: string;
   acronym: string;
@@ -211,6 +248,11 @@ export type NextPrevWork = {
   companyName: string;
   role: string;
 } & Gradiented;
+
+export type NextPrevIismaJournal = {
+  title: string;
+  stage: string;
+};
 
 export type NextPrevProject = {
   projectName: string;

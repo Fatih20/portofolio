@@ -1,0 +1,176 @@
+---
+import {
+  iismaJournalNextPrevFetcher,
+  iismaJournalIdFetcher,
+  iismaJournalPageContentFetcher,
+} from "@/api";
+import Spacer from "@/components/Spacer.astro";
+import Layout from "@/layouts/Layout.astro";
+import {
+  dateCardMakerIismaJournal,
+  dateConverter,
+  idAbleToStaticPathConverter,
+  iismaJournalGradient,
+  iismaJournalStageDisplay,
+  nextPrevSlugMaker,
+  thumbnailProcessor,
+} from "@/utils/utils";
+import ToOther from "@/components/ToOther.astro";
+import { customRender } from "@/utils/redaction";
+import type { IismaJournalPageContentAugmented } from "@/types/cms";
+
+const iismaJournalIDs = await iismaJournalIdFetcher();
+
+export async function getStaticPaths() {
+  const result = idAbleToStaticPathConverter(await iismaJournalIdFetcher());
+  console.log(result);
+  return result;
+}
+
+const { slug } = Astro.params;
+
+const { nextSlug, prevSlug } = nextPrevSlugMaker(
+  slug ?? "",
+  iismaJournalIDs.map(({ slug }) => slug)
+);
+
+const { title: nextTitle, stage: nextStage } =
+  await iismaJournalNextPrevFetcher(nextSlug);
+
+const {
+  gradientEndColor: nextGradientEndColor,
+  gradientStartColor: nextGradientStartColor,
+} = iismaJournalGradient[nextStage];
+
+const { title: prevTitle, stage: prevStage } =
+  await iismaJournalNextPrevFetcher(prevSlug);
+
+const {
+  gradientEndColor: prevGradientEndColor,
+  gradientStartColor: prevGradientStartColor,
+} = iismaJournalGradient[prevStage];
+
+const iismaJournalEntry = await iismaJournalPageContentFetcher(slug ?? "");
+
+const {
+  description,
+  title,
+  publishedDate,
+  stage,
+  thumbnail,
+  shortDescription,
+  gradientEndColor,
+  gradientStartColor,
+} = {
+  ...iismaJournalEntry,
+  ...iismaJournalGradient[iismaJournalEntry.stage],
+} as IismaJournalPageContentAugmented;
+---
+
+<Layout
+  metaInfo={{
+    title: `${title}`,
+    description: `A journal entry from Fatih Nararya's IISMA journal titled "${title}"`,
+    customThumbnail: thumbnailProcessor(thumbnail),
+  }}
+  activeNavigationOption={""}
+>
+  <div
+    class="flex flex-col items-center justify-start w-full px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop flex-grow text-silver-100"
+  >
+    <main
+      class="flex flex-col items-center justify-start w-full max-w-2xl mx-auto flex-grow pb-4 border-b-2"
+      style={`
+        border-color: ${gradientEndColor};
+    `}
+    >
+      <header
+        class="flex flex-col items-start justify-start gap-2 w-full px-4 pb-2"
+        style={`border-color: ${gradientStartColor};`}
+      >
+        <div class="flex flex-col items-start justify-start gap-1 w-full">
+          <h1 class="text-4xl lg:text-5xl text-left font-black">
+            {title}
+          </h1>
+          <p class="text-xl text-left text-silver-500">
+            {shortDescription}
+          </p>
+          <div class="flex justify-start gap-2 items-center text-silver-500">
+            <i class="fa-regular fa-calendar-days" style={``}></i>
+            <p class="text-base font-medium text-left">
+              {dateCardMakerIismaJournal(publishedDate)}
+            </p>
+          </div>
+        </div>
+      </header>
+      <div
+        class="w-full border-y-[1px] py-2 flex flex-col justify-start items-start gap-2"
+        style={`
+        border-color: ${gradientEndColor};
+        --icon-color: ${gradientEndColor};
+    `}
+      >
+        <section
+          class="summary-container flex flex-col items-start justify-start w-full rounded-lg px-4 pb-4"
+          style={`
+        border-color: ${gradientEndColor};
+    `}
+        >
+          <Fragment set:html={customRender(description)} />
+        </section>
+
+        <Spacer />
+        <div
+          class="flex flex-col lg:flex-row w-full text-silver-100 h-fit justify-items-stretch gap-2 lg:gap-4 text-xl"
+        >
+          <ToOther
+            gradientStartColor={prevGradientStartColor}
+            gradientEndColor={prevGradientEndColor}
+            ;
+            link={`/iisma-journal/${prevSlug}`}
+          >
+            <div class="flex flex-col" slot="other-title">
+              <p>
+                {prevTitle}
+              </p>
+              <p class="text-sm">
+                {iismaJournalStageDisplay[prevStage]}
+              </p>
+            </div>
+          </ToOther>
+          <Spacer />
+          <ToOther
+            gradientStartColor={nextGradientStartColor}
+            gradientEndColor={nextGradientEndColor}
+            next={true}
+            ;
+            link={`/iisma-journal/${nextSlug}`}
+          >
+            <div class="flex flex-col" slot="other-title">
+              <p>
+                {nextTitle}
+              </p>
+              <p class="text-sm">
+                {iismaJournalStageDisplay[nextStage]}
+              </p>
+            </div>
+          </ToOther>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <style is:global>
+    .attribute-container {
+      @apply flex justify-start items-center gap-2;
+    }
+
+    .attribute-container i {
+      color: var(--icon-color);
+    }
+
+    .attribute {
+      @apply font-medium text-left;
+    }
+  </style>
+</Layout>

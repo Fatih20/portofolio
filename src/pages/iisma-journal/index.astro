@@ -1,0 +1,64 @@
+---
+import {
+  iismaJournalCardContentFetcher,
+  iismaJournalContentFetcher,
+} from "@/api";
+import IismaJournalContent from "@/components/IismaJournal/IismaJournalContent.svelte";
+import Spacer from "@/components/Spacer.astro";
+import Layout from "@/layouts/Layout.astro";
+import type { IismaJournalCardContentAugmented } from "@/types/cms";
+import { customRender } from "@/utils/redaction";
+import {
+  iismaJournalEntryStageCountCounter,
+  iismaJournalGradient,
+} from "@/utils/utils";
+
+const iismaJournalCards = (await iismaJournalCardContentFetcher())
+  .allIismaJournals;
+
+const iismaJournalCardsGradiented: IismaJournalCardContentAugmented[] =
+  iismaJournalCards.map((iismaJournalCard) => {
+    return {
+      ...iismaJournalCard,
+      ...iismaJournalGradient[iismaJournalCard.stage],
+    };
+  });
+
+const iismaJournalEntryStageCount = iismaJournalEntryStageCountCounter(
+  iismaJournalCards.map(({ stage }) => stage)
+);
+
+const {
+  iismaJournalPage: { description, metaInfo, title },
+} = await iismaJournalContentFetcher();
+---
+
+<Layout metaInfo={metaInfo} activeNavigationOption={"iismaJournal"}>
+  <main
+    class="flex flex-col justify-start items-center max-w-7xl w-full gap-6 px-horizontalPaddingMobile lg:px-horizontalPaddingDesktop pb-6 text-silver-100"
+  >
+    <header
+      class="mx-auto flex justify-center items-center flex-col w-full pb-2 gap-1"
+    >
+      <h1 class="text-center text-3xl lg:text-4xl font-bold">
+        {title}
+      </h1>
+      <div class="text-center description">
+        <Fragment set:html={customRender(description)} />
+      </div>
+    </header>
+    <!-- Container for the buttons -->
+    <IismaJournalContent
+      client:visible
+      journalCards={iismaJournalCardsGradiented}
+      iismaJournalEntryStageCount={iismaJournalEntryStageCount}
+    />
+  </main>
+  <Spacer />
+
+  <style>
+    .description {
+      @apply text-base lg:text-lg;
+    }
+  </style>
+</Layout>

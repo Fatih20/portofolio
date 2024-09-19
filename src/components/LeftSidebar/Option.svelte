@@ -5,7 +5,6 @@
   export let navigationOption: HeaderOption;
   export let startColor: string;
   export let endColor: string;
-  export let iconName: string;
   export let text: string;
   export let destination: string;
 </script>
@@ -20,7 +19,7 @@
     style:--startColor={startColor}
     style:--endColor={endColor}
   >
-    <i class={`fa-solid fa-${iconName} `} />
+    <slot name="icon"></slot>
     <p>{text}</p>
   </a>
 </li>
