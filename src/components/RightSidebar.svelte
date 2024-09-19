@@ -3,10 +3,6 @@
 
   export let stackContent: TechStack[] = [];
 
-  stackContent = [
-    { link: "", name: "BruhBruhBru hBruhBruhBruhBruhBruhBruhBruh" },
-  ];
-
   let shown = false;
 </script>
 
