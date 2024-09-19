@@ -41,6 +41,17 @@
         }}
       >
         <span class="block">
+          {#if iismaJournalEntryStage === "all"}
+            <i class={`fa-brands fa-canadian-maple-leaf`}></i>
+          {:else if iismaJournalEntryStage === "abroad"}
+            <i class="fa-solid fa-earth-americas"></i>
+          {:else if iismaJournalEntryStage === "pre-departure"}
+            <i class="fa-solid fa-suitcase"></i>
+          {:else if iismaJournalEntryStage === "registration"}
+            <i class="fa-solid fa-id-card"></i>
+          {/if}
+        </span>
+        <span class="ml-2">
           {iismaJournalStageDisplay[iismaJournalEntryStage]}
         </span>
         <span class="flex-grow"></span>
