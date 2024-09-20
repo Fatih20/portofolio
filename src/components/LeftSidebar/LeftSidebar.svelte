@@ -24,7 +24,7 @@
       class="absolute flex justify-end lg:justify-center items-start flex-col z-20 top-0 bottom-0 left-full lg:h-full pb-12 lg:pb-0 box-border lg:box-content left-sidebar-container"
     >
       <button
-        class={`px-2 py-1 rounded-r-md bg-black-500 lg:bg-transparent lg:pointer-events-none ${
+        class={`px-2 py-4 rounded-r-md bg-black-500 lg:bg-transparent lg:pointer-events-none ${
           open ? "lg:opacity-0" : ""
         } transition-all`}
         on:click={(e) => {
@@ -34,7 +34,7 @@
         aria-label="open header menu"
       >
         <i
-          class={`fa-solid fa-chevron-right text-xl text-silver-100 ${
+          class={`fa-solid fa-chevron-right text-2xl text-silver-100 ${
             open ? "rotate-180 lg:opacity-0" : "rotate-0"
           } transition-all duration-300 lg:duration-200`}
         />
