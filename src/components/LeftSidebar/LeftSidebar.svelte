@@ -21,7 +21,7 @@
     on:focus={() => {}}
   >
     <div
-      class="absolute flex justify-end lg:justify-center items-start flex-col z-20 top-0 bottom-0 left-full h-screen pb-12 box-border"
+      class="absolute flex justify-end lg:justify-center items-start flex-col z-20 top-0 bottom-0 left-full lg:h-full pb-12 lg:pb-0 box-border lg:box-content left-sidebar-container"
     >
       <button
         class={`px-2 py-1 rounded-r-md bg-black-500 lg:bg-transparent lg:pointer-events-none ${
@@ -100,3 +100,11 @@
     <div class="flex-grow lg:hidden" />
   </nav>
 </div>
+
+<style>
+  @media screen and (max-width: 768px) {
+    .left-sidebar-container {
+      height: calc(var(--vh, 1vh) * 100);
+    }
+  }
+</style>

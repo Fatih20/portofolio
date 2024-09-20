@@ -62,6 +62,13 @@ const thumbnailPath =
       src="https://kit.fontawesome.com/112dcdcf9d.js"
       crossorigin="anonymous"
     ></script>
+    <script>
+      window.addEventListener('resize', () => {
+      let vh = window.innerHeight * 0.01;
+      console.log(vh);
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    });
+      </script>
   </head>
   <body
     class="flex flex-col justify-start items-center pt-headerHeight bg-background min-h-screen relative"
@@ -79,6 +86,9 @@ const thumbnailPath =
   </body>
 </html>
 <style is:global>
+  :root {
+    --vh: 1vh;
+  }
   body * {
     @apply font-inter m-0 p-0;
   }
