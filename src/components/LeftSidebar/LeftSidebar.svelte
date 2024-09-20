@@ -10,21 +10,21 @@
 <div
   class={`fixed inset-0 z-20 w-screen h-screen pointer-events-none ${
     open ? "bg-slate-900/75 backdrop-blur-sm" : ""
-  } flex items-center box-border py-sidebarVerticalScreenGap`}
+  } flex items-center box-border lg:py-sidebarVerticalScreenGap`}
 >
   <nav
     class={`pointer-events-auto bg-black rounded-r-md lg:rounded-r-xl ${
       open ? "translate-x-0" : "-translate-x-full"
-    } h-full py-4 pl-4 pr-6 relative transition-transform items-start justify-center flex flex-col gap-4 duration-200`}
+    } h-full lg:py-4 pl-4 pr-6 relative transition-transform items-start justify-center flex flex-col gap-4 duration-200`}
     on:mouseover={() => (open = true)}
     on:mouseleave={() => (open = false)}
     on:focus={() => {}}
   >
     <div
-      class="absolute flex justify-center items-center flex-col z-20 top-0 bottom-0 left-full h-full"
+      class="absolute flex justify-end lg:justify-center items-start flex-col z-20 top-0 bottom-0 left-full lg:h-full pb-12 lg:pb-0 box-border lg:box-content left-sidebar-container"
     >
       <button
-        class={`px-2 py-1 rounded-r-md bg-black-500 lg:bg-transparent lg:pointer-events-none ${
+        class={`px-2 py-4 rounded-r-md bg-black-500 lg:bg-transparent lg:pointer-events-none ${
           open ? "lg:opacity-0" : ""
         } transition-all`}
         on:click={(e) => {
@@ -34,7 +34,7 @@
         aria-label="open header menu"
       >
         <i
-          class={`fa-solid fa-chevron-right text-xl text-silver-100 ${
+          class={`fa-solid fa-chevron-right text-2xl text-silver-100 ${
             open ? "rotate-180 lg:opacity-0" : "rotate-0"
           } transition-all duration-300 lg:duration-200`}
         />
@@ -100,3 +100,11 @@
     <div class="flex-grow lg:hidden" />
   </nav>
 </div>
+
+<style>
+  @media screen and (max-width: 768px) {
+    .left-sidebar-container {
+      height: calc(var(--vh, 1vh) * 100);
+    }
+  }
+</style>
