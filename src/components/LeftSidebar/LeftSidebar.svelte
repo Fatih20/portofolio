@@ -10,18 +10,18 @@
 <div
   class={`fixed inset-0 z-20 w-screen h-screen pointer-events-none ${
     open ? "bg-slate-900/75 backdrop-blur-sm" : ""
-  } flex items-center box-border py-sidebarVerticalScreenGap`}
+  } flex items-center box-border lg:py-sidebarVerticalScreenGap`}
 >
   <nav
     class={`pointer-events-auto bg-black rounded-r-md lg:rounded-r-xl ${
       open ? "translate-x-0" : "-translate-x-full"
-    } h-full py-4 pl-4 pr-6 relative transition-transform items-start justify-center flex flex-col gap-4 duration-200`}
+    } h-full lg:py-4 pl-4 pr-6 relative transition-transform items-start justify-center flex flex-col gap-4 duration-200`}
     on:mouseover={() => (open = true)}
     on:mouseleave={() => (open = false)}
     on:focus={() => {}}
   >
     <div
-      class="absolute flex justify-end lg:justify-center items-start flex-col z-20 top-0 bottom-0 left-full h-full"
+      class="absolute flex justify-end lg:justify-center items-start flex-col z-20 top-0 bottom-0 left-full h-screen pb-12 box-border"
     >
       <button
         class={`px-2 py-1 rounded-r-md bg-black-500 lg:bg-transparent lg:pointer-events-none ${
