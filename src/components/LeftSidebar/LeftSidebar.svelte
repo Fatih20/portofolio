@@ -21,7 +21,7 @@
     on:focus={() => {}}
   >
     <div
-      class="absolute flex justify-center items-center flex-col z-20 top-0 bottom-0 left-full h-full"
+      class="absolute flex justify-end lg:justify-center items-start flex-col z-20 top-0 bottom-0 left-full h-full"
     >
       <button
         class={`px-2 py-1 rounded-r-md bg-black-500 lg:bg-transparent lg:pointer-events-none ${
