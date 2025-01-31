@@ -69,7 +69,7 @@ export const iismaJournalGradient: Record<IismaJournalEntryStage, Gradiented> =
   {
     all: { gradientEndColor: "#c12117", gradientStartColor: "#ff453a" },
     abroad: { gradientEndColor: "#25355a", gradientStartColor: "#007fa3" },
-    aftermath: { gradientEndColor: "", gradientStartColor: "" },
+    aftermath: { gradientEndColor: "#1B5E20", gradientStartColor: "#2E7D32" },
     preambule: { gradientEndColor: "", gradientStartColor: "" },
     registration: {
       gradientStartColor: "#6A2D6E",
