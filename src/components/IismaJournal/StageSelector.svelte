@@ -49,6 +49,8 @@
             <i class="fa-solid fa-suitcase"></i>
           {:else if iismaJournalEntryStage === "registration"}
             <i class="fa-solid fa-id-card"></i>
+          {:else if iismaJournalEntryStage === "aftermath"}
+            <i class="fa-solid fa-plane-arrival"></i>
           {/if}
         </span>
         <span class="ml-2">
